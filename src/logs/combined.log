@@ -1,0 +1,5 @@
+{"level":"info","message":"Finance App backend listening on port 4000 [development]","timestamp":"2026-07-16T12:25:17.414Z"}
+{"level":"info","message":"Swagger docs: http://localhost:4000/api-docs","timestamp":"2026-07-16T12:25:17.421Z"}
+{"level":"info","message":"Due reminder job scheduled (daily 09:00).","timestamp":"2026-07-16T12:25:17.426Z"}
+{"level":"info","message":"Overdue checker job scheduled (daily 00:00).","timestamp":"2026-07-16T12:25:17.427Z"}
+{"level":"info","message":"Backup job scheduled (daily 02:00). Requires pg_dump on PATH.","timestamp":"2026-07-16T12:25:17.428Z"}

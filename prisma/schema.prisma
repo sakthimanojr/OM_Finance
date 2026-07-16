@@ -1,0 +1,245 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  SUPER_ADMIN
+  VIEW_ADMIN
+  CUSTOMER
+}
+
+enum CustomerStatus {
+  ACTIVE
+  SUSPENDED
+  CLOSED
+}
+
+enum DocumentType {
+  AADHAAR
+  PAN
+  AGREEMENT
+  OTHER
+}
+
+enum LoanType {
+  WEEKLY
+  MONTHLY
+  HIGH_VALUE
+}
+
+enum LoanStatus {
+  ACTIVE
+  COMPLETED
+  CLOSED
+  OVERDUE
+}
+
+enum DueStatus {
+  PENDING
+  PAID
+  MISSED
+}
+
+enum PaymentMethod {
+  UPI
+  CASH
+  MANUAL
+}
+
+enum PaymentStatus {
+  INITIATED
+  SUCCESS
+  FAILED
+}
+
+enum NotificationChannel {
+  SMS
+  EMAIL
+  PUSH
+}
+
+enum NotificationStatus {
+  PENDING
+  SENT
+  FAILED
+}
+
+model User {
+  id           String   @id @default(uuid())
+  role         Role
+  phone        String   @unique
+  email        String?  @unique
+  passwordHash String
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  customer  Customer?
+  auditLogs AuditLog[]
+
+  @@map("users")
+}
+
+model Customer {
+  id               String         @id @default(uuid())
+  userId           String         @unique
+  user             User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name             String
+  fatherName       String?
+  phone            String
+  email            String?
+  address          String?
+  aadhaarLast4     String?
+  aadhaarEncrypted String?
+  panEncrypted     String?
+  occupation       String?
+  monthlyIncome    Decimal?       @db.Decimal(12, 2)
+  guarantorName    String?
+  guarantorPhone   String?
+  emergencyContact String?
+  photoUrl         String?
+  status           CustomerStatus @default(ACTIVE)
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  documents     Document[]
+  loans         Loan[]
+  payments      Payment[]
+  notifications Notification[]
+
+  @@map("customers")
+}
+
+model Document {
+  id         String       @id @default(uuid())
+  customerId String
+  customer   Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  type       DocumentType
+  fileUrl    String
+  uploadedAt DateTime     @default(now())
+
+  @@map("documents")
+}
+
+model Loan {
+  id               String     @id @default(uuid())
+  customerId       String
+  customer         Customer   @relation(fields: [customerId], references: [id])
+  type             LoanType
+  principal        Decimal    @db.Decimal(12, 2)
+  interestRate     Decimal    @db.Decimal(5, 2)
+  agreementFee     Decimal    @default(0) @db.Decimal(10, 2)
+  disbursedAmount  Decimal    @db.Decimal(12, 2)
+  totalCollection  Decimal    @default(0) @db.Decimal(12, 2)
+  startDate        DateTime
+  endDate          DateTime?
+  status           LoanStatus @default(ACTIVE)
+  termCount        Int?
+  installmentAmount Decimal?  @db.Decimal(12, 2)
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  dues     Due[]
+  payments Payment[]
+
+  @@map("loans")
+}
+
+model Due {
+  id          String    @id @default(uuid())
+  loanId      String
+  loan        Loan      @relation(fields: [loanId], references: [id], onDelete: Cascade)
+  dueNumber   Int
+  dueDate     DateTime
+  amount      Decimal   @db.Decimal(12, 2)
+  status      DueStatus @default(PENDING)
+  paidDate    DateTime?
+  paidAmount  Decimal?  @db.Decimal(12, 2)
+  paymentMethod PaymentMethod?
+  remarks     String?
+  createdAt   DateTime  @default(now())
+
+  payments Payment[]
+
+  @@unique([loanId, dueNumber])
+  @@map("dues")
+}
+
+model Payment {
+  id            String        @id @default(uuid())
+  dueId         String
+  due           Due           @relation(fields: [dueId], references: [id])
+  loanId        String
+  loan          Loan          @relation(fields: [loanId], references: [id])
+  customerId    String
+  customer      Customer      @relation(fields: [customerId], references: [id])
+  amount        Decimal       @db.Decimal(12, 2)
+  method        PaymentMethod
+  upiRefNumber  String?
+  gatewayOrderId String?      @unique
+  gatewaySignature String?
+  status        PaymentStatus @default(INITIATED)
+  paidAt        DateTime?
+  createdAt     DateTime      @default(now())
+
+  receipt Receipt?
+
+  @@map("payments")
+}
+
+model Receipt {
+  id            String   @id @default(uuid())
+  paymentId     String   @unique
+  payment       Payment  @relation(fields: [paymentId], references: [id])
+  receiptNumber String   @unique
+  qrCodeUrl     String?
+  pdfUrl        String?
+  generatedAt   DateTime @default(now())
+
+  @@map("receipts")
+}
+
+model Notification {
+  id         String              @id @default(uuid())
+  customerId String
+  customer   Customer            @relation(fields: [customerId], references: [id])
+  channel    NotificationChannel
+  type       String
+  message    String
+  sentAt     DateTime?
+  status     NotificationStatus  @default(PENDING)
+  createdAt  DateTime            @default(now())
+
+  @@map("notifications")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  adminId    String
+  admin      User     @relation(fields: [adminId], references: [id])
+  action     String
+  entityType String
+  entityId   String?
+  details    Json?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@map("audit_logs")
+}
+
+model AdminConfig {
+  id                String   @id @default(uuid())
+  upiId             String?
+  smsProvider       String?
+  smsApiKeyEncrypted String?
+  smtpConfigEncrypted String?
+  updatedBy         String?
+  updatedAt         DateTime @updatedAt
+
+  @@map("admin_config")
+}

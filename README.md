@@ -1,0 +1,116 @@
+# Finance App — Backend
+
+Node.js + Express + Prisma + PostgreSQL backend for a loan management platform
+(weekly loans, monthly EMI loans, high-value interest-only loans, UPI/cash
+collection, receipts, notifications, reporting, and audit logging).
+
+## Quick start (local, without Docker)
+
+```bash
+cd backend
+cp .env.example .env
+# Edit .env: set DATABASE_URL, JWT secrets, SMTP creds, etc.
+
+npm install
+npx prisma migrate dev --name init   # creates tables in your Postgres DB
+npx prisma db seed                    # creates the SUPER_ADMIN account
+npm run dev                           # starts on http://localhost:4000
+```
+
+Requires a running PostgreSQL instance. If you don't have one locally:
+
+```bash
+docker run --name finance-app-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=finance_app -p 5432:5432 -d postgres:16-alpine
+```
+
+## Quick start (Docker, backend + Postgres together)
+
+```bash
+cd backend
+cp .env.example .env   # edit values as needed
+docker compose up --build
+# in another terminal, run migrations once the containers are up:
+docker compose exec backend npx prisma migrate deploy
+docker compose exec backend npx prisma db seed
+```
+
+API will be live at `http://localhost:4000`, Swagger docs at
+`http://localhost:4000/api-docs`.
+
+## First login
+
+After seeding, log in as the super admin using the phone/password from your
+`.env` (`SUPER_ADMIN_PHONE` / `SUPER_ADMIN_PASSWORD`):
+
+```
+POST /api/v1/auth/login
+{ "phone": "9999999999", "password": "ChangeMe123!" }
+```
+
+**Change this password immediately in a real deployment.**
+
+## Project structure
+
+```
+src/
+  config/        env, database (Prisma client), firebase, multer, swagger
+  middlewares/    auth, role guard, validation, audit logger, error handler, rate limiter
+  modules/
+    auth/         login, OTP, password reset, JWT refresh
+    admin/        manage VIEW_ADMIN users, system config (UPI/SMS/SMTP)
+    customer/     KYC, profile, documents
+    loan/         loan creation + the 3 calculators (weekly, monthly EMI, high-value)
+    due/          due schedule queries, overdue marking
+    payment/      UPI intent generation, initiate/confirm payment
+    receipt/      PDF receipt generation with QR code
+    notification/ SMS / email / push channels + templates
+    report/       Excel exports (collections, portfolio, overdue)
+    document/     KYC document storage/retrieval
+    dashboard/    admin + customer summary stats
+    audit/        audit log query endpoint
+  jobs/           cron jobs: due reminders, overdue checker, DB backup
+  routes/         route aggregator
+tests/
+  unit/           calculator logic tests (no DB required)
+prisma/
+  schema.prisma   full data model
+  seed.js         creates the super admin on first run
+```
+
+## Important implementation notes
+
+- **UPI payments**: two paths are supported.
+  - **Default (no setup required)**: a static UPI-intent QR code is generated
+    and an admin manually confirms receipt via `POST /payments/confirm` after
+    checking their bank/UPI app.
+  - **Optional — real gateway via Razorpay**: set `RAZORPAY_KEY_ID`,
+    `RAZORPAY_KEY_SECRET`, and `RAZORPAY_WEBHOOK_SECRET` in `.env` and the
+    backend automatically switches to creating a real Razorpay order on
+    `POST /payments/initiate`. Confirmation then happens automatically via
+    `POST /api/v1/payments/webhook/razorpay`, verified with the webhook
+    secret (HMAC-SHA256 over the raw body) — see
+    `src/modules/payment/razorpay.adapter.js`. In the Razorpay dashboard,
+    point your webhook at `https://<your-domain>/api/v1/payments/webhook/razorpay`
+    and subscribe to the `payment.captured` event. You'll need
+    `npx prisma migrate dev` again after pulling this change, since it adds
+    `gatewayOrderId`/`gatewaySignature` columns to the `payments` table.
+- **Aadhaar numbers are encrypted at rest** (AES-256-CBC via `ENCRYPTION_KEY`);
+  only the last 4 digits are stored in plaintext for display. PAN is encrypted
+  the same way. Rotate `ENCRYPTION_KEY` carefully — changing it invalidates
+  previously encrypted data.
+- **SMS/SMTP are stubbed by default** (just logged) so you can run the app
+  without paid accounts. Set `SMS_PROVIDER` and SMTP env vars to enable real
+  sending — see `notification/channels/`.
+- **OTP storage is in-memory** (a `Map`) for simplicity. Swap for Redis before
+  running multiple server instances or in production.
+- Run `npm test` to run the full test suite: calculator unit tests (no DB
+  needed) plus integration tests that boot the real Express app (real routes,
+  real middleware, real RBAC) against a mocked Prisma client — see
+  `tests/mocks/prismaMock.js`. These catch route/middleware wiring bugs
+  without needing a live database. They are not a substitute for testing
+  against a real Postgres instance before going live — see `DEPLOYMENT.md`
+  in the project root for a full pre-launch checklist.
+
+## Environment variables
+
+See `.env.example` for the full list with comments.
