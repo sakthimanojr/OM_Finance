@@ -1,14 +1,10 @@
-const fs = require('fs');
-const path = require('path');
 const PDFDocument = require('pdfkit');
 const QRCode = require('qrcode');
 const prisma = require('../../config/database');
 const ApiError = require('../../utils/apiError');
 const { generateReceiptNumber } = require('../../utils/generateId');
 const { formatINR } = require('../../utils/currencyFormatter');
-
-const RECEIPTS_DIR = path.join(process.cwd(), 'uploads', 'receipts');
-fs.mkdirSync(RECEIPTS_DIR, { recursive: true });
+const { uploadBuffer } = require('../../config/cloudinary');
 
 async function generateReceipt(paymentId) {
   const payment = await prisma.payment.findUnique({
@@ -22,26 +18,37 @@ async function generateReceipt(paymentId) {
     JSON.stringify({ receiptNumber, paymentId, amount: payment.amount })
   );
 
-  const pdfPath = path.join(RECEIPTS_DIR, `${receiptNumber}.pdf`);
-  await renderReceiptPdf(pdfPath, { payment, receiptNumber, qrDataUrl });
+  const pdfBuffer = await renderReceiptPdf({ payment, receiptNumber, qrDataUrl });
+
+  // Upload PDF buffer to Cloudinary
+  const result = await uploadBuffer(pdfBuffer, 'om-finance/receipts', receiptNumber);
+  const pdfUrl = result ? result.url : null;
+  const cloudinaryPublicId = result ? result.publicId : null;
 
   const receipt = await prisma.receipt.create({
     data: {
       paymentId,
       receiptNumber,
       qrCodeUrl: qrDataUrl,
-      pdfUrl: pdfPath,
+      pdfUrl,
+      cloudinaryPublicId,
     },
   });
 
   return receipt;
 }
 
-function renderReceiptPdf(filePath, { payment, receiptNumber, qrDataUrl }) {
+/**
+ * Generate a receipt PDF entirely in memory and return the Buffer.
+ */
+function renderReceiptPdf({ payment, receiptNumber, qrDataUrl }) {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ size: 'A5', margin: 40 });
-    const stream = fs.createWriteStream(filePath);
-    doc.pipe(stream);
+    const chunks = [];
+
+    doc.on('data', (chunk) => chunks.push(chunk));
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('error', reject);
 
     doc.fontSize(18).text('Payment Receipt', { align: 'center' });
     doc.moveDown();
@@ -69,8 +76,6 @@ function renderReceiptPdf(filePath, { payment, receiptNumber, qrDataUrl }) {
     doc.fontSize(9).fillColor('gray').text('This is a system-generated receipt.', { align: 'center' });
 
     doc.end();
-    stream.on('finish', resolve);
-    stream.on('error', reject);
   });
 }
 

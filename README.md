@@ -94,6 +94,12 @@ prisma/
     and subscribe to the `payment.captured` event. You'll need
     `npx prisma migrate dev` again after pulling this change, since it adds
     `gatewayOrderId`/`gatewaySignature` columns to the `payments` table.
+- **File storage (Cloudinary)**: KYC documents (Aadhaar, PAN, agreements)
+  and generated receipt PDFs are stored on **Cloudinary** — not on local disk.
+  This is essential for platforms with ephemeral filesystems (e.g. Render free
+  tier, Heroku) where local files are wiped on every restart/redeploy. Set the
+  three `CLOUDINARY_*` env vars (see below) before uploading any documents or
+  generating receipts.
 - **Aadhaar numbers are encrypted at rest** (AES-256-CBC via `ENCRYPTION_KEY`);
   only the last 4 digits are stored in plaintext for display. PAN is encrypted
   the same way. Rotate `ENCRYPTION_KEY` carefully — changing it invalidates
@@ -111,6 +117,25 @@ prisma/
   against a real Postgres instance before going live — see `DEPLOYMENT.md`
   in the project root for a full pre-launch checklist.
 
+## Cloudinary setup (file storage)
+
+KYC document uploads and receipt PDFs are stored on [Cloudinary](https://cloudinary.com)
+instead of local disk, so files persist across deploys on ephemeral platforms.
+
+1. Create a **free** Cloudinary account at <https://cloudinary.com/users/register_free>.
+2. In the Cloudinary Dashboard, go to **Programmable Media → Dashboard** (or **API Keys**).
+3. Copy the three credentials and add them to your `.env`:
+
+```env
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=123456789012345
+CLOUDINARY_API_SECRET=abcdefghijklmnopqrstuvwx
+```
+
+Without these, document upload and receipt generation will fail at runtime (the
+app still starts, but the relevant endpoints return 500 errors).
+
 ## Environment variables
 
 See `.env.example` for the full list with comments.
+

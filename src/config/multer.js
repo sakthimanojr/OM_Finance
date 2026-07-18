@@ -1,27 +1,6 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 
-const destinations = {
-  AADHAAR: 'uploads/aadhaar',
-  PAN: 'uploads/pan',
-  AGREEMENT: 'uploads/agreements',
-  OTHER: 'uploads/customers',
-};
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const type = (req.body.type || 'OTHER').toUpperCase();
-    const dest = destinations[type] || destinations.OTHER;
-    fs.mkdirSync(dest, { recursive: true });
-    cb(null, dest);
-  },
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname);
-    const unique = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    cb(null, `${unique}${ext}`);
-  },
-});
+const storage = multer.memoryStorage();
 
 const ALLOWED_MIME = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
 

@@ -111,12 +111,35 @@ async function updateCustomer(id, payload) {
   return sanitizeCustomer(updated);
 }
 
-async function addDocument(customerId, type, fileUrl) {
+const path = require('path');
+const { uploadBuffer } = require('../../config/cloudinary');
+
+const CLOUDINARY_FOLDERS = {
+  AADHAAR: 'om-finance/documents/aadhaar',
+  PAN: 'om-finance/documents/pan',
+  AGREEMENT: 'om-finance/documents/agreement',
+  OTHER: 'om-finance/documents/other',
+};
+
+async function addDocument(customerId, type, buffer, originalname) {
   const customer = await prisma.customer.findUnique({ where: { id: customerId } });
   if (!customer) throw ApiError.notFound('Customer not found');
 
+  const docType = (type || 'OTHER').toUpperCase();
+  const folder = CLOUDINARY_FOLDERS[docType] || CLOUDINARY_FOLDERS.OTHER;
+  const ext = path.extname(originalname || '');
+  const filename = `${customerId}-${Date.now()}${ext}`;
+
+  const result = await uploadBuffer(buffer, folder, filename);
+  if (!result) throw ApiError.internal('File upload failed — Cloudinary not configured');
+
   return prisma.document.create({
-    data: { customerId, type, fileUrl },
+    data: {
+      customerId,
+      type: docType,
+      fileUrl: result.url,
+      cloudinaryPublicId: result.publicId,
+    },
   });
 }
 

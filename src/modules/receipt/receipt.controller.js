@@ -1,4 +1,3 @@
-const path = require('path');
 const receiptService = require('./receipt.service');
 const ApiResponse = require('../../utils/apiResponse');
 const ApiError = require('../../utils/apiError');
@@ -25,7 +24,8 @@ async function download(req, res, next) {
   try {
     const receipt = await receiptService.getReceiptById(req.params.id);
     await _assertOwnsReceiptIfCustomer(req, receipt.payment);
-    return res.download(path.resolve(receipt.pdfUrl), `${receipt.receiptNumber}.pdf`);
+    if (!receipt.pdfUrl) throw ApiError.notFound('Receipt PDF not available');
+    return res.redirect(receipt.pdfUrl);
   } catch (err) {
     next(err);
   }

@@ -64,7 +64,12 @@ async function updateCustomer(req, res, next) {
 async function uploadDocument(req, res, next) {
   try {
     if (!req.file) throw ApiError.badRequest('No file uploaded');
-    const doc = await customerService.addDocument(req.params.id, req.body.type, req.file.path);
+    const doc = await customerService.addDocument(
+      req.params.id,
+      req.body.type,
+      req.file.buffer,
+      req.file.originalname
+    );
     if (req.audit) await req.audit('UPLOAD_DOCUMENT', 'Document', doc.id, { type: doc.type });
     return ApiResponse.success(res, { statusCode: 201, message: 'Document uploaded', data: doc });
   } catch (err) {

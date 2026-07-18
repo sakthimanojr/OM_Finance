@@ -1,4 +1,3 @@
-const path = require('path');
 const documentService = require('./document.service');
 const ApiResponse = require('../../utils/apiResponse');
 
@@ -14,7 +13,7 @@ async function listByCustomer(req, res, next) {
 async function download(req, res, next) {
   try {
     const doc = await documentService.getById(req.params.id);
-    return res.download(path.resolve(doc.fileUrl));
+    return res.redirect(doc.fileUrl);
   } catch (err) {
     next(err);
   }
