@@ -2,6 +2,8 @@ const prisma = require('../../config/database');
 const ApiError = require('../../utils/apiError');
 
 async function listDues({ loanId, customerId, status, fromDate, toDate, page = 1, limit = 20 }) {
+  page = parseInt(page, 10) || 1;
+  limit = parseInt(limit, 10) || 20;
   const where = {};
   if (loanId) where.loanId = loanId;
   if (status) where.status = status;

@@ -71,6 +71,8 @@ async function getCustomerById(id) {
 }
 
 async function listCustomers({ search, status, page, limit }) {
+  page = parseInt(page, 10) || 1;
+  limit = parseInt(limit, 10) || 20;
   const where = {};
   if (status) where.status = status;
   if (search) {

@@ -84,6 +84,8 @@ async function getLoanById(id) {
 }
 
 async function listLoans({ customerId, status, type, page, limit }) {
+  page = parseInt(page, 10) || 1;
+  limit = parseInt(limit, 10) || 20;
   const where = {};
   if (customerId) where.customerId = customerId;
   if (status) where.status = status;

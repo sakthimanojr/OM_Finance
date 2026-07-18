@@ -155,6 +155,8 @@ async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature } =
 }
 
 async function listPayments({ customerId, loanId, status, page, limit }) {
+  page = parseInt(page, 10) || 1;
+  limit = parseInt(limit, 10) || 20;
   const where = {};
   if (customerId) where.customerId = customerId;
   if (loanId) where.loanId = loanId;
