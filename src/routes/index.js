@@ -12,6 +12,7 @@ const reportRoutes = require('../modules/report/report.routes');
 const documentRoutes = require('../modules/document/document.routes');
 const dashboardRoutes = require('../modules/dashboard/dashboard.routes');
 const auditRoutes = require('../modules/audit/audit.routes');
+const closedLoanRoutes = require('../modules/closedLoan/closedLoan.routes');
 
 const router = express.Router();
 
@@ -27,5 +28,6 @@ router.use('/reports', reportRoutes);
 router.use('/documents', documentRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/audit-logs', auditRoutes);
+router.use('/closed-loans', closedLoanRoutes);
 
 module.exports = router;

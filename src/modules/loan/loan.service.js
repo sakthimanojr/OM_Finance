@@ -42,6 +42,7 @@ async function createLoan(payload) {
     const created = await tx.loan.create({
       data: {
         customerId: payload.customerId,
+        loanNumber: payload.loanNumber || null,
         type: payload.type,
         principal: payload.principal,
         interestRate: payload.interestRate,
@@ -88,7 +89,11 @@ async function listLoans({ customerId, status, type, page, limit }) {
   limit = parseInt(limit, 10) || 20;
   const where = {};
   if (customerId) where.customerId = customerId;
-  if (status) where.status = status;
+  if (status) {
+    where.status = status;
+  } else {
+    where.status = { notIn: ['COMPLETED', 'CLOSED'] };
+  }
   if (type) where.type = type;
 
   const [items, total] = await Promise.all([

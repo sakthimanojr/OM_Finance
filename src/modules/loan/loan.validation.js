@@ -3,6 +3,7 @@ const Joi = require('joi');
 const createLoan = {
   body: Joi.object({
     customerId: Joi.string().uuid().required(),
+    loanNumber: Joi.string().max(50).required(),
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').required(),
     principal: Joi.number().positive().required(),
     interestRate: Joi.number().positive().required(),
@@ -47,7 +48,7 @@ const repayPrincipal = {
   }),
   body: Joi.object({
     amount: Joi.number().positive().required(),
-    paymentMethod: Joi.string().valid('UPI', 'CASH', 'MANUAL').required(),
+    paymentMethod: Joi.string().valid('UPI', 'CASH', 'BANK_TRANSFER', 'MANUAL').required(),
   }),
 };
 

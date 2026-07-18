@@ -3,7 +3,7 @@ const dateHelper = require('../../../utils/dateHelper');
 
 /**
  * Weekly loan: interest deducted upfront; principal divided evenly across term.
- * Example: 10,000 @10% -> disburse 9,000, repay 1,000 x 10 weeks = 11,000
+ * Example: 10,000 @10% -> disburse 9,000, repay 1,000 x 10 weeks = 10,000
  *
  * @param {number} principal
  * @param {number} interestRate - percentage, e.g. 10 for 10%
@@ -13,8 +13,9 @@ const dateHelper = require('../../../utils/dateHelper');
 function calculate({ principal, interestRate, termCount, startDate }) {
   const interestAmount = round2((principal * interestRate) / 100);
   const disbursedAmount = round2(principal - interestAmount);
-  const totalRepayable = round2(principal + interestAmount);
-  const installmentAmount = round2(totalRepayable / termCount);
+  // Customer repays only the principal in installments; interest was deducted upfront.
+  const totalRepayable = principal;
+  const installmentAmount = round2(principal / termCount);
 
   const dueSchedule = [];
   let runningTotal = 0;

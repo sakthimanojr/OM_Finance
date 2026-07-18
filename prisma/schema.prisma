@@ -48,6 +48,7 @@ enum DueStatus {
 enum PaymentMethod {
   UPI
   CASH
+  BANK_TRANSFER
   MANUAL
 }
 
@@ -131,6 +132,7 @@ model Loan {
   id               String     @id @default(uuid())
   customerId       String
   customer         Customer   @relation(fields: [customerId], references: [id])
+  loanNumber       String?
   type             LoanType
   principal        Decimal    @db.Decimal(12, 2)
   interestRate     Decimal    @db.Decimal(5, 2)
@@ -244,4 +246,25 @@ model AdminConfig {
   updatedAt         DateTime @updatedAt
 
   @@map("admin_config")
+}
+
+model ClosedLoan {
+  id              String   @id @default(uuid())
+  loanId          String   @unique
+  customerId      String
+  customerName    String
+  customerPhone   String
+  loanType        String
+  loanNumber      String?
+  principal       Decimal  @db.Decimal(12, 2)
+  interestRate    Decimal  @db.Decimal(5, 2)
+  disbursedAmount Decimal  @db.Decimal(12, 2)
+  totalCollected  Decimal  @db.Decimal(12, 2)
+  startDate       DateTime
+  endDate         DateTime?
+  closedAt        DateTime @default(now())
+  paymentHistory  Json
+  dueSchedule     Json
+
+  @@map("closed_loans")
 }

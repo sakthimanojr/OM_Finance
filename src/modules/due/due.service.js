@@ -86,4 +86,57 @@ async function markOverdueDues() {
   return { updatedCount: result.count };
 }
 
-module.exports = { listDues, getUpcoming, getOverdue, getDueById, markOverdueDues };
+/**
+ * Returns all pending/missed dues due exactly today.
+ */
+async function getTodaysDues() {
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+
+  return prisma.due.findMany({
+    where: {
+      status: { in: ['PENDING', 'MISSED'] },
+      dueDate: { gte: startOfDay, lte: endOfDay },
+    },
+    include: { loan: { include: { customer: { select: { id: true, name: true, phone: true } } } } },
+    orderBy: { dueDate: 'asc' },
+  });
+}
+
+/**
+ * Returns all pending/missed dues grouped by customer.
+ * Each item includes customer info and a count + list of their pending dues.
+ */
+async function getDuesByCustomer() {
+  const dues = await prisma.due.findMany({
+    where: { status: { in: ['PENDING', 'MISSED'] } },
+    include: { loan: { include: { customer: { select: { id: true, name: true, phone: true } } } } },
+    orderBy: { dueDate: 'asc' },
+  });
+
+  // Group by customer
+  const grouped = {};
+  for (const due of dues) {
+    const customer = due.loan?.customer;
+    if (!customer) continue;
+    if (!grouped[customer.id]) {
+      grouped[customer.id] = {
+        customerId: customer.id,
+        customerName: customer.name,
+        customerPhone: customer.phone,
+        pendingCount: 0,
+        totalAmount: 0,
+        dues: [],
+      };
+    }
+    grouped[customer.id].pendingCount += 1;
+    grouped[customer.id].totalAmount += Number(due.amount);
+    grouped[customer.id].dues.push(due);
+  }
+
+  return Object.values(grouped).sort((a, b) => b.pendingCount - a.pendingCount);
+}
+
+module.exports = { listDues, getUpcoming, getOverdue, getDueById, markOverdueDues, getTodaysDues, getDuesByCustomer };
+

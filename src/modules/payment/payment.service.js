@@ -4,6 +4,7 @@ const ApiError = require('../../utils/apiError');
 const env = require('../../config/env');
 const receiptService = require('../receipt/receipt.service');
 const notificationService = require('../notification/notification.service');
+const closedLoanService = require('../closedLoan/closedLoan.service');
 const razorpay = require('./razorpay.adapter');
 
 /**
@@ -145,13 +146,30 @@ async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature } =
       await tx.loan.update({ where: { id: payment.loanId }, data: { status: 'COMPLETED' } });
     }
 
-    return updatedPayment;
+    return { updatedPayment, loanCompleted: remainingPending === 0 };
   });
 
-  const receipt = await receiptService.generateReceipt(result.id);
-  await notificationService.sendPaymentSuccess(payment.customer, result, receipt.receiptNumber);
+  const receipt = await receiptService.generateReceipt(result.updatedPayment.id);
+  await notificationService.sendPaymentSuccess(payment.customer, result.updatedPayment, receipt.receiptNumber);
 
-  return { payment: result, receipt };
+  // Auto-archive the loan if all dues are now paid
+  if (result.loanCompleted) {
+    try {
+      await closedLoanService.createSnapshot(payment.loanId);
+      // Send loan closure notification to customer
+      await notificationService.sendManual(
+        payment.customer.id,
+        `Your loan has been fully repaid and closed. Thank you for your timely payments!`,
+        'SMS'
+      );
+    } catch (archiveErr) {
+      // Don't fail the payment confirmation if archival has an issue
+      const logger = require('../../utils/logger');
+      logger.error(`Failed to archive closed loan ${payment.loanId}: ${archiveErr.message}`);
+    }
+  }
+
+  return { payment: result.updatedPayment, receipt };
 }
 
 async function listPayments({ customerId, loanId, status, page, limit }) {
@@ -161,6 +179,11 @@ async function listPayments({ customerId, loanId, status, page, limit }) {
   if (customerId) where.customerId = customerId;
   if (loanId) where.loanId = loanId;
   if (status) where.status = status;
+  if (arguments[0].month === 'current') {
+    const now = new Date();
+    where.paidAt = { gte: new Date(now.getFullYear(), now.getMonth(), 1) };
+    where.status = 'SUCCESS';
+  }
 
   const [items, total] = await Promise.all([
     prisma.payment.findMany({

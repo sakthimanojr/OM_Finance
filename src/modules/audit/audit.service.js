@@ -1,12 +1,15 @@
 const prisma = require('../../config/database');
 
-async function listAuditLogs({ adminId, entityType, action, page = 1, limit = 30 }) {
+async function listAuditLogs({ adminId, entityType, action, paymentMethod, page = 1, limit = 30 }) {
   page = parseInt(page, 10) || 1;
   limit = parseInt(limit, 10) || 30;
   const where = {};
   if (adminId) where.adminId = adminId;
   if (entityType) where.entityType = entityType;
   if (action) where.action = action;
+  if (paymentMethod) {
+    where.details = { path: ['method'], equals: paymentMethod };
+  }
 
   const [items, total] = await Promise.all([
     prisma.auditLog.findMany({

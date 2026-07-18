@@ -24,6 +24,15 @@ async function initiate(req, res, next) {
 async function confirm(req, res, next) {
   try {
     const { paymentId, upiRefNumber } = req.body;
+
+    // Only allow manual confirmation for Cash and Bank Transfer.
+    // UPI payments are confirmed automatically via Razorpay webhook or QR flow.
+    const payment = await prisma.payment.findUnique({ where: { id: paymentId } });
+    if (!payment) throw ApiError.notFound('Payment not found');
+    if (payment.method === 'UPI') {
+      throw ApiError.badRequest('UPI payments cannot be manually confirmed — they are confirmed automatically');
+    }
+
     const result = await paymentService.confirmPayment(paymentId, upiRefNumber, req.user?.id);
     if (req.audit) await req.audit('CONFIRM_PAYMENT', 'Payment', paymentId, { upiRefNumber });
     return ApiResponse.success(res, { message: 'Payment confirmed', data: result });

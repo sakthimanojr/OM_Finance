@@ -49,4 +49,22 @@ async function getDue(req, res, next) {
   }
 }
 
-module.exports = { listDues, getUpcoming, getOverdue, getDue };
+async function getTodaysDues(req, res, next) {
+  try {
+    const dues = await dueService.getTodaysDues();
+    return ApiResponse.success(res, { data: dues });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function getDuesByCustomer(req, res, next) {
+  try {
+    const groups = await dueService.getDuesByCustomer();
+    return ApiResponse.success(res, { data: groups });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { listDues, getUpcoming, getOverdue, getDue, getTodaysDues, getDuesByCustomer };
