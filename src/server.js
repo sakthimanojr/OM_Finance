@@ -7,7 +7,7 @@ const { scheduleDueReminderJob } = require('./jobs/dueReminder.job');
 const { scheduleOverdueCheckerJob } = require('./jobs/overdueChecker.job');
 const { scheduleBackupJob } = require('./jobs/backupScheduler.job');
 
-const server = app.listen(env.PORT, () => {
+const server = app.listen(env.PORT, '0.0.0.0', () => {
   logger.info(`Finance App backend listening on port ${env.PORT} [${env.NODE_ENV}]`);
   logger.info(`Swagger docs: http://localhost:${env.PORT}/api-docs`);
 
