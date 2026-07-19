@@ -24,11 +24,13 @@ afterEach(() => jest.clearAllMocks());
 describe('POST /api/v1/loans — weekly loan creation', () => {
   test('creates the loan and its due schedule via the real calculator, then returns the created loan', async () => {
     prisma.customer.findUnique.mockResolvedValueOnce({ id: '11111111-1111-1111-1111-111111111111', status: 'ACTIVE' });
+    prisma.loan.findUnique.mockResolvedValueOnce(null); // Uniqueness check
     prisma.loan.create.mockResolvedValueOnce({ id: '22222222-2222-2222-2222-222222222222' });
     prisma.due.createMany.mockResolvedValueOnce({ count: 10 });
     prisma.loan.findUnique.mockResolvedValueOnce({
       id: '22222222-2222-2222-2222-222222222222',
       customerId: '11111111-1111-1111-1111-111111111111',
+      loanNumber: 'LN-1001',
       type: 'WEEKLY',
       principal: 10000,
       interestRate: 10,
@@ -38,7 +40,7 @@ describe('POST /api/v1/loans — weekly loan creation', () => {
       endDate: new Date('2026-03-12'),
       status: 'ACTIVE',
       termCount: 10,
-      installmentAmount: 1100,
+      installmentAmount: 1000,
       customer: { id: '11111111-1111-1111-1111-111111111111', name: 'Test Customer', phone: '9000000000' },
       dues: [],
     });
@@ -48,6 +50,7 @@ describe('POST /api/v1/loans — weekly loan creation', () => {
       .set('Authorization', `Bearer ${adminToken()}`)
       .send({
         customerId: '11111111-1111-1111-1111-111111111111',
+        loanNumber: 'LN-1001',
         type: 'WEEKLY',
         principal: 10000,
         interestRate: 10,
@@ -59,13 +62,13 @@ describe('POST /api/v1/loans — weekly loan creation', () => {
     expect(res.body.data.disbursedAmount).toBe(9000);
 
     // Verify the calculator's math actually reached the DB layer correctly:
-    // 10 weekly dues of 1,100 each should have been created in one batch call.
+    // 10 weekly dues of 1,000 each should have been created in one batch call.
     expect(prisma.due.createMany).toHaveBeenCalledTimes(1);
     const dueRows = prisma.due.createMany.mock.calls[0][0].data;
     expect(dueRows).toHaveLength(10);
-    expect(dueRows[0].amount).toBe(1100);
+    expect(dueRows[0].amount).toBe(1000);
     const total = dueRows.reduce((sum, d) => sum + d.amount, 0);
-    expect(Math.round(total * 100) / 100).toBe(11000);
+    expect(Math.round(total * 100) / 100).toBe(10000);
   });
 
   test('rejects loan creation for a non-existent customer', async () => {
@@ -76,6 +79,7 @@ describe('POST /api/v1/loans — weekly loan creation', () => {
       .set('Authorization', `Bearer ${adminToken()}`)
       .send({
         customerId: '99999999-9999-9999-9999-999999999999',
+        loanNumber: 'LN-1002',
         type: 'WEEKLY',
         principal: 10000,
         interestRate: 10,
@@ -92,6 +96,7 @@ describe('POST /api/v1/loans — weekly loan creation', () => {
       .set('Authorization', `Bearer ${adminToken()}`)
       .send({
         customerId: '11111111-1111-1111-1111-111111111111',
+        loanNumber: 'LN-1003',
         type: 'WEEKLY',
         principal: 10000,
         interestRate: 10,

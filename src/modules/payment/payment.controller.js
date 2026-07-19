@@ -34,7 +34,7 @@ async function confirm(req, res, next) {
     }
 
     const result = await paymentService.confirmPayment(paymentId, upiRefNumber, req.user?.id);
-    if (req.audit) await req.audit('CONFIRM_PAYMENT', 'Payment', paymentId, { upiRefNumber });
+    if (req.audit) await req.audit('CONFIRM_PAYMENT', 'Payment', paymentId, { upiRefNumber, method: payment.method });
     return ApiResponse.success(res, { message: 'Payment confirmed', data: result });
   } catch (err) {
     next(err);

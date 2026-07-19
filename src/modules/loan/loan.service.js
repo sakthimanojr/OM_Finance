@@ -10,6 +10,9 @@ async function createLoan(payload) {
   if (!customer) throw ApiError.notFound('Customer not found');
   if (customer.status !== 'ACTIVE') throw ApiError.badRequest('Customer is not active');
 
+  const existingLoan = await prisma.loan.findUnique({ where: { loanNumber: payload.loanNumber } });
+  if (existingLoan) throw ApiError.conflict('A loan with this loan number already exists');
+
   const startDate = new Date(payload.startDate);
   let calcResult;
 

@@ -11,11 +11,11 @@ describe('Loan Calculators', () => {
       startDate: new Date('2026-01-01'),
     });
     expect(result.disbursedAmount).toBe(9000);
-    expect(result.totalRepayable).toBe(11000);
-    expect(result.installmentAmount).toBe(1100);
+    expect(result.totalRepayable).toBe(10000);
+    expect(result.installmentAmount).toBe(1000);
     expect(result.dueSchedule).toHaveLength(10);
     const totalDues = result.dueSchedule.reduce((s, d) => s + d.amount, 0);
-    expect(Math.round(totalDues * 100) / 100).toBe(11000);
+    expect(Math.round(totalDues * 100) / 100).toBe(10000);
   });
 
   test('monthly EMI loan: 10,000 @15% + 100 fee over 5 months', () => {

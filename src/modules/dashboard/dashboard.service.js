@@ -67,24 +67,36 @@ async function getCustomerSummary(customerId) {
   // Total principal borrowed across all loans
   const totalPrincipalBorrowed = loans.reduce((sum, l) => sum + Number(l.principal), 0);
 
-  // Total amount repaid (from successful payments)
-  const totalAmountRepaid = Number(totalPaymentsAgg._sum.amount || 0);
+  let totalPrincipalPaid = 0;
+  let totalInterestPaid = 0;
 
-  // Total interest paid: for completed loans, interest = totalCollection - principal
-  // For active loans, we count what's been paid so far
-  const totalInterestPaid = loans.reduce((sum, loan) => {
-    const interestAmount = Number(loan.principal) * Number(loan.interestRate) / 100;
-    // Only count interest that's actually been collected
+  for (const loan of loans) {
     const collected = Number(loan.totalCollection || 0);
-    const principalCollected = Math.min(collected, Number(loan.principal));
-    const interestCollected = Math.max(0, collected - principalCollected);
-    // For weekly/monthly: interest was deducted upfront, so it's interestAmount
-    if (loan.type === 'WEEKLY' || loan.type === 'MONTHLY') {
-      return sum + interestAmount;
+
+    if (loan.type === 'HIGH_VALUE') {
+      const interestPaid = loan.dues
+        .filter((d) => d.status === 'PAID')
+        .reduce((s, d) => s + Number(d.paidAmount || d.amount), 0);
+      const principalPaid = Math.max(0, collected - interestPaid);
+      totalPrincipalPaid += principalPaid;
+      totalInterestPaid += interestPaid;
+    } else {
+      const principalPart = Number(loan.disbursedAmount);
+      const duesSum = loan.dues.reduce((s, d) => s + Number(d.amount), 0);
+      
+      if (duesSum > 0) {
+        const ratio = principalPart / duesSum;
+        const principalPaid = collected * ratio;
+        const interestPaid = collected * (1 - ratio);
+        totalPrincipalPaid += principalPaid;
+        totalInterestPaid += interestPaid;
+      } else {
+        totalPrincipalPaid += collected;
+      }
     }
-    // For high-value: interest is in the dues themselves
-    return sum + interestCollected;
-  }, 0);
+  }
+
+  const totalAmountRepaid = totalPrincipalPaid + totalInterestPaid;
 
   // Loan history — basic info for each loan
   const loanHistory = loans.map((l) => ({
@@ -108,6 +120,7 @@ async function getCustomerSummary(customerId) {
     activeLoans: activeLoans.length,
     totalOutstanding,
     totalPrincipalBorrowed,
+    totalPrincipalPaid,
     totalInterestPaid,
     totalAmountRepaid,
     loanHistory,

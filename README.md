@@ -139,3 +139,30 @@ app still starts, but the relevant endpoints return 500 errors).
 
 See `.env.example` for the full list with comments.
 
+## Wiping Customer Data (Cleanup Script)
+
+A standalone script is provided to completely clean up the database of all customer-related test data before going live.
+
+### Usage
+
+```bash
+node scripts/wipeAllCustomerData.js --confirm
+```
+
+### What it does
+
+In a single, atomic Prisma database transaction (all-or-nothing), the script:
+1. Deletes all `Receipt`, `Payment`, `Due`, `Document`, `Notification`, `Loan`, `ClosedLoan`, and `Customer` records in foreign-key-safe order.
+2. Deletes all `User` records with the role `CUSTOMER`.
+3. Leaves all admin configurations, non-customer user accounts (`SUPER_ADMIN`, `VIEW_ADMIN`), and audit logs intact.
+4. Logs an entry to the `AuditLog` database table record detailing this wipe itself (for system security tracking).
+
+### Safety Features & Warnings
+
+> [!WARNING]  
+> This script is strictly for developer use/pre-launch test cleanup. Running this script against a production database will result in permanent, unrecoverable data loss.
+>
+> **Safety Guards**:
+> - The script will query the database, print a summary counts of all records to be deleted, and immediately refuse to run/exit if the `--confirm` CLI flag is missing.
+
+

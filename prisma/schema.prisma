@@ -132,7 +132,7 @@ model Loan {
   id               String     @id @default(uuid())
   customerId       String
   customer         Customer   @relation(fields: [customerId], references: [id])
-  loanNumber       String?
+  loanNumber       String     @unique
   type             LoanType
   principal        Decimal    @db.Decimal(12, 2)
   interestRate     Decimal    @db.Decimal(5, 2)
