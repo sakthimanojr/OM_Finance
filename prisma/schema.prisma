@@ -201,6 +201,7 @@ model Receipt {
   paymentId          String   @unique
   payment            Payment  @relation(fields: [paymentId], references: [id])
   receiptNumber      String   @unique
+  billNumber         Int      @default(autoincrement()) @unique
   qrCodeUrl          String?
   pdfUrl             String?
   cloudinaryPublicId String?

@@ -20,6 +20,7 @@ async function createLoan(payload) {
     calcResult = weeklyCalc.calculate({
       principal: payload.principal,
       interestRate: payload.interestRate,
+      agreementFee: payload.agreementFee || 0,
       termCount: payload.termCount,
       startDate,
     });

@@ -109,8 +109,14 @@ async function getTodaysDues() {
  * Each item includes customer info and a count + list of their pending dues.
  */
 async function getDuesByCustomer() {
+  const now = new Date();
+  const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59, 999);
+
   const dues = await prisma.due.findMany({
-    where: { status: { in: ['PENDING', 'MISSED'] } },
+    where: { 
+      status: { in: ['PENDING', 'MISSED'] },
+      dueDate: { lte: endOfDay }
+    },
     include: { loan: { include: { customer: { select: { id: true, name: true, phone: true } } } } },
     orderBy: { dueDate: 'asc' },
   });

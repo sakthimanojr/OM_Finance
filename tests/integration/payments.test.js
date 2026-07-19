@@ -6,6 +6,11 @@ const prisma = require('../../src/config/database');
 const app = require('../../src/app');
 const env = require('../../src/config/env');
 
+jest.mock('../../src/modules/payment/razorpay.adapter', () => ({
+  createOrder: jest.fn(),
+  verifyWebhookSignature: jest.fn().mockReturnValue(true),
+}));
+
 function adminToken() {
   return jwt.sign({ sub: 'admin-1', role: 'SUPER_ADMIN' }, env.JWT_ACCESS_SECRET, { expiresIn: '15m' });
 }
@@ -147,5 +152,85 @@ describe('POST /api/v1/payments/confirm', () => {
     expect(res.status).toBe(200);
     // ClosedLoan should have been created
     expect(prisma.closedLoan.create).toHaveBeenCalledTimes(1);
+  });
+
+  describe('Sequential Bill Numbers', () => {
+    let billCounter = 1;
+    beforeEach(() => {
+      billCounter = 1;
+      prisma.receipt.create.mockImplementation(async (args) => ({
+        id: 'receipt-id',
+        receiptNumber: args.data.receiptNumber,
+        billNumber: billCounter++,
+      }));
+    });
+
+    test('webhook and manual paths should produce sequential bill numbers', async () => {
+      const mockPayment1 = { 
+        id: 'payment-1', 
+        amount: 1000, 
+        status: 'PENDING', 
+        method: 'UPI',
+        dueId: 'due-1',
+        loanId: 'loan-1',
+        customerId: 'customer-1',
+        gatewayOrderId: 'order_1',
+        customer: { id: 'customer-1', name: 'Test', phone: '123' },
+        loan: { loanNumber: 'LN-123' },
+        due: { dueNumber: 1 }
+      };
+      prisma.payment.findUnique.mockResolvedValue(mockPayment1);
+      prisma.payment.update.mockResolvedValue({ ...mockPayment1, status: 'SUCCESS' });
+      prisma.due.update.mockResolvedValue({ id: 'due-1' });
+      prisma.loan.update.mockResolvedValue({ id: 'loan-1' });
+      prisma.due.count.mockResolvedValue(1); // not closed
+      prisma.receipt.findUnique.mockResolvedValue(null);
+
+      // Path 1: Webhook (UPI)
+      const res1 = await request(app)
+        .post('/api/v1/payments/webhook/razorpay')
+        .set('x-razorpay-signature', 'valid-signature') // mock bypass
+        .send({
+          event: 'payment.captured',
+          payload: { payment: { entity: { order_id: 'order_1', id: 'pay_1' } } },
+        });
+      // The webhook returns 200 immediately, but the receipt is created
+      expect(res1.status).toBe(200);
+      
+      // Wait a tick for async processing (since webhook is async)
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      
+      // Path 2: Manual Confirm (Cash)
+      const mockPayment2Id = '22222222-2222-2222-2222-222222222222';
+      const mockPayment2 = {
+        id: mockPayment2Id,
+        amount: 1000,
+        status: 'PENDING',
+        method: 'CASH',
+        dueId: 'due-2',
+        loanId: 'loan-1',
+        customerId: 'customer-1',
+        customer: { id: 'customer-1', name: 'Test', phone: '123' },
+        loan: { loanNumber: 'LN-123' },
+        due: { dueNumber: 2 }
+      };
+      prisma.payment.findUnique.mockResolvedValue(mockPayment2);
+      prisma.payment.update.mockResolvedValue({ ...mockPayment2, status: 'SUCCESS' });
+      
+      const res2 = await request(app)
+        .post('/api/v1/payments/confirm')
+        .set('Authorization', `Bearer ${adminToken()}`)
+        .send({ paymentId: mockPayment2Id });
+
+      expect(res2.status).toBe(200);
+      expect(res2.body.data.receipt.billNumber).toBe(2);
+
+      // Verify that receipts were created twice
+      expect(prisma.receipt.create).toHaveBeenCalledTimes(2);
+      
+      // First receipt should be billNumber 1, Second is 2
+      expect(prisma.receipt.create.mock.results[0].value.then(r => expect(r.billNumber).toBe(1)));
+      expect(prisma.receipt.create.mock.results[1].value.then(r => expect(r.billNumber).toBe(2)));
+    });
   });
 });

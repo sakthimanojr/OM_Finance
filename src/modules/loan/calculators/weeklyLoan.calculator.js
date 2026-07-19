@@ -10,9 +10,9 @@ const dateHelper = require('../../../utils/dateHelper');
  * @param {number} termCount - number of weekly installments
  * @param {Date} startDate
  */
-function calculate({ principal, interestRate, termCount, startDate }) {
+function calculate({ principal, interestRate, termCount, startDate, agreementFee = 0 }) {
   const interestAmount = round2((principal * interestRate) / 100);
-  const disbursedAmount = round2(principal - interestAmount);
+  const disbursedAmount = round2(principal - interestAmount - agreementFee);
   // Customer repays only the principal in installments; interest was deducted upfront.
   const totalRepayable = principal;
   const installmentAmount = round2(principal / termCount);

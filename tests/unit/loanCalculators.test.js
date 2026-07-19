@@ -18,6 +18,21 @@ describe('Loan Calculators', () => {
     expect(Math.round(totalDues * 100) / 100).toBe(10000);
   });
 
+  test('weekly loan: 10,000 @10% + 200 fee over 10 weeks', () => {
+    const result = weeklyCalc.calculate({
+      principal: 10000,
+      interestRate: 10,
+      agreementFee: 200,
+      termCount: 10,
+      startDate: new Date('2026-01-01'),
+    });
+    expect(result.disbursedAmount).toBe(8800); // 10000 - 1000 (interest) - 200 (fee)
+    expect(result.totalRepayable).toBe(10000);
+    expect(result.installmentAmount).toBe(1000);
+    expect(result.dueSchedule).toHaveLength(10);
+  });
+
+
   test('monthly EMI loan: 10,000 @15% + 100 fee over 5 months', () => {
     const result = monthlyCalc.calculate({
       principal: 10000,
