@@ -36,6 +36,19 @@ const mockPrisma = {
   auditLog: buildModelMock(),
   adminConfig: buildModelMock(),
   closedLoan: buildModelMock(),
+
+  // Chit Fund Models
+  chitFund: buildModelMock(),
+  chitMember: buildModelMock(),
+  chitMonth: buildModelMock(),
+  chitAuction: buildModelMock(),
+  chitBid: buildModelMock(),
+  chitFundLedger: buildModelMock(),
+  chitLoan: buildModelMock(),
+  chitLoanTransaction: buildModelMock(),
+  chitMemberPayment: buildModelMock(),
+  chitPayout: buildModelMock(),
+
   // Most services call `prisma.$transaction(async (tx) => { ... })` — running
   // the callback with this same mock client is enough for route/middleware
   // level tests since the individual tx.model.method() calls are what's

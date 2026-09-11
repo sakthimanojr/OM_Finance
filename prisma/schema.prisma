@@ -84,6 +84,14 @@ model User {
   customer  Customer?
   auditLogs AuditLog[]
 
+  // Chit Fund relations
+  chitFundsCreated   ChitFund[]           @relation("ChitFundCreatedBy")
+  chitMemberships    ChitMember[]         @relation("ChitMemberUser")
+  chitAuctionsCreated ChitAuction[]       @relation("ChitAuctionCreatedBy")
+  chitLedgerEntries  ChitFundLedger[]     @relation("ChitLedgerCreatedBy")
+  chitLoansCreated   ChitLoan[]           @relation("ChitLoanCreatedBy")
+  chitLoanTxCreated  ChitLoanTransaction[] @relation("ChitLoanTxCreatedBy")
+
   @@map("users")
 }
 
@@ -113,6 +121,9 @@ model Customer {
   loans         Loan[]
   payments      Payment[]
   notifications Notification[]
+
+  // Chit Fund relations
+  chitMemberships ChitMember[] @relation("ChitMemberCustomer")
 
   @@map("customers")
 }
@@ -269,4 +280,296 @@ model ClosedLoan {
   dueSchedule     Json
 
   @@map("closed_loans")
+}
+
+// ─────────────────────────────────────────────
+// CHIT FUND MODULE
+// ─────────────────────────────────────────────
+
+enum ChitStatus {
+  DRAFT
+  ACTIVE
+  PAUSED
+  COMPLETED
+}
+
+enum ChitMemberStatus {
+  ACTIVE
+  INACTIVE
+  REMOVED
+}
+
+enum ChitMonthStatus {
+  OPEN
+  CLOSED
+}
+
+enum AuctionType {
+  REGULAR
+  ADDITIONAL
+}
+
+enum AuctionStatus {
+  PENDING
+  SETTLED
+  CANCELLED
+}
+
+enum ChitMemberPaymentStatus {
+  PENDING
+  PARTIAL
+  PAID
+  LATE
+  FAILED
+  WAIVED
+}
+
+enum ChitLoanStatus {
+  ACTIVE
+  PARTIALLY_PAID
+  PAID
+  OVERDUE
+  WRITTEN_OFF
+}
+
+enum ChitLedgerDirection {
+  CREDIT
+  DEBIT
+}
+
+enum ChitLedgerTransactionType {
+  WINNING_BID_CREDIT
+  LOAN_DISBURSEMENT
+  LOAN_PRINCIPAL_REPAYMENT
+  LOAN_INTEREST_CREDIT
+  ADDITIONAL_AUCTION_ALLOCATION
+  MANUAL_CREDIT
+  MANUAL_DEBIT
+  REFUND
+}
+
+model ChitFund {
+  id                   String     @id @default(uuid())
+  name                 String
+  description          String?
+  memberCount          Int
+  monthlyContribution  Decimal    @db.Decimal(15, 2)
+  regularAuctionAmount Decimal    @db.Decimal(15, 2)
+  startingBid          Decimal    @db.Decimal(15, 2)
+  interestRate         Decimal    @default(3.00) @db.Decimal(5, 2)
+  loanPeriodRule       String?    // e.g. "repay before next auction"
+  startDate            DateTime
+  paymentDueDay        Int        @default(1) // day of month payment is due
+  currentMonth         Int        @default(0)
+  completedAuctionCount Int       @default(0)
+  requiredWinnerCount  Int        // = memberCount
+  status               ChitStatus @default(DRAFT)
+  createdById          String
+  createdBy            User       @relation("ChitFundCreatedBy", fields: [createdById], references: [id])
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+
+  members      ChitMember[]
+  months       ChitMonth[]
+  auctions     ChitAuction[]
+  loans        ChitLoan[]
+  ledger       ChitFundLedger[]
+  payments     ChitMemberPayment[]
+  payouts      ChitPayout[]
+
+  @@map("chit_funds")
+}
+
+model ChitMember {
+  id                  String           @id @default(uuid())
+  chitId              String
+  chit                ChitFund         @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  userId              String
+  user                User             @relation("ChitMemberUser", fields: [userId], references: [id])
+  customerId          String
+  customer            Customer         @relation("ChitMemberCustomer", fields: [customerId], references: [id])
+  monthlyContribution Decimal          @db.Decimal(15, 2)
+  auctionEligible     Boolean          @default(true)
+  hasWonAuction       Boolean          @default(false)
+  wonAuctionId        String?          // Denormalized ref – enforced by app logic
+  wonAuctionNumber    Int?
+  status              ChitMemberStatus @default(ACTIVE)
+  joinedAt            DateTime         @default(now())
+  createdAt           DateTime         @default(now())
+  updatedAt           DateTime         @updatedAt
+
+  payments       ChitMemberPayment[]
+  loans          ChitLoan[]
+  payouts        ChitPayout[]
+  wonAuctions    ChitAuction[]    @relation("AuctionWinner")
+
+  @@unique([chitId, userId])
+  @@map("chit_members")
+}
+
+model ChitMonth {
+  id              String          @id @default(uuid())
+  chitId          String
+  chit            ChitFund        @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  monthNumber     Int
+  periodStart     DateTime
+  periodEnd       DateTime?
+  amountDue       Decimal         @db.Decimal(15, 2)
+  amountCollected Decimal         @default(0) @db.Decimal(15, 2)
+  status          ChitMonthStatus @default(OPEN)
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  auctions ChitAuction[]
+  payments ChitMemberPayment[]
+
+  @@unique([chitId, monthNumber])
+  @@map("chit_months")
+}
+
+model ChitAuction {
+  id              String        @id @default(uuid())
+  chitId          String
+  chit            ChitFund      @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  monthId         String
+  month           ChitMonth     @relation(fields: [monthId], references: [id])
+  auctionNumber   Int
+  auctionType     AuctionType
+  auctionDate     DateTime
+  auctionAmount   Decimal       @db.Decimal(15, 2)
+  startingBid     Decimal       @db.Decimal(15, 2)
+  winningBid      Decimal?      @db.Decimal(15, 2)
+  winnerId        String?       // ChitMember.id of the winner
+  winner          ChitMember?   @relation("AuctionWinner", fields: [winnerId], references: [id])
+  winnerPayout    Decimal?      @db.Decimal(15, 2)
+  status          AuctionStatus @default(PENDING)
+  createdById     String
+  createdBy       User          @relation("ChitAuctionCreatedBy", fields: [createdById], references: [id])
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  ledger     ChitFundLedger[]
+  payout     ChitPayout?
+  bids       ChitBid[]
+
+  @@unique([chitId, auctionNumber])
+  @@map("chit_auctions")
+}
+
+model ChitBid {
+  id        String      @id @default(uuid())
+  auctionId String
+  auction   ChitAuction @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  memberId  String
+  bidAmount Decimal     @db.Decimal(15, 2)
+  bidTime   DateTime    @default(now())
+  status    String      @default("PLACED") // PLACED, WON, LOST
+  createdAt DateTime    @default(now())
+
+  @@map("chit_bids")
+}
+
+model ChitFundLedger {
+  id              String                    @id @default(uuid())
+  chitId          String
+  chit            ChitFund                  @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  auctionId       String?
+  auction         ChitAuction?              @relation(fields: [auctionId], references: [id])
+  loanId          String?
+  loan            ChitLoan?                 @relation(fields: [loanId], references: [id])
+  transactionType ChitLedgerTransactionType
+  amount          Decimal                   @db.Decimal(15, 2)
+  direction       ChitLedgerDirection
+  balanceAfter    Decimal                   @db.Decimal(15, 2)
+  referenceId     String?
+  description     String
+  createdById     String
+  createdBy       User                      @relation("ChitLedgerCreatedBy", fields: [createdById], references: [id])
+  createdAt       DateTime                  @default(now())
+
+  @@map("chit_fund_ledger")
+}
+
+model ChitLoan {
+  id              String         @id @default(uuid())
+  chitId          String
+  chit            ChitFund       @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  memberId        String
+  member          ChitMember     @relation(fields: [memberId], references: [id])
+  principalAmount Decimal        @db.Decimal(15, 2)
+  interestRate    Decimal        @default(3.00) @db.Decimal(5, 2)
+  interestAmount  Decimal        @db.Decimal(15, 2)
+  totalRepayment  Decimal        @db.Decimal(15, 2)
+  amountPaid      Decimal        @default(0) @db.Decimal(15, 2)
+  remainingAmount Decimal        @db.Decimal(15, 2)
+  loanDate        DateTime
+  dueDate         DateTime
+  status          ChitLoanStatus @default(ACTIVE)
+  createdById     String
+  createdBy       User           @relation("ChitLoanCreatedBy", fields: [createdById], references: [id])
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  transactions ChitLoanTransaction[]
+  ledger       ChitFundLedger[]
+
+  @@map("chit_loans")
+}
+
+model ChitLoanTransaction {
+  id               String   @id @default(uuid())
+  loanId           String
+  loan             ChitLoan @relation(fields: [loanId], references: [id], onDelete: Cascade)
+  transactionType  String   // REPAYMENT, DISBURSEMENT
+  principalAmount  Decimal  @db.Decimal(15, 2)
+  interestAmount   Decimal  @db.Decimal(15, 2)
+  totalAmount      Decimal  @db.Decimal(15, 2)
+  paymentReference String?
+  transactionDate  DateTime @default(now())
+  createdById      String
+  createdBy        User     @relation("ChitLoanTxCreatedBy", fields: [createdById], references: [id])
+  createdAt        DateTime @default(now())
+
+  @@map("chit_loan_transactions")
+}
+
+model ChitMemberPayment {
+  id               String                  @id @default(uuid())
+  chitId           String
+  chit             ChitFund                @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  memberId         String
+  member           ChitMember              @relation(fields: [memberId], references: [id])
+  monthId          String
+  month            ChitMonth               @relation(fields: [monthId], references: [id])
+  amountDue        Decimal                 @db.Decimal(15, 2)
+  amountPaid       Decimal                 @default(0) @db.Decimal(15, 2)
+  dueDate          DateTime
+  paidDate         DateTime?
+  status           ChitMemberPaymentStatus @default(PENDING)
+  paymentReference String?
+  paymentMethod    String?
+  createdAt        DateTime                @default(now())
+  updatedAt        DateTime                @updatedAt
+
+  @@unique([memberId, monthId])
+  @@map("chit_member_payments")
+}
+
+model ChitPayout {
+  id               String      @id @default(uuid())
+  chitId           String
+  chit             ChitFund    @relation(fields: [chitId], references: [id], onDelete: Cascade)
+  auctionId        String      @unique
+  auction          ChitAuction @relation(fields: [auctionId], references: [id])
+  winnerId         String
+  winner           ChitMember  @relation(fields: [winnerId], references: [id])
+  auctionAmount    Decimal     @db.Decimal(15, 2)
+  winningBid       Decimal     @db.Decimal(15, 2)
+  payoutAmount     Decimal     @db.Decimal(15, 2)
+  status           String      @default("PENDING") // PENDING, PAID
+  paymentReference String?
+  paidAt           DateTime?
+  createdAt        DateTime    @default(now())
+
+  @@map("chit_payouts")
 }

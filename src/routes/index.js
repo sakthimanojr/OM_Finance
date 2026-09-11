@@ -13,6 +13,8 @@ const documentRoutes = require('../modules/document/document.routes');
 const dashboardRoutes = require('../modules/dashboard/dashboard.routes');
 const auditRoutes = require('../modules/audit/audit.routes');
 const closedLoanRoutes = require('../modules/closedLoan/closedLoan.routes');
+const chitFundRoutes = require('../modules/chitFund/chitFund.routes');
+const myChitRoutes = require('../modules/chitFund/myChit.routes');
 
 const router = express.Router();
 
@@ -29,5 +31,7 @@ router.use('/documents', documentRoutes);
 router.use('/dashboard', dashboardRoutes);
 router.use('/audit-logs', auditRoutes);
 router.use('/closed-loans', closedLoanRoutes);
+router.use('/chit-funds', chitFundRoutes);
+router.use('/my/chits', myChitRoutes);
 
 module.exports = router;

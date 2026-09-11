@@ -13,8 +13,10 @@ function getTransporter() {
   transporter = nodemailer.createTransport({
     host: env.SMTP_HOST,
     port: env.SMTP_PORT,
+    // 465 = implicit TLS (secure:true); 587 = STARTTLS (secure:false)
     secure: env.SMTP_PORT === 465,
     auth: { user: env.SMTP_USER, pass: env.SMTP_PASS },
+    tls: { rejectUnauthorized: false },
   });
   return transporter;
 }
