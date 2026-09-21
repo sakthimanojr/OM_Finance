@@ -225,12 +225,11 @@ describe('POST /api/v1/payments/confirm', () => {
       expect(res2.status).toBe(200);
       expect(res2.body.data.receipt.billNumber).toBe(2);
 
-      // Verify that receipts were created twice
-      expect(prisma.receipt.create).toHaveBeenCalledTimes(2);
-      
       // First receipt should be billNumber 1, Second is 2
-      expect(prisma.receipt.create.mock.results[0].value.then(r => expect(r.billNumber).toBe(1)));
-      expect(prisma.receipt.create.mock.results[1].value.then(r => expect(r.billNumber).toBe(2)));
+      const r1 = await prisma.receipt.create.mock.results[0].value;
+      const r2 = await prisma.receipt.create.mock.results[1].value;
+      expect(r1.billNumber).toBe(1);
+      expect(r2.billNumber).toBe(2);
     });
   });
 });

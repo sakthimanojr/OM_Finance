@@ -36,7 +36,7 @@ const env = {
 
   // Deployment URLs
   BASE_URL: process.env.BASE_URL || '',
-  CORS_ORIGIN: process.env.CORS_ORIGIN || (isProd ? '' : '*'),
+  CORS_ORIGIN: process.env.CORS_ORIGIN || '*',
 
   DATABASE_URL: required('DATABASE_URL'),
 
