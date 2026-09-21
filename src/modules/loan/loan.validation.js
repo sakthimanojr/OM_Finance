@@ -23,7 +23,7 @@ const listLoans = {
     status: Joi.string().valid('ACTIVE', 'COMPLETED', 'CLOSED', 'OVERDUE').optional(),
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').optional(),
     page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(100).default(20),
+    limit: Joi.number().integer().min(1).max(500).default(20),
   }),
 };
 

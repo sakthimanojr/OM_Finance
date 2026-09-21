@@ -22,7 +22,7 @@ const listPayments = {
     status: Joi.string().valid('INITIATED', 'SUCCESS', 'FAILED').optional(),
     month: Joi.string().valid('current').optional(),
     page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(100).default(20),
+    limit: Joi.number().integer().min(1).max(500).default(20),
   }),
 };
 
