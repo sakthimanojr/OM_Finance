@@ -49,4 +49,14 @@ async function updateConfig(req, res, next) {
   }
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, getConfig, updateConfig };
+async function importLegacyLoans(req, res, next) {
+  try {
+    const result = await adminService.importLegacyLoans();
+    if (req.audit) await req.audit('IMPORT_LEGACY_LOANS', 'Loan', null, result);
+    return ApiResponse.success(res, { message: 'Legacy loans imported successfully', data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createViewAdmin, listAdmins, setAdminActive, getConfig, updateConfig, importLegacyLoans };

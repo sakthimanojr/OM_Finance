@@ -1,0 +1,6276 @@
+[
+  {
+    "legacyLoanNo": 1,
+    "loanNumber": "LN-001",
+    "customerName": "pattu (mani)",
+    "phone": "8825696877",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-04-16T00:00:00.000Z",
+    "endDate": "2026-06-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-04-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-18T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-25T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 2,
+    "loanNumber": "LN-002",
+    "customerName": "ragupathy",
+    "phone": "9655320968",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-04-16T00:00:00.000Z",
+    "endDate": "2026-06-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-04-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-25T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 3,
+    "loanNumber": "LN-003",
+    "customerName": "venkatesan (kv)",
+    "phone": "9655550366",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-04-15T00:00:00.000Z",
+    "endDate": "2026-06-24T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-22T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-04-29T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-05-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-03T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-10T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-17T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-24T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 4,
+    "loanNumber": "LN-004",
+    "customerName": "naga (mesthiri)",
+    "phone": "6383153440",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-04-20T00:00:00.000Z",
+    "endDate": "2026-06-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-18T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-25T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 5,
+    "loanNumber": "LN-005",
+    "customerName": "ajith aali",
+    "phone": "9100000005",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-04-20T00:00:00.000Z",
+    "endDate": "2026-06-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 6,
+    "loanNumber": "LN-006",
+    "customerName": "praveen (baguti)",
+    "phone": "7825985142",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-04-20T00:00:00.000Z",
+    "endDate": "2026-06-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 7,
+    "loanNumber": "LN-007",
+    "customerName": "elango (pigga)",
+    "phone": "9100000007",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-04-20T00:00:00.000Z",
+    "endDate": "2026-06-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-27T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-04T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-11T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-18T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-25T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 8,
+    "loanNumber": "LN-008",
+    "customerName": "arvind (sb)",
+    "phone": "9100000008",
+    "loanType": "WEEKLY",
+    "principal": 25000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 22500,
+    "installmentAmount": 2500,
+    "termCount": 10,
+    "startDate": "2026-04-25T00:00:00.000Z",
+    "endDate": "2026-07-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-02T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-09T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-16T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-23T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-30T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-06T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-13T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-20T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 2500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 2500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 9,
+    "loanNumber": "LN-009",
+    "customerName": "sakthivel",
+    "phone": "9100000009",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-04-28T00:00:00.000Z",
+    "endDate": "2026-07-07T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-09T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-16T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-23T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-30T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 10,
+    "loanNumber": "LN-010",
+    "customerName": "kisoth (sappa)",
+    "phone": "9100000010",
+    "loanType": "MONTHLY",
+    "principal": 15000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 12750,
+    "installmentAmount": 3450,
+    "termCount": 5,
+    "startDate": "2026-04-28T00:00:00.000Z",
+    "endDate": "2026-09-28T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-28T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 3450
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 11,
+    "loanNumber": "LN-011",
+    "customerName": "balaraman",
+    "phone": "9100000011",
+    "loanType": "WEEKLY",
+    "principal": 30000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 27000,
+    "installmentAmount": 3000,
+    "termCount": 10,
+    "startDate": "2026-04-27T00:00:00.000Z",
+    "endDate": "2026-07-06T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-04T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-11T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-18T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-25T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 3000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 3000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 12,
+    "loanNumber": "LN-012",
+    "customerName": "ajith (metu)",
+    "phone": "7270276690",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-04-09T00:00:00.000Z",
+    "endDate": "2026-06-18T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-04-16T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-04-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-04-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-05-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-05-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-06-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-06-18T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 13,
+    "loanNumber": "LN-013",
+    "customerName": "manimaran (laddu)",
+    "phone": "9100000013",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-04-29T00:00:00.000Z",
+    "endDate": "2026-07-08T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-05-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-06-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-08T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 14,
+    "loanNumber": "LN-014",
+    "customerName": "yuvaraj (goindthan)",
+    "phone": "6383032175",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-05-07T00:00:00.000Z",
+    "endDate": "2026-07-16T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-14T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-21T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-04T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-11T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-18T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-06-25T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-09T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-16T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 15,
+    "loanNumber": "LN-015",
+    "customerName": "Dayalan (manda)",
+    "phone": "9100000015",
+    "loanType": "WEEKLY",
+    "principal": 6000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 5400,
+    "installmentAmount": 600,
+    "termCount": 10,
+    "startDate": "2026-05-31T00:00:00.000Z",
+    "endDate": "2026-08-09T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-07T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-14T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-21T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-05T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 600
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 16,
+    "loanNumber": "LN-016",
+    "customerName": "Mani (Jolly)",
+    "phone": "9345396573",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-05-31T00:00:00.000Z",
+    "endDate": "2026-08-09T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-05T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 17,
+    "loanNumber": "LN-017",
+    "customerName": "Ashok",
+    "phone": "9100000017",
+    "loanType": "WEEKLY",
+    "principal": 35000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 31500,
+    "installmentAmount": 3500,
+    "termCount": 10,
+    "startDate": "2026-05-21T00:00:00.000Z",
+    "endDate": "2026-07-30T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-04T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-11T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-18T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-25T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-02T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-09T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-16T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-23T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-30T00:00:00.000Z",
+        "amount": 3500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 18,
+    "loanNumber": "LN-018",
+    "customerName": "Raj (rice)",
+    "phone": "9100000018",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-05-20T00:00:00.000Z",
+    "endDate": "2026-07-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-27T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-03T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-10T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-17T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-24T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-01T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-08T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-15T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-22T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-29T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 19,
+    "loanNumber": "LN-019",
+    "customerName": "sakthivel (mangalam)",
+    "phone": "9848757747",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-05-16T00:00:00.000Z",
+    "endDate": "2026-07-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-25T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 20,
+    "loanNumber": "LN-020",
+    "customerName": "murugan (painter)",
+    "phone": "9843173422",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-05-16T00:00:00.000Z",
+    "endDate": "2026-07-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-05-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-18T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-25T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 21,
+    "loanNumber": "LN-021",
+    "customerName": "raghul (naren)",
+    "phone": "9100000021",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-05-21T00:00:00.000Z",
+    "endDate": "2026-07-30T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-28T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-04T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-11T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-18T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-25T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-09T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-16T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-23T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-07-30T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 22,
+    "loanNumber": "LN-022",
+    "customerName": "Jai (pichai)",
+    "phone": "9100000022",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-05-23T00:00:00.000Z",
+    "endDate": "2026-08-01T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-05-30T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-06T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-13T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-20T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-11T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-18T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-25T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-01T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 23,
+    "loanNumber": "LN-023",
+    "customerName": "ragupathy",
+    "phone": "9100000023",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-05-25T00:00:00.000Z",
+    "endDate": "2026-08-03T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 24,
+    "loanNumber": "LN-024",
+    "customerName": "ranjith",
+    "phone": "9100000024",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-05-25T00:00:00.000Z",
+    "endDate": "2026-08-03T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 25,
+    "loanNumber": "LN-025",
+    "customerName": "Shanmugavel (KP)",
+    "phone": "9100000025",
+    "loanType": "WEEKLY",
+    "principal": 35000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 31500,
+    "installmentAmount": 3500,
+    "termCount": 10,
+    "startDate": "2026-05-25T00:00:00.000Z",
+    "endDate": "2026-08-03T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-01T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-08T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-15T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 3500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 3500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 26,
+    "loanNumber": "LN-026",
+    "customerName": "mani (tails)",
+    "phone": "9100000026",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-05-26T00:00:00.000Z",
+    "endDate": "2026-08-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-02T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-09T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-16T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 27,
+    "loanNumber": "LN-027",
+    "customerName": "praveen (baguti)",
+    "phone": "9100000027",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-05-26T00:00:00.000Z",
+    "endDate": "2026-08-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-02T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-09T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 28,
+    "loanNumber": "LN-028",
+    "customerName": "arunachalam (master)",
+    "phone": "9100000028",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-05-26T00:00:00.000Z",
+    "endDate": "2026-08-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-02T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-09T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-06-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 29,
+    "loanNumber": "LN-029",
+    "customerName": "ajith (aali)",
+    "phone": "9100000029",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-05-30T00:00:00.000Z",
+    "endDate": "2026-08-08T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-18T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-25T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-01T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-08T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 30,
+    "loanNumber": "LN-030",
+    "customerName": "vicky (metu)",
+    "phone": "9100000030",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-05-31T00:00:00.000Z",
+    "endDate": "2026-08-09T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-07T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-14T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-21T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 31,
+    "loanNumber": "LN-031",
+    "customerName": "yuvaraj (3)",
+    "phone": "9100000031",
+    "loanType": "MONTHLY",
+    "principal": 15000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 12750,
+    "installmentAmount": 3450,
+    "termCount": 5,
+    "startDate": "2026-06-06T00:00:00.000Z",
+    "endDate": "2026-11-06T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-06T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-06T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-06T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-11-06T00:00:00.000Z",
+        "amount": 3450
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 32,
+    "loanNumber": "LN-032",
+    "customerName": "ragupathy",
+    "phone": "9100000032",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-06-09T00:00:00.000Z",
+    "endDate": "2026-08-18T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-06-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-18T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 33,
+    "loanNumber": "LN-033",
+    "customerName": "babu (metu)",
+    "phone": "9100000033",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-06-13T00:00:00.000Z",
+    "endDate": "2026-08-22T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-20T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-11T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-18T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-25T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-01T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-08T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-15T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-22T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 34,
+    "loanNumber": "LN-034",
+    "customerName": "venkatesan (kv)",
+    "phone": "9100000034",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-06-14T00:00:00.000Z",
+    "endDate": "2026-08-23T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-05T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-23T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 35,
+    "loanNumber": "LN-035",
+    "customerName": "Ashok",
+    "phone": "9100000035",
+    "loanType": "WEEKLY",
+    "principal": 3500,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 3150,
+    "installmentAmount": 350,
+    "termCount": 10,
+    "startDate": "2026-06-15T00:00:00.000Z",
+    "endDate": "2026-08-24T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-22T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 350
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 350
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 36,
+    "loanNumber": "LN-036",
+    "customerName": "balu (tha)",
+    "phone": "9100000036",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-06-20T00:00:00.000Z",
+    "endDate": "2026-08-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 37,
+    "loanNumber": "LN-037",
+    "customerName": "bass (khan)",
+    "phone": "9199566430",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-06-21T00:00:00.000Z",
+    "endDate": "2026-08-30T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-05T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-30T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 38,
+    "loanNumber": "LN-038",
+    "customerName": "Balamuthu",
+    "phone": "9100000038",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-06-21T00:00:00.000Z",
+    "endDate": "2026-08-30T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-05T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-16T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-30T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 39,
+    "loanNumber": "LN-039",
+    "customerName": "simabu (kv)",
+    "phone": "9100000039",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-06-22T00:00:00.000Z",
+    "endDate": "2026-08-31T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-06-29T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 40,
+    "loanNumber": "LN-040",
+    "customerName": "madhan (makku)",
+    "phone": "9100000040",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-06-26T00:00:00.000Z",
+    "endDate": "2026-09-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-07-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 41,
+    "loanNumber": "LN-041",
+    "customerName": "magi (kv)",
+    "phone": "9100000041",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-06-29T00:00:00.000Z",
+    "endDate": "2026-09-07T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 42,
+    "loanNumber": "LN-042",
+    "customerName": "babu (metu)",
+    "phone": "9100000042",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-06-30T00:00:00.000Z",
+    "endDate": "2026-09-08T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-08T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 43,
+    "loanNumber": "LN-043",
+    "customerName": "raghul (naren)",
+    "phone": "9100000043",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-06-30T00:00:00.000Z",
+    "endDate": "2026-09-08T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-18T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-25T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-01T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-08T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 44,
+    "loanNumber": "LN-044",
+    "customerName": "Prakash (metu)",
+    "phone": "9100000044",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-07-01T00:00:00.000Z",
+    "endDate": "2026-09-09T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-08T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-15T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-22T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-29T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-09T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 45,
+    "loanNumber": "LN-045",
+    "customerName": "Sundar Santhosh",
+    "phone": "9100000045",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-07-03T00:00:00.000Z",
+    "endDate": "2026-09-11T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-07-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-11T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 46,
+    "loanNumber": "LN-046",
+    "customerName": "Mohan (Small)",
+    "phone": "9100000046",
+    "loanType": "MONTHLY",
+    "principal": 15000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 12750,
+    "installmentAmount": 3450,
+    "termCount": 5,
+    "startDate": "2026-07-04T00:00:00.000Z",
+    "endDate": "2026-12-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-12-04T00:00:00.000Z",
+        "amount": 3450
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 47,
+    "loanNumber": "LN-047",
+    "customerName": "Kotti (karthi)",
+    "phone": "9944328194",
+    "loanType": "MONTHLY",
+    "principal": 10000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 8500,
+    "installmentAmount": 2300,
+    "termCount": 5,
+    "startDate": "2026-07-04T00:00:00.000Z",
+    "endDate": "2026-12-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-12-04T00:00:00.000Z",
+        "amount": 2300
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 48,
+    "loanNumber": "LN-048",
+    "customerName": "diva (metu)",
+    "phone": "7418302940",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-07-05T00:00:00.000Z",
+    "endDate": "2026-09-13T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-12T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-19T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-26T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-13T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 49,
+    "loanNumber": "LN-049",
+    "customerName": "naga (mesthiri)",
+    "phone": "6373153440",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-07-06T00:00:00.000Z",
+    "endDate": "2026-09-14T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 50,
+    "loanNumber": "LN-050",
+    "customerName": "elango (pigga)",
+    "phone": "9100000050",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-07-13T00:00:00.000Z",
+    "endDate": "2026-09-21T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-21T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 51,
+    "loanNumber": "LN-051",
+    "customerName": "Diva (om)",
+    "phone": "9100000051",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-07-17T00:00:00.000Z",
+    "endDate": "2026-09-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-24T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-31T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-18T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 52,
+    "loanNumber": "LN-052",
+    "customerName": "sarath (kv)",
+    "phone": "9100000052",
+    "loanType": "MONTHLY",
+    "principal": 10000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 8500,
+    "installmentAmount": 2300,
+    "termCount": 5,
+    "startDate": "2026-07-17T00:00:00.000Z",
+    "endDate": "2026-12-17T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-17T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-11-17T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-12-17T00:00:00.000Z",
+        "amount": 2300
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 53,
+    "loanNumber": "LN-053",
+    "customerName": "sundu santhosh",
+    "phone": "9100000053",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-07-17T00:00:00.000Z",
+    "endDate": "2026-09-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-07-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-08-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 54,
+    "loanNumber": "LN-054",
+    "customerName": "Raman",
+    "phone": "9843560642",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-07-21T00:00:00.000Z",
+    "endDate": "2026-09-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 55,
+    "loanNumber": "LN-055",
+    "customerName": "mani (pattu)",
+    "phone": "9100000055",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-07-21T00:00:00.000Z",
+    "endDate": "2026-09-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-09-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 56,
+    "loanNumber": "LN-056",
+    "customerName": "sakthivel (mangalam)",
+    "phone": "9847557749",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-07-23T00:00:00.000Z",
+    "endDate": "2026-10-01T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-03T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-10T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-17T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-24T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-01T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 57,
+    "loanNumber": "LN-057",
+    "customerName": "ranjith",
+    "phone": "9100000057",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-07-23T00:00:00.000Z",
+    "endDate": "2026-10-01T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-03T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-10T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-17T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-24T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-01T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 58,
+    "loanNumber": "LN-058",
+    "customerName": "ragupathy",
+    "phone": "9100000058",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-07-23T00:00:00.000Z",
+    "endDate": "2026-10-01T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-30T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-06T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-13T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-20T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-27T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-03T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-10T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-17T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-24T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-01T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 59,
+    "loanNumber": "LN-059",
+    "customerName": "ajith (metu)",
+    "phone": "9100000059",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-07-24T00:00:00.000Z",
+    "endDate": "2026-10-02T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-07-31T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-07T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-14T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-21T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-28T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-04T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-11T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-18T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-02T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 60,
+    "loanNumber": "LN-060",
+    "customerName": "ganesh (karesh)",
+    "phone": "9100000060",
+    "loanType": "MONTHLY",
+    "principal": 10000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 8500,
+    "installmentAmount": 2300,
+    "termCount": 5,
+    "startDate": "2026-07-24T00:00:00.000Z",
+    "endDate": "2026-12-24T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-24T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-11-24T00:00:00.000Z",
+        "amount": 2300
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-12-24T00:00:00.000Z",
+        "amount": 2300
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 61,
+    "loanNumber": "LN-061",
+    "customerName": "Suresh (mesthiri)",
+    "phone": "9100000061",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-07-25T00:00:00.000Z",
+    "endDate": "2026-10-03T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-01T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-08T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-15T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-22T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-29T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 62,
+    "loanNumber": "LN-062",
+    "customerName": "yuvaraj (Gowinthan)",
+    "phone": "9100000062",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-07-25T00:00:00.000Z",
+    "endDate": "2026-10-03T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-01T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-08T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-15T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-22T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-29T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 63,
+    "loanNumber": "LN-063",
+    "customerName": "Mani (Tails)",
+    "phone": "9100000063",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-07-26T00:00:00.000Z",
+    "endDate": "2026-10-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-02T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-16T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-23T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-08-30T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-06T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-13T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-20T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-27T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 64,
+    "loanNumber": "LN-064",
+    "customerName": "ajith (aali)",
+    "phone": "9100000064",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-07-29T00:00:00.000Z",
+    "endDate": "2026-10-07T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-05T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-12T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-19T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-26T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-02T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-09T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-09-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-07T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 65,
+    "loanNumber": "LN-065",
+    "customerName": "arunachalam (master)",
+    "phone": "9100000065",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-07-30T00:00:00.000Z",
+    "endDate": "2026-10-08T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-06T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-13T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-20T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-27T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-03T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-10T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-17T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-24T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-01T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-08T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 66,
+    "loanNumber": "LN-066",
+    "customerName": "karthi (kendu)",
+    "phone": "9100000066",
+    "loanType": "MONTHLY",
+    "principal": 15000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 12750,
+    "installmentAmount": 3450,
+    "termCount": 5,
+    "startDate": "2026-07-31T00:00:00.000Z",
+    "endDate": "2026-12-31T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-10-01T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-12-01T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-12-31T00:00:00.000Z",
+        "amount": 3450
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 67,
+    "loanNumber": "LN-067",
+    "customerName": "babu (acheri)",
+    "phone": "9100000067",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-08-02T00:00:00.000Z",
+    "endDate": "2026-10-11T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-09T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-16T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-11T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 68,
+    "loanNumber": "LN-068",
+    "customerName": "Naveen (puthupet)",
+    "phone": "9100000068",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-08-03T00:00:00.000Z",
+    "endDate": "2026-10-12T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-21T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-05T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-12T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 69,
+    "loanNumber": "LN-069",
+    "customerName": "ragupathy",
+    "phone": "9100000069",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-08-03T00:00:00.000Z",
+    "endDate": "2026-10-12T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-10T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-05T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-12T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 70,
+    "loanNumber": "LN-070",
+    "customerName": "venkatesan (kv)",
+    "phone": "9100000070",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-08-10T00:00:00.000Z",
+    "endDate": "2026-10-19T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-05T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-12T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-19T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 71,
+    "loanNumber": "LN-071",
+    "customerName": "vicky (metu)",
+    "phone": "9100000071",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-08-13T00:00:00.000Z",
+    "endDate": "2026-10-22T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-20T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-27T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-03T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-10T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-17T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-24T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-01T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-08T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-15T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-22T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 72,
+    "loanNumber": "LN-072",
+    "customerName": "rathinavel (kv)",
+    "phone": "9100000072",
+    "loanType": "MONTHLY",
+    "principal": 20000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 17000,
+    "installmentAmount": 4600,
+    "termCount": 5,
+    "startDate": "2026-08-15T00:00:00.000Z",
+    "endDate": "2027-01-15T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-15T00:00:00.000Z",
+        "amount": 4600
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-10-15T00:00:00.000Z",
+        "amount": 4600
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-11-15T00:00:00.000Z",
+        "amount": 4600
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-12-15T00:00:00.000Z",
+        "amount": 4600
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2027-01-15T00:00:00.000Z",
+        "amount": 4600
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 73,
+    "loanNumber": "LN-073",
+    "customerName": "manimaran (laddu)",
+    "phone": "9100000073",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-08-17T18:30:00.000Z",
+    "endDate": "2026-10-26T18:30:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-24T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-31T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-07T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-14T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-21T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-28T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-05T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-12T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-19T18:30:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-26T18:30:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 74,
+    "loanNumber": "LN-074",
+    "customerName": "logesh (don)",
+    "phone": "9100000074",
+    "loanType": "WEEKLY",
+    "principal": 12000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 10800,
+    "installmentAmount": 1200,
+    "termCount": 10,
+    "startDate": "2026-08-10T00:00:00.000Z",
+    "endDate": "2026-10-19T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-17T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-08-24T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-08-31T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-07T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-09-21T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-05T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-12T00:00:00.000Z",
+        "amount": 1200
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-19T00:00:00.000Z",
+        "amount": 1200
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 75,
+    "loanNumber": "LN-075",
+    "customerName": "dhanush (vv)",
+    "phone": "9100000075",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-08-22T00:00:00.000Z",
+    "endDate": "2026-10-31T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-29T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-10T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 76,
+    "loanNumber": "LN-076",
+    "customerName": "bass (khan)",
+    "phone": "9100000076",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-08-22T00:00:00.000Z",
+    "endDate": "2026-10-31T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-08-29T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-05T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-10T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 77,
+    "loanNumber": "LN-077",
+    "customerName": "arvind (sb)",
+    "phone": "9100000077",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-08-29T00:00:00.000Z",
+    "endDate": "2026-11-07T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-05T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-07T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 78,
+    "loanNumber": "LN-078",
+    "customerName": "madhan (makku)",
+    "phone": "9100000078",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-08-29T00:00:00.000Z",
+    "endDate": "2026-11-07T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-05T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-07T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 79,
+    "loanNumber": "LN-079",
+    "customerName": "udhaya (rd st)",
+    "phone": "9100000079",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-09-05T00:00:00.000Z",
+    "endDate": "2026-11-14T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-10T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-07T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-14T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 80,
+    "loanNumber": "LN-080",
+    "customerName": "barath (mia)",
+    "phone": "9100000080",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-08-26T00:00:00.000Z",
+    "endDate": "2026-11-04T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-02T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-09T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-16T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-09-23T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-09-30T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-07T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-14T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-21T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-10-28T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 81,
+    "loanNumber": "LN-081",
+    "customerName": "shanmugavel (kp)",
+    "phone": "9100000081",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-05T00:00:00.000Z",
+    "endDate": "2026-11-14T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-12T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-19T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-26T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-17T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-24T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-10-31T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-07T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-14T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 82,
+    "loanNumber": "LN-082",
+    "customerName": "vicky (metu)",
+    "phone": "9100000082",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-09-07T00:00:00.000Z",
+    "endDate": "2026-11-16T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-14T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-21T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-05T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-12T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-19T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-26T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-09T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-16T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 83,
+    "loanNumber": "LN-083",
+    "customerName": "mani (metu)",
+    "phone": "9100000083",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-06T00:00:00.000Z",
+    "endDate": "2026-11-15T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-15T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 84,
+    "loanNumber": "LN-084",
+    "customerName": "balaji",
+    "phone": "9100000084",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-08T00:00:00.000Z",
+    "endDate": "2026-11-17T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-29T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-03T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-10T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-17T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 85,
+    "loanNumber": "LN-085",
+    "customerName": "raman (metu)",
+    "phone": "9100000085",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-09-11T00:00:00.000Z",
+    "endDate": "2026-11-20T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-18T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-02T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-09T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-16T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-23T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-30T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-06T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-13T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-20T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 86,
+    "loanNumber": "LN-086",
+    "customerName": "raman (metu)",
+    "phone": "9100000086",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-09-09T00:00:00.000Z",
+    "endDate": "2026-11-18T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-16T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-23T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-30T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-07T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-14T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-21T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-28T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-11T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-18T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 87,
+    "loanNumber": "LN-087",
+    "customerName": "raja (metu)",
+    "phone": "9100000087",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-09-09T00:00:00.000Z",
+    "endDate": "2026-11-18T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-18T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 88,
+    "loanNumber": "LN-088",
+    "customerName": "main (pattu)",
+    "phone": "9100000088",
+    "loanType": "WEEKLY",
+    "principal": 15000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 13500,
+    "installmentAmount": 1500,
+    "termCount": 10,
+    "startDate": "2026-09-09T00:00:00.000Z",
+    "endDate": "2026-11-18T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-16T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-23T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-09-30T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-07T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-14T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-21T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-28T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-11T00:00:00.000Z",
+        "amount": 1500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-18T00:00:00.000Z",
+        "amount": 1500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 89,
+    "loanNumber": "LN-089",
+    "customerName": "dhakshinesh (sakthi)",
+    "phone": "9100000089",
+    "loanType": "WEEKLY",
+    "principal": 5000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 4500,
+    "installmentAmount": 500,
+    "termCount": 10,
+    "startDate": "2026-09-11T00:00:00.000Z",
+    "endDate": "2026-11-20T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-18T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-02T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-09T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-16T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-23T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-30T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-06T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-13T00:00:00.000Z",
+        "amount": 500
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-20T00:00:00.000Z",
+        "amount": 500
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 90,
+    "loanNumber": "LN-090",
+    "customerName": "venkat (sengadu motur)",
+    "phone": "9100000090",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-11T00:00:00.000Z",
+    "endDate": "2026-11-20T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-02T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-09T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-16T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-10-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-20T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 91,
+    "loanNumber": "LN-091",
+    "customerName": "raghul (naren)",
+    "phone": "9100000091",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-09-15T00:00:00.000Z",
+    "endDate": "2026-11-24T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-22T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-29T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-06T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-13T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-20T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-27T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-11-03T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-10T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-17T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-24T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 92,
+    "loanNumber": "LN-092",
+    "customerName": "mohan (small)",
+    "phone": "9100000092",
+    "loanType": "MONTHLY",
+    "principal": 15000,
+    "interestRate": 15,
+    "agreementFee": 0,
+    "disbursedAmount": 12750,
+    "installmentAmount": 3450,
+    "termCount": 5,
+    "startDate": "2026-09-16T00:00:00.000Z",
+    "endDate": "2027-02-16T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-10-16T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-11-16T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-12-16T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2027-01-16T00:00:00.000Z",
+        "amount": 3450
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2027-02-16T00:00:00.000Z",
+        "amount": 3450
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 93,
+    "loanNumber": "LN-093",
+    "customerName": "ajith (aali)",
+    "phone": "9100000093",
+    "loanType": "WEEKLY",
+    "principal": 20000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 18000,
+    "installmentAmount": 2000,
+    "termCount": 10,
+    "startDate": "2026-09-16T00:00:00.000Z",
+    "endDate": "2026-11-25T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-23T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-09-30T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-07T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-14T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-21T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-28T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-11-04T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-11T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-18T00:00:00.000Z",
+        "amount": 2000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-25T00:00:00.000Z",
+        "amount": 2000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 94,
+    "loanNumber": "LN-094",
+    "customerName": "ragupathy",
+    "phone": "9100000094",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-18T00:00:00.000Z",
+    "endDate": "2026-11-27T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-10-02T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-09T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-16T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-23T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-10-30T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-11-06T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-13T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-20T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-27T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 95,
+    "loanNumber": "LN-095",
+    "customerName": "elango (pigga)",
+    "phone": "9100000095",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-20T00:00:00.000Z",
+    "endDate": "2026-11-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-11-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-11-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 96,
+    "loanNumber": "LN-096",
+    "customerName": "ramesh (eli)",
+    "phone": "9100000096",
+    "loanType": "WEEKLY",
+    "principal": 10000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 9000,
+    "installmentAmount": 1000,
+    "termCount": 10,
+    "startDate": "2026-09-20T00:00:00.000Z",
+    "endDate": "2026-11-29T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-27T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-10-04T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-11T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-18T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-25T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-11-01T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-11-08T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-15T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-22T00:00:00.000Z",
+        "amount": 1000
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-29T00:00:00.000Z",
+        "amount": 1000
+      }
+    ]
+  },
+  {
+    "legacyLoanNo": 97,
+    "loanNumber": "LN-097",
+    "customerName": "dayalan (manda)",
+    "phone": "9100000097",
+    "loanType": "WEEKLY",
+    "principal": 6000,
+    "interestRate": 10,
+    "agreementFee": 0,
+    "disbursedAmount": 5400,
+    "installmentAmount": 600,
+    "termCount": 10,
+    "startDate": "2026-09-21T00:00:00.000Z",
+    "endDate": "2026-11-30T00:00:00.000Z",
+    "dueSchedule": [
+      {
+        "dueNumber": 1,
+        "dueDate": "2026-09-28T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 2,
+        "dueDate": "2026-10-05T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 3,
+        "dueDate": "2026-10-12T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 4,
+        "dueDate": "2026-10-19T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 5,
+        "dueDate": "2026-10-26T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 6,
+        "dueDate": "2026-11-02T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 7,
+        "dueDate": "2026-11-09T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 8,
+        "dueDate": "2026-11-16T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 9,
+        "dueDate": "2026-11-23T00:00:00.000Z",
+        "amount": 600
+      },
+      {
+        "dueNumber": 10,
+        "dueDate": "2026-11-30T00:00:00.000Z",
+        "amount": 600
+      }
+    ]
+  }
+]

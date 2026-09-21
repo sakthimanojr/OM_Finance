@@ -65,4 +65,77 @@ async function updateConfig(payload, updatedBy) {
   return getConfig();
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, getConfig, updateConfig };
+async function importLegacyLoans() {
+  const records = require('./legacyLoansData.json');
+  const defaultPasswordHash = await bcrypt.hash('Customer@123', 10);
+  let importedCount = 0;
+  let skippedCount = 0;
+
+  for (const item of records) {
+    const existingLoan = await prisma.loan.findUnique({ where: { loanNumber: item.loanNumber } });
+    if (existingLoan) {
+      skippedCount++;
+      continue;
+    }
+
+    let user = await prisma.user.findUnique({ where: { phone: item.phone } });
+    if (!user) {
+      user = await prisma.user.create({
+        data: {
+          phone: item.phone,
+          passwordHash: defaultPasswordHash,
+          role: 'CUSTOMER',
+          isActive: true,
+        },
+      });
+    }
+
+    let customer = await prisma.customer.findUnique({ where: { userId: user.id } });
+    if (!customer) {
+      customer = await prisma.customer.create({
+        data: {
+          userId: user.id,
+          name: item.customerName,
+          phone: item.phone,
+          status: 'ACTIVE',
+        },
+      });
+    }
+
+    await prisma.$transaction(async (tx) => {
+      const createdLoan = await tx.loan.create({
+        data: {
+          customerId: customer.id,
+          loanNumber: item.loanNumber,
+          type: item.loanType,
+          principal: item.principal,
+          interestRate: item.interestRate,
+          agreementFee: item.agreementFee || 0,
+          disbursedAmount: item.disbursedAmount,
+          startDate: new Date(item.startDate),
+          endDate: item.endDate ? new Date(item.endDate) : null,
+          termCount: item.termCount,
+          installmentAmount: item.installmentAmount,
+          status: 'ACTIVE',
+        },
+      });
+
+      await tx.due.createMany({
+        data: item.dueSchedule.map((d) => ({
+          loanId: createdLoan.id,
+          dueNumber: d.dueNumber,
+          dueDate: new Date(d.dueDate),
+          amount: d.amount,
+          status: 'PENDING',
+        })),
+      });
+    });
+
+    importedCount++;
+  }
+
+  return { total: records.length, importedCount, skippedCount };
+}
+
+module.exports = { createViewAdmin, listAdmins, setAdminActive, getConfig, updateConfig, importLegacyLoans };
+

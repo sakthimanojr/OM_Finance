@@ -43,4 +43,6 @@ router.put(
   controller.updateConfig
 );
 
+router.post('/import-legacy-loans', controller.importLegacyLoans);
+
 module.exports = router;
