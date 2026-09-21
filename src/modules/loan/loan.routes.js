@@ -18,6 +18,7 @@ router.use(authMiddleware);
 router.post('/', roleGuard('SUPER_ADMIN'), validate(schemas.createLoan), controller.createLoan);
 router.get('/', validate(schemas.listLoans), controller.listLoans);
 router.get('/:id', validate(schemas.loanIdParam), controller.getLoan);
+router.patch('/:id', roleGuard('SUPER_ADMIN'), validate(schemas.updateLoan), controller.updateLoan);
 router.patch('/:id/close', roleGuard('SUPER_ADMIN'), validate(schemas.closeLoan), controller.closeLoan);
 router.post(
   '/:id/repay-principal',
@@ -25,5 +26,6 @@ router.post(
   validate(schemas.repayPrincipal),
   controller.repayPrincipal
 );
+
 
 module.exports = router;

@@ -35,4 +35,39 @@ async function overdue(req, res, next) {
   }
 }
 
-module.exports = { collections, loanPortfolio, overdue };
+async function monthlyCollectionsJson(req, res, next) {
+  try {
+    const data = await reportService.monthlyCollections();
+    res.json({ success: true, data });
+  } catch (err) { next(err); }
+}
+
+async function loanPortfolioJsonHandler(req, res, next) {
+  try {
+    const data = await reportService.loanPortfolioJson();
+    res.json({ success: true, data });
+  } catch (err) { next(err); }
+}
+
+async function interestProfitHandler(req, res, next) {
+  try {
+    const data = await reportService.interestProfitSummary();
+    res.json({ success: true, data });
+  } catch (err) { next(err); }
+}
+
+async function overdueDetailHandler(req, res, next) {
+  try {
+    const data = await reportService.overdueDetailJson();
+    res.json({ success: true, data });
+  } catch (err) { next(err); }
+}
+
+async function disbursementSummaryHandler(req, res, next) {
+  try {
+    const data = await reportService.disbursementSummary();
+    res.json({ success: true, data });
+  } catch (err) { next(err); }
+}
+
+module.exports = { collections, loanPortfolio, overdue, monthlyCollectionsJson, loanPortfolioJsonHandler, interestProfitHandler, overdueDetailHandler, disbursementSummaryHandler };

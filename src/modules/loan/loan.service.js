@@ -173,8 +173,148 @@ async function repayPrincipal(id, amount, paymentMethod) {
       });
     }
 
-    return { loan: updated, newOutstandingPrincipal: newOutstanding, paymentMethod };
+async function updateLoan(id, payload) {
+  const loan = await getLoanById(id);
+  if (['COMPLETED', 'CLOSED'].includes(loan.status)) {
+    throw ApiError.badRequest(`Cannot edit a loan with status ${loan.status}`);
+  }
+
+  const newPrincipal = payload.principal !== undefined ? Number(payload.principal) : Number(loan.principal);
+  const newInterestRate = payload.interestRate !== undefined ? Number(payload.interestRate) : Number(loan.interestRate);
+  const newAgreementFee = payload.agreementFee !== undefined ? Number(payload.agreementFee) : (Number(loan.agreementFee) || 0);
+  const newTermCount = payload.termCount !== undefined ? Number(payload.termCount) : loan.termCount;
+  const newStartDate = payload.startDate ? new Date(payload.startDate) : new Date(loan.startDate);
+
+  const paidDues = loan.dues.filter((d) => d.status === 'PAID');
+  const unpaidDues = loan.dues.filter((d) => d.status !== 'PAID');
+
+  await prisma.$transaction(async (tx) => {
+    if (paidDues.length === 0) {
+      // Clean slate: recalculate entire due schedule
+      let calcResult;
+      if (loan.type === 'WEEKLY') {
+        calcResult = weeklyCalc.calculate({
+          principal: newPrincipal,
+          interestRate: newInterestRate,
+          agreementFee: newAgreementFee,
+          termCount: newTermCount,
+          startDate: newStartDate,
+        });
+      } else if (loan.type === 'MONTHLY') {
+        calcResult = monthlyCalc.calculate({
+          principal: newPrincipal,
+          interestRate: newInterestRate,
+          agreementFee: newAgreementFee,
+          termCount: newTermCount,
+          startDate: newStartDate,
+        });
+      } else if (loan.type === 'HIGH_VALUE') {
+        calcResult = highValueCalc.calculate({
+          principal: newPrincipal,
+          interestRate: newInterestRate,
+          startDate: newStartDate,
+        });
+      }
+
+      // Delete existing dues and create new due schedule
+      await tx.due.deleteMany({ where: { loanId: id } });
+      await tx.due.createMany({
+        data: calcResult.dueSchedule.map((d) => ({
+          loanId: id,
+          dueNumber: d.dueNumber,
+          dueDate: d.dueDate,
+          amount: d.amount,
+          status: 'PENDING',
+        })),
+      });
+
+      await tx.loan.update({
+        where: { id },
+        data: {
+          principal: newPrincipal,
+          interestRate: newInterestRate,
+          agreementFee: newAgreementFee,
+          disbursedAmount: calcResult.disbursedAmount,
+          installmentAmount: calcResult.installmentAmount,
+          endDate: calcResult.endDate || null,
+          termCount: newTermCount || null,
+          startDate: newStartDate,
+          updatedAt: new Date(),
+        },
+      });
+    } else {
+      // Some dues already paid: preserve paid dues and adjust remaining unpaid dues
+      if (loan.type === 'HIGH_VALUE') {
+        const paidPrincipalSoFar = loan.totalCollection ? Number(loan.totalCollection) : 0;
+        const newOutstanding = Math.max(0, round2(newPrincipal - paidPrincipalSoFar));
+        const newMonthlyInterest = highValueCalc.recalculateInterest({
+          outstandingPrincipal: newOutstanding,
+          interestRate: newInterestRate,
+        });
+
+        await tx.due.updateMany({
+          where: { loanId: id, status: { not: 'PAID' } },
+          data: { amount: newMonthlyInterest },
+        });
+
+        await tx.loan.update({
+          where: { id },
+          data: {
+            principal: newPrincipal,
+            interestRate: newInterestRate,
+            disbursedAmount: newPrincipal,
+            installmentAmount: newMonthlyInterest,
+            updatedAt: new Date(),
+          },
+        });
+      } else {
+        // WEEKLY or MONTHLY
+        let totalRepayable = newPrincipal;
+        let disbursedAmount = newPrincipal;
+        if (loan.type === 'WEEKLY') {
+          const interestAmount = round2((newPrincipal * newInterestRate) / 100);
+          disbursedAmount = round2(newPrincipal - interestAmount - newAgreementFee);
+          totalRepayable = newPrincipal;
+        } else if (loan.type === 'MONTHLY') {
+          const interestAmount = round2((newPrincipal * newInterestRate) / 100);
+          disbursedAmount = round2(newPrincipal - interestAmount - newAgreementFee);
+          totalRepayable = round2(newPrincipal + interestAmount);
+        }
+
+        const totalAlreadyPaid = paidDues.reduce((s, d) => s + Number(d.amount), 0);
+        const remainingToCollect = Math.max(0, round2(totalRepayable - totalAlreadyPaid));
+
+        if (unpaidDues.length > 0) {
+          const newInstallment = round2(remainingToCollect / unpaidDues.length);
+          let runningSum = 0;
+          for (let i = 0; i < unpaidDues.length; i++) {
+            const due = unpaidDues[i];
+            const amt = (i === unpaidDues.length - 1) ? round2(remainingToCollect - runningSum) : newInstallment;
+            runningSum = round2(runningSum + amt);
+            await tx.due.update({
+              where: { id: due.id },
+              data: { amount: amt },
+            });
+          }
+
+          await tx.loan.update({
+            where: { id },
+            data: {
+              principal: newPrincipal,
+              interestRate: newInterestRate,
+              agreementFee: newAgreementFee,
+              disbursedAmount,
+              installmentAmount: newInstallment,
+              updatedAt: new Date(),
+            },
+          });
+        }
+      }
+    }
   });
+
+  return getLoanById(id);
 }
 
-module.exports = { createLoan, getLoanById, listLoans, closeLoan, repayPrincipal };
+module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, repayPrincipal };
+

@@ -52,4 +52,19 @@ const repayPrincipal = {
   }),
 };
 
-module.exports = { createLoan, listLoans, loanIdParam, closeLoan, repayPrincipal };
+const updateLoan = {
+  params: Joi.object({
+    id: Joi.string().uuid().required(),
+  }),
+  body: Joi.object({
+    principal: Joi.number().positive().optional(),
+    interestRate: Joi.number().positive().optional(),
+    agreementFee: Joi.number().min(0).optional(),
+    termCount: Joi.number().integer().min(1).optional(),
+    startDate: Joi.date().optional(),
+  }).min(1),
+};
+
+module.exports = { createLoan, updateLoan, listLoans, loanIdParam, closeLoan, repayPrincipal };
+
+

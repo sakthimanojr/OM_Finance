@@ -62,6 +62,15 @@ async function repayPrincipal(req, res, next) {
   } catch (err) {
     next(err);
   }
+async function updateLoan(req, res, next) {
+  try {
+    const loan = await loanService.updateLoan(req.params.id, req.body);
+    if (req.audit) await req.audit('UPDATE_LOAN', 'Loan', loan.id, { changes: req.body });
+    return ApiResponse.success(res, { message: 'Loan updated successfully', data: loan });
+  } catch (err) {
+    next(err);
+  }
 }
 
-module.exports = { createLoan, getLoan, listLoans, closeLoan, repayPrincipal };
+module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, repayPrincipal };
+
