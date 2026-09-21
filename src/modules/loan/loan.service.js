@@ -173,6 +173,10 @@ async function repayPrincipal(id, amount, paymentMethod) {
       });
     }
 
+    return updated;
+  });
+}
+
 async function updateLoan(id, payload) {
   const loan = await getLoanById(id);
   if (['COMPLETED', 'CLOSED'].includes(loan.status)) {

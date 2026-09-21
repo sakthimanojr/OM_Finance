@@ -62,6 +62,8 @@ async function repayPrincipal(req, res, next) {
   } catch (err) {
     next(err);
   }
+}
+
 async function updateLoan(req, res, next) {
   try {
     const loan = await loanService.updateLoan(req.params.id, req.body);
