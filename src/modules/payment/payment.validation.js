@@ -12,6 +12,7 @@ const confirm = {
   body: Joi.object({
     paymentId: Joi.string().uuid().required(),
     upiRefNumber: Joi.string().max(100).optional(),
+    paidAt: Joi.string().isoDate().optional(), // allow backdating: admin can set actual payment date
   }),
 };
 

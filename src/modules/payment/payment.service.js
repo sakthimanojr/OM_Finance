@@ -82,13 +82,13 @@ async function initiatePayment({ dueId, method, amount }) {
  * verification in a production integration). Marks the due as PAID, updates
  * loan totals, generates a receipt, and notifies the customer.
  */
-async function confirmPayment(paymentId, upiRefNumber, confirmedByAdminId = null) {
+async function confirmPayment(paymentId, upiRefNumber, confirmedByAdminId = null, paidAt = null) {
   const payment = await prisma.payment.findUnique({
     where: { id: paymentId },
     include: { due: true, loan: true, customer: true },
   });
   if (!payment) throw ApiError.notFound('Payment not found');
-  return _confirmPaymentCore(payment, { upiRefNumber });
+  return _confirmPaymentCore(payment, { upiRefNumber, paidAt });
 }
 
 /**
@@ -107,18 +107,21 @@ async function confirmPaymentByOrderId(gatewayOrderId, { razorpayPaymentId, gate
   return _confirmPaymentCore(payment, { upiRefNumber: razorpayPaymentId, gatewaySignature });
 }
 
-async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature } = {}) {
+async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature, paidAt } = {}) {
   if (payment.status === 'SUCCESS') {
     // Idempotent: webhooks can be delivered more than once.
     return { payment, receipt: await receiptService.getReceiptByPaymentId(payment.id).catch(() => null) };
   }
+
+  // Use the admin-supplied date if provided, otherwise default to now.
+  const effectivePaidAt = paidAt instanceof Date ? paidAt : new Date();
 
   const result = await prisma.$transaction(async (tx) => {
     const updatedPayment = await tx.payment.update({
       where: { id: payment.id },
       data: {
         status: 'SUCCESS',
-        paidAt: new Date(),
+        paidAt: effectivePaidAt,
         upiRefNumber: upiRefNumber || null,
         gatewaySignature: gatewaySignature || null,
       },
@@ -128,7 +131,7 @@ async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature } =
       where: { id: payment.dueId },
       data: {
         status: 'PAID',
-        paidDate: new Date(),
+        paidDate: effectivePaidAt,
         paidAmount: payment.amount,
         paymentMethod: payment.method,
       },
