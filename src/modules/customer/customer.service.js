@@ -7,7 +7,10 @@ async function createCustomer(payload) {
   const existingUser = await prisma.user.findUnique({ where: { phone: payload.phone } });
   if (existingUser) throw ApiError.conflict('A user with this phone number already exists');
 
-  const passwordHash = await bcrypt.hash(payload.password, 10);
+  const rawPassword = (payload.password && String(payload.password).trim().length > 0)
+    ? String(payload.password).trim()
+    : payload.phone;
+  const passwordHash = await bcrypt.hash(rawPassword, 10);
 
   const result = await prisma.$transaction(async (tx) => {
     const user = await tx.user.create({
@@ -16,6 +19,7 @@ async function createCustomer(payload) {
         phone: payload.phone,
         email: payload.email || null,
         passwordHash,
+        isActive: true,
       },
     });
 
@@ -35,6 +39,7 @@ async function createCustomer(payload) {
         guarantorName: payload.guarantorName || null,
         guarantorPhone: payload.guarantorPhone || null,
         emergencyContact: payload.emergencyContact || null,
+        status: 'ACTIVE',
       },
     });
 
@@ -45,17 +50,25 @@ async function createCustomer(payload) {
 }
 
 function sanitizeCustomer(customer) {
-  const { aadhaarEncrypted, panEncrypted, ...rest } = customer;
+  const { aadhaarEncrypted, panEncrypted, loans, ...rest } = customer;
+  const loansList = Array.isArray(loans) ? loans : [];
+  const activeLoan = loansList.find((l) => l.status === 'ACTIVE' || l.status === 'OVERDUE');
+  const latestLoan = activeLoan || loansList[0] || null;
+
   return {
     ...rest,
     pan: panEncrypted ? decrypt(panEncrypted) : null,
+    loans: loansList,
+    loanNumber: latestLoan?.loanNumber || null,
+    activeLoanNumber: activeLoan?.loanNumber || null,
+    loanStatus: latestLoan?.status || null,
   };
 }
 
 async function getCustomerByUserId(userId) {
   const customer = await prisma.customer.findUnique({
     where: { userId },
-    include: { documents: true },
+    include: { documents: true, loans: { orderBy: { createdAt: 'desc' } } },
   });
   if (!customer) throw ApiError.notFound('Customer profile not found');
   return sanitizeCustomer(customer);
@@ -64,7 +77,7 @@ async function getCustomerByUserId(userId) {
 async function getCustomerById(id) {
   const customer = await prisma.customer.findUnique({
     where: { id },
-    include: { documents: true },
+    include: { documents: true, loans: { orderBy: { createdAt: 'desc' } } },
   });
   if (!customer) throw ApiError.notFound('Customer not found');
   return sanitizeCustomer(customer);
@@ -86,6 +99,20 @@ async function listCustomers({ search, status, page, limit }) {
   const [items, total] = await Promise.all([
     prisma.customer.findMany({
       where,
+      include: {
+        loans: {
+          select: {
+            id: true,
+            loanNumber: true,
+            status: true,
+            type: true,
+            principal: true,
+            disbursedAmount: true,
+            totalCollection: true,
+          },
+          orderBy: { createdAt: 'desc' },
+        },
+      },
       orderBy: { createdAt: 'desc' },
       skip: (page - 1) * limit,
       take: limit,
@@ -106,11 +133,102 @@ async function updateCustomer(id, payload) {
   const existing = await prisma.customer.findUnique({ where: { id } });
   if (!existing) throw ApiError.notFound('Customer not found');
 
-  const updated = await prisma.customer.update({
-    where: { id },
-    data: payload,
+  const {
+    password,
+    phone,
+    email,
+    name,
+    fatherName,
+    address,
+    aadhaar,
+    pan,
+    occupation,
+    monthlyIncome,
+    guarantorName,
+    guarantorPhone,
+    emergencyContact,
+    status,
+  } = payload;
+
+  // If phone is changed, verify uniqueness
+  if (phone && phone !== existing.phone) {
+    const phoneExists = await prisma.user.findFirst({
+      where: {
+        phone,
+        id: { not: existing.userId },
+      },
+    });
+    if (phoneExists) {
+      throw ApiError.conflict('A user with this phone number already exists');
+    }
+  }
+
+  // If email is changed, verify uniqueness
+  if (email && email !== existing.email) {
+    const emailExists = await prisma.user.findFirst({
+      where: {
+        email,
+        id: { not: existing.userId },
+      },
+    });
+    if (emailExists) {
+      throw ApiError.conflict('A user with this email address already exists');
+    }
+  }
+
+  const result = await prisma.$transaction(async (tx) => {
+    // 1. Sync User updates (password, phone, email, status)
+    const userUpdateData = {};
+    if (password && String(password).trim().length > 0) {
+      userUpdateData.passwordHash = await bcrypt.hash(String(password).trim(), 10);
+    }
+    if (phone && phone !== existing.phone) {
+      userUpdateData.phone = phone;
+    }
+    if (email !== undefined) {
+      userUpdateData.email = email || null;
+    }
+    if (status !== undefined) {
+      userUpdateData.isActive = status === 'ACTIVE';
+    }
+
+    if (Object.keys(userUpdateData).length > 0) {
+      await tx.user.update({
+        where: { id: existing.userId },
+        data: userUpdateData,
+      });
+    }
+
+    // 2. Prepare customer record updates
+    const customerData = {};
+    if (name !== undefined) customerData.name = name;
+    if (fatherName !== undefined) customerData.fatherName = fatherName || null;
+    if (phone !== undefined) customerData.phone = phone;
+    if (email !== undefined) customerData.email = email || null;
+    if (address !== undefined) customerData.address = address || null;
+    if (occupation !== undefined) customerData.occupation = occupation || null;
+    if (monthlyIncome !== undefined) customerData.monthlyIncome = monthlyIncome || null;
+    if (guarantorName !== undefined) customerData.guarantorName = guarantorName || null;
+    if (guarantorPhone !== undefined) customerData.guarantorPhone = guarantorPhone || null;
+    if (emergencyContact !== undefined) customerData.emergencyContact = emergencyContact || null;
+    if (status !== undefined) customerData.status = status;
+    if (aadhaar !== undefined) {
+      customerData.aadhaarLast4 = aadhaar ? maskAadhaar(aadhaar) : null;
+      customerData.aadhaarEncrypted = aadhaar ? encrypt(aadhaar) : null;
+    }
+    if (pan !== undefined) {
+      customerData.panEncrypted = pan ? encrypt(pan) : null;
+    }
+
+    const updated = await tx.customer.update({
+      where: { id },
+      data: customerData,
+    });
+
+    return updated;
   });
-  return sanitizeCustomer(updated);
+
+  return sanitizeCustomer(result);
 }
 
 const path = require('path');

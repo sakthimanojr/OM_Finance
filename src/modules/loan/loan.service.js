@@ -90,11 +90,15 @@ async function getLoanById(id) {
 
 async function listLoans({ customerId, status, type, page, limit }) {
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 20;
+  limit = parseInt(limit, 10) || 200;
   const where = {};
   if (customerId) where.customerId = customerId;
   if (status) {
-    where.status = status;
+    if (status.toUpperCase() === 'ACTIVE') {
+      where.status = { in: ['ACTIVE', 'OVERDUE'] };
+    } else {
+      where.status = status;
+    }
   } else {
     where.status = { notIn: ['COMPLETED', 'CLOSED'] };
   }

@@ -13,9 +13,11 @@ async function getAdminSummary() {
     collectedThisMonthAgg,
     pendingDuesCount,
     overdueDuesCount,
+    pendingDuesAgg,
+    allLoans,
   ] = await Promise.all([
     prisma.customer.count({ where: { status: 'ACTIVE' } }),
-    prisma.loan.count({ where: { status: 'ACTIVE' } }),
+    prisma.loan.count({ where: { status: { in: ['ACTIVE', 'OVERDUE'] } } }),
     prisma.loan.count({ where: { status: 'OVERDUE' } }),
     prisma.loan.aggregate({ _sum: { disbursedAmount: true } }),
     prisma.loan.aggregate({ _sum: { totalCollection: true } }),
@@ -25,14 +27,52 @@ async function getAdminSummary() {
     }),
     prisma.due.count({ where: { status: 'PENDING' } }),
     prisma.due.count({ where: { status: 'MISSED' } }),
+    prisma.due.aggregate({
+      _sum: { amount: true },
+      where: { status: { in: ['PENDING', 'MISSED'] } },
+    }),
+    prisma.loan.findMany({
+      select: {
+        type: true,
+        principal: true,
+        disbursedAmount: true,
+        totalCollection: true,
+        dues: { select: { status: true, amount: true, paidAmount: true } },
+      },
+    }),
   ]);
+
+  const totalDisbursed = Number(totalDisbursedAgg._sum.disbursedAmount || 0);
+  const totalCollected = Number(totalCollectedAgg._sum.totalCollection || 0);
+  const totalOutstanding = Number(pendingDuesAgg._sum.amount || 0);
+
+  let totalInterestProfit = 0;
+  for (const l of allLoans) {
+    const collected = Number(l.totalCollection || 0);
+    if (l.type === 'HIGH_VALUE') {
+      const interestPaid = l.dues
+        .filter((d) => d.status === 'PAID')
+        .reduce((s, d) => s + Number(d.paidAmount || d.amount), 0);
+      totalInterestProfit += interestPaid;
+    } else {
+      const principalPart = Number(l.disbursedAmount);
+      const duesSum = l.dues.reduce((s, d) => s + Number(d.amount), 0);
+      if (duesSum > 0 && duesSum > principalPart) {
+        const ratio = (duesSum - principalPart) / duesSum;
+        totalInterestProfit += collected * ratio;
+      }
+    }
+  }
+  totalInterestProfit = Math.round(totalInterestProfit * 100) / 100;
 
   return {
     totalCustomers,
     activeLoans,
     overdueLoans,
-    totalDisbursed: totalDisbursedAgg._sum.disbursedAmount || 0,
-    totalCollected: totalCollectedAgg._sum.totalCollection || 0,
+    totalDisbursed,
+    totalCollected,
+    totalInterestProfit,
+    totalOutstanding,
     collectedThisMonth: collectedThisMonthAgg._sum.amount || 0,
     pendingDuesCount,
     overdueDuesCount,

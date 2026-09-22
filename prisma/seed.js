@@ -5,9 +5,9 @@ require('dotenv').config();
 const prisma = new PrismaClient();
 
 async function main() {
-  const phone = process.env.SUPER_ADMIN_PHONE || '9999999999';
-  const email = process.env.SUPER_ADMIN_EMAIL || 'admin@example.com';
-  const password = process.env.SUPER_ADMIN_PASSWORD || 'ChangeMe123!';
+  const phone = process.env.SUPER_ADMIN_PHONE || '8015810364';
+  const email = process.env.SUPER_ADMIN_EMAIL || 'admin@omfinance.com';
+  const password = process.env.SUPER_ADMIN_PASSWORD || 'Sakthi@143';
 
   const existing = await prisma.user.findUnique({ where: { phone } });
   if (existing) {

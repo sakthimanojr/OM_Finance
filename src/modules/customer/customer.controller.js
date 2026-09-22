@@ -54,7 +54,11 @@ async function listCustomers(req, res, next) {
 async function updateCustomer(req, res, next) {
   try {
     const customer = await customerService.updateCustomer(req.params.id, req.body);
-    if (req.audit) await req.audit('UPDATE_CUSTOMER', 'Customer', customer.id, req.body);
+    if (req.audit) {
+      const auditPayload = { ...req.body };
+      if (auditPayload.password) auditPayload.password = '***REDACTED***';
+      await req.audit('UPDATE_CUSTOMER', 'Customer', customer.id, auditPayload);
+    }
     return ApiResponse.success(res, { message: 'Customer updated', data: customer });
   } catch (err) {
     next(err);
