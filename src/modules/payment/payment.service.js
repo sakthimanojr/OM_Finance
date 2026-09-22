@@ -114,7 +114,9 @@ async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature, pa
   }
 
   // Use the admin-supplied date if provided, otherwise default to now.
-  const effectivePaidAt = paidAt instanceof Date ? paidAt : new Date();
+  const effectivePaidAt = (paidAt && !isNaN(new Date(paidAt).getTime()))
+    ? new Date(paidAt)
+    : new Date();
 
   const result = await prisma.$transaction(async (tx) => {
     const updatedPayment = await tx.payment.update({
