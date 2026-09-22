@@ -20,10 +20,10 @@ const createLoan = {
 const listLoans = {
   query: Joi.object({
     customerId: Joi.string().uuid().optional(),
-    status: Joi.string().valid('ACTIVE', 'COMPLETED', 'CLOSED', 'OVERDUE').optional(),
+    status: Joi.string().valid('ACTIVE', 'COMPLETED', 'CLOSED', 'OVERDUE', 'ALL').optional(),
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').optional(),
     page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(500).default(20),
+    limit: Joi.number().integer().min(1).max(1000).default(500),
   }),
 };
 

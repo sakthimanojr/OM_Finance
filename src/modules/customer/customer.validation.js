@@ -43,7 +43,7 @@ const listCustomers = {
     search: Joi.string().max(100).optional().allow(''),
     status: Joi.string().valid('ACTIVE', 'SUSPENDED', 'CLOSED').optional(),
     page: Joi.number().integer().min(1).default(1),
-    limit: Joi.number().integer().min(1).max(500).default(20),
+    limit: Joi.number().integer().min(1).max(1000).default(500),
   }),
 };
 

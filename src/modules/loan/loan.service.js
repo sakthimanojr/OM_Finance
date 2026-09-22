@@ -90,17 +90,24 @@ async function getLoanById(id) {
 
 async function listLoans({ customerId, status, type, page, limit }) {
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 200;
+  limit = parseInt(limit, 10) || 500;
   const where = {};
   if (customerId) where.customerId = customerId;
   if (status) {
-    if (status.toUpperCase() === 'ACTIVE') {
+    const s = status.toUpperCase();
+    if (s === 'ACTIVE') {
       where.status = { in: ['ACTIVE', 'OVERDUE'] };
+    } else if (s === 'CLOSED') {
+      where.status = { in: ['CLOSED', 'COMPLETED'] };
+    } else if (s === 'ALL') {
+      // Return all non-closed loans
+      where.status = { not: 'CLOSED' };
     } else {
       where.status = status;
     }
   } else {
-    where.status = { notIn: ['COMPLETED', 'CLOSED'] };
+    // Default: all non-closed loans
+    where.status = { not: 'CLOSED' };
   }
   if (type) where.type = type;
 

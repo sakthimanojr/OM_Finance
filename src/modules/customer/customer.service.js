@@ -55,8 +55,18 @@ function sanitizeCustomer(customer) {
   const activeLoan = loansList.find((l) => l.status === 'ACTIVE' || l.status === 'OVERDUE');
   const latestLoan = activeLoan || loansList[0] || null;
 
+  let effectiveStatus = rest.status || 'ACTIVE';
+  if (loansList.length > 0) {
+    if (activeLoan) {
+      effectiveStatus = activeLoan.status === 'OVERDUE' ? 'OVERDUE' : 'ACTIVE';
+    } else {
+      effectiveStatus = 'CLOSED';
+    }
+  }
+
   return {
     ...rest,
+    status: effectiveStatus,
     pan: panEncrypted ? decrypt(panEncrypted) : null,
     loans: loansList,
     loanNumber: latestLoan?.loanNumber || null,
@@ -85,9 +95,21 @@ async function getCustomerById(id) {
 
 async function listCustomers({ search, status, page, limit }) {
   page = parseInt(page, 10) || 1;
-  limit = parseInt(limit, 10) || 20;
+  limit = parseInt(limit, 10) || 500;
   const where = {};
-  if (status) where.status = status;
+  if (status) {
+    const s = status.toUpperCase();
+    if (s === 'ACTIVE') {
+      where.loans = { some: { status: { in: ['ACTIVE', 'OVERDUE'] } } };
+    } else if (s === 'CLOSED') {
+      where.loans = {
+        some: { status: { in: ['CLOSED', 'COMPLETED'] } },
+        none: { status: { in: ['ACTIVE', 'OVERDUE'] } },
+      };
+    } else {
+      where.status = status;
+    }
+  }
   if (search) {
     where.OR = [
       { name: { contains: search, mode: 'insensitive' } },
