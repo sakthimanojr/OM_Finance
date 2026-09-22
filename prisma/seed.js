@@ -11,42 +11,41 @@ async function main() {
 
   const passwordHash = await bcrypt.hash(password, 10);
 
-  // Upsert by phone — truly idempotent even if email already exists
-  // First, clean up any stale record that has the same email but different phone
-  await prisma.user.deleteMany({
-    where: {
-      email,
-      phone: { not: phone },
-    },
-  });
+  // Find the canonical record: prefer phone match, then fall back to email match.
+  // We never delete — audit_log FK is RESTRICT, so deletion would fail.
+  const byPhone = await prisma.user.findUnique({ where: { phone } });
+  const byEmail = await prisma.user.findUnique({ where: { email } });
 
-  const admin = await prisma.user.upsert({
-    where: { phone },
-    update: {
-      role: 'SUPER_ADMIN',
-      email,
-      passwordHash,
-      isActive: true,
-    },
-    create: {
-      role: 'SUPER_ADMIN',
-      phone,
-      email,
-      passwordHash,
-      isActive: true,
-    },
-  });
+  if (byPhone) {
+    // Record with this phone already exists — just update it in place.
+    await prisma.user.update({
+      where: { phone },
+      data: { role: 'SUPER_ADMIN', email, passwordHash, isActive: true },
+    });
+    console.log(`Super admin updated (matched by phone ${phone}).`);
+  } else if (byEmail) {
+    // A different user has this email — update that record's phone too.
+    await prisma.user.update({
+      where: { email },
+      data: { role: 'SUPER_ADMIN', phone, passwordHash, isActive: true },
+    });
+    console.log(`Super admin updated (matched by email ${email}, phone set to ${phone}).`);
+  } else {
+    // No existing record — create fresh.
+    const admin = await prisma.user.create({
+      data: { role: 'SUPER_ADMIN', phone, email, passwordHash, isActive: true },
+    });
+    console.log(`Super admin created: phone=${admin.phone}, email=${admin.email}`);
+  }
 
-  // Ensure adminConfig exists (only one row ever)
+  // Ensure adminConfig exists (only one row ever needed)
   const configCount = await prisma.adminConfig.count();
   if (configCount === 0) {
     await prisma.adminConfig.create({ data: {} });
+    console.log('AdminConfig row created.');
   }
 
-  console.log('Super admin seeded (created or updated):');
-  console.log(`  Phone:    ${admin.phone}`);
-  console.log(`  Email:    ${admin.email}`);
-  console.log(`  Password: ${password} (change this after first login!)`);
+  console.log(`Password: ${password} (change after first login!)`);
 }
 
 main()
