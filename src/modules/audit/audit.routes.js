@@ -4,7 +4,7 @@ const authMiddleware = require('../../middlewares/auth.middleware');
 const roleGuard = require('../../middlewares/role.middleware');
 
 const router = express.Router();
-router.use(authMiddleware, roleGuard('SUPER_ADMIN', 'VIEW_ADMIN'));
+router.use(authMiddleware, roleGuard('SUPER_ADMIN'));
 
 router.get('/', controller.listAuditLogs);
 

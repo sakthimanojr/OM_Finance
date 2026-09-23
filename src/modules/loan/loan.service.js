@@ -293,7 +293,7 @@ async function updateLoan(id, payload) {
         } else if (loan.type === 'MONTHLY') {
           const interestAmount = round2((newPrincipal * newInterestRate) / 100);
           disbursedAmount = round2(newPrincipal - interestAmount - newAgreementFee);
-          totalRepayable = round2(newPrincipal + interestAmount);
+          totalRepayable = newPrincipal;
         }
 
         const totalAlreadyPaid = paidDues.reduce((s, d) => s + Number(d.amount), 0);

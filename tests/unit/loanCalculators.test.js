@@ -33,7 +33,7 @@ describe('Loan Calculators', () => {
   });
 
 
-  test('monthly EMI loan: 10,000 @15% + 100 fee over 5 months', () => {
+  test('monthly loan: 10,000 @15% + 100 fee over 5 months (20% monthly)', () => {
     const result = monthlyCalc.calculate({
       principal: 10000,
       interestRate: 15,
@@ -41,9 +41,25 @@ describe('Loan Calculators', () => {
       termCount: 5,
       startDate: new Date('2026-01-01'),
     });
-    expect(result.disbursedAmount).toBe(8400);
-    expect(result.totalRepayable).toBe(11500);
-    expect(result.installmentAmount).toBe(2300);
+    expect(result.interestAmount).toBe(1500); // Upfront income 1
+    expect(result.disbursedAmount).toBe(8400); // 10000 - 1500 (interest) - 100 (fee)
+    expect(result.totalRepayable).toBe(10000); // Repays 100% of principal
+    expect(result.installmentAmount).toBe(2000); // 20% of 10,000
+    expect(result.dueSchedule).toHaveLength(5);
+    const totalDues = result.dueSchedule.reduce((s, d) => s + d.amount, 0);
+    expect(Math.round(totalDues * 100) / 100).toBe(10000);
+  });
+
+  test('monthly loan: defaults to 5 months if termCount is omitted', () => {
+    const result = monthlyCalc.calculate({
+      principal: 50000,
+      interestRate: 10,
+      agreementFee: 500,
+      startDate: new Date('2026-01-01'),
+    });
+    expect(result.disbursedAmount).toBe(44500);
+    expect(result.totalRepayable).toBe(50000);
+    expect(result.installmentAmount).toBe(10000); // 20% of 50,000
     expect(result.dueSchedule).toHaveLength(5);
   });
 

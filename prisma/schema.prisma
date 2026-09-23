@@ -573,3 +573,27 @@ model ChitPayout {
 
   @@map("chit_payouts")
 }
+
+model DailyRecord {
+  id                     String   @id @default(uuid())
+  recordDate             DateTime @unique @db.Date
+  openingBalance         Decimal  @default(0) @db.Decimal(15, 2)
+  billIncome             Decimal  @default(0) @db.Decimal(15, 2)
+  otherIncome1Label      String?
+  otherIncome1Amount     Decimal  @default(0) @db.Decimal(15, 2)
+  otherIncome2Label      String?
+  otherIncome2Amount     Decimal  @default(0) @db.Decimal(15, 2)
+  expenses               Decimal  @default(0) @db.Decimal(15, 2)
+  expensesDetails        Json?
+  loansGivenCount        Int      @default(0)
+  loansGivenPrincipal    Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenIncome       Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenNetDisbursed Decimal  @default(0) @db.Decimal(15, 2)
+  closingBalance         Decimal  @default(0) @db.Decimal(15, 2)
+  notes                  String?
+  updatedBy              String?
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+
+  @@map("daily_records")
+}

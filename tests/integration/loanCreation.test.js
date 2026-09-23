@@ -105,4 +105,55 @@ describe('POST /api/v1/loans — weekly loan creation', () => {
 
     expect(res.status).toBe(400);
   });
+
+  test('creates a MONTHLY loan with 20% monthly installment over 5 months', async () => {
+    prisma.customer.findUnique.mockResolvedValueOnce({ id: '11111111-1111-1111-1111-111111111111', status: 'ACTIVE' });
+    prisma.loan.findUnique.mockResolvedValueOnce(null);
+    prisma.loan.create.mockResolvedValueOnce({ id: '33333333-3333-3333-3333-333333333333' });
+    prisma.due.createMany.mockResolvedValueOnce({ count: 5 });
+    prisma.loan.findUnique.mockResolvedValueOnce({
+      id: '33333333-3333-3333-3333-333333333333',
+      customerId: '11111111-1111-1111-1111-111111111111',
+      loanNumber: 'LN-M101',
+      type: 'MONTHLY',
+      principal: 10000,
+      interestRate: 15,
+      agreementFee: 100,
+      disbursedAmount: 8400,
+      totalCollection: 0,
+      startDate: new Date('2026-01-01'),
+      status: 'ACTIVE',
+      termCount: 5,
+      installmentAmount: 2000,
+      customer: { id: '11111111-1111-1111-1111-111111111111', name: 'Test Customer', phone: '9000000000' },
+      dues: [],
+    });
+
+    const res = await request(app)
+      .post('/api/v1/loans')
+      .set('Authorization', `Bearer ${adminToken()}`)
+      .send({
+        customerId: '11111111-1111-1111-1111-111111111111',
+        loanNumber: 'LN-M101',
+        type: 'MONTHLY',
+        principal: 10000,
+        interestRate: 15,
+        agreementFee: 100,
+        termCount: 5,
+        startDate: '2026-01-01',
+      });
+
+    expect(res.status).toBe(201);
+    expect(res.body.data.type).toBe('MONTHLY');
+    expect(res.body.data.disbursedAmount).toBe(8400);
+    expect(res.body.data.installmentAmount).toBe(2000);
+
+    const createCall = prisma.loan.create.mock.calls[0][0];
+    expect(createCall.data.disbursedAmount).toBe(8400);
+    expect(createCall.data.installmentAmount).toBe(2000);
+
+    const dueCall = prisma.due.createMany.mock.calls[0][0];
+    expect(dueCall.data).toHaveLength(5);
+    expect(dueCall.data[0].amount).toBe(2000);
+  });
 });

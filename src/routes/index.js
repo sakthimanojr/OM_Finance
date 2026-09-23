@@ -15,6 +15,7 @@ const auditRoutes = require('../modules/audit/audit.routes');
 const closedLoanRoutes = require('../modules/closedLoan/closedLoan.routes');
 const chitFundRoutes = require('../modules/chitFund/chitFund.routes');
 const myChitRoutes = require('../modules/chitFund/myChit.routes');
+const dailyRecordRoutes = require('../modules/dailyRecord/dailyRecord.routes');
 
 const router = express.Router();
 
@@ -33,5 +34,6 @@ router.use('/audit-logs', auditRoutes);
 router.use('/closed-loans', closedLoanRoutes);
 router.use('/chit-funds', chitFundRoutes);
 router.use('/my/chits', myChitRoutes);
+router.use('/daily-records', dailyRecordRoutes);
 
 module.exports = router;

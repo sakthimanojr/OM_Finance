@@ -1,2225 +1,2225 @@
 BEGIN;
 -- Record #1: pattu (mani)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('b93c5867-1958-4610-ad07-e0f392337f55', '8825696877', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('a591a3d8-8b35-42e2-9838-9c87153483f9', '8825696877', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '7384fe42-3198-49f2-be03-6719032be99e', u.id, 'pattu (mani)', '8825696877', 'ACTIVE', NOW(), NOW()
+SELECT '0fc45676-1984-4e36-9225-a9435a6e1131', u.id, 'pattu (mani)', '8825696877', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '8825696877'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '07ff0d46-8ae3-444d-9935-8ebe38eb6f77', c.id, 'LN-001', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-04-16T00:00:00.000Z', '2026-06-25T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT '38a0f13f-fe54-4cb0-ae2a-1ca57c3f1b3a', c.id, 'LN-001', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-04-16T00:00:00.000Z', '2026-06-25T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '8825696877'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '98f7e019-4f7f-46ef-8aa8-8a7c78616b37', l.id, 1, '2026-04-23T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'ec908902-f8b5-4333-866b-e6806b78ff8f', l.id, 1, '2026-04-23T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '210fc749-4ae3-4dca-821d-1c514bab6e1e', l.id, 2, '2026-04-30T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '9ba6562e-b8bc-4dc2-b626-0bc8e4061ce5', l.id, 2, '2026-04-30T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '53a88e06-ec7e-45c5-9e14-218bd33d02a8', l.id, 3, '2026-05-07T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'cccc6e44-f0c1-4ef4-a87d-9e04afc1fc7e', l.id, 3, '2026-05-07T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f83d9641-1041-4159-9f1a-b57991080d69', l.id, 4, '2026-05-14T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'e317332a-6d70-4ac9-9863-5e031fc44f39', l.id, 4, '2026-05-14T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7a8e2cc0-a9fe-4ada-b9af-324a6388466e', l.id, 5, '2026-05-21T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '796787d4-be20-4cc5-81cc-45a752344d37', l.id, 5, '2026-05-21T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c21a42dd-db5f-421f-9bca-ba32f8acf43e', l.id, 6, '2026-05-28T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'f03c28aa-8e2d-462c-a4f0-e16a68e843fd', l.id, 6, '2026-05-28T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1957d2f5-7e25-4ba5-909e-ff391ccbbb28', l.id, 7, '2026-06-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '4141d0ae-2ef0-4d5b-b0a1-c6143ec88acb', l.id, 7, '2026-06-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b24778a9-73c0-4f10-94e9-6d8caa6209c6', l.id, 8, '2026-06-11T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'fb208964-d888-4790-988b-ee99296810bf', l.id, 8, '2026-06-11T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2311aa2c-d92d-4f27-be60-edd2fc1275bc', l.id, 9, '2026-06-18T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '672ca019-19c4-4637-ad0a-2c4c834216fd', l.id, 9, '2026-06-18T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b5e78acb-b767-4bbc-b291-be21265552c6', l.id, 10, '2026-06-25T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '46906ddc-c9be-46dc-b1a0-f9dcfbd30f25', l.id, 10, '2026-06-25T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-001'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #2: ragupathy
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('b3d038ce-607b-473b-aa76-98e92881a28b', '9655320968', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('c4f81cbd-42e9-4dbc-a571-1cbd4a93dcd4', '9655320968', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'f1d7e543-e931-46b4-ad41-ac13159c7a93', u.id, 'ragupathy', '9655320968', 'ACTIVE', NOW(), NOW()
+SELECT 'dd2d0541-1c81-4f6f-9ced-7c10dee92f9f', u.id, 'ragupathy', '9655320968', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9655320968'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '984491e0-add7-4265-902c-1c6c86802b28', c.id, 'LN-002', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-16T00:00:00.000Z', '2026-06-25T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT '833dbc12-6129-4eb3-a8a4-02036648afdd', c.id, 'LN-002', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-16T00:00:00.000Z', '2026-06-25T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9655320968'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5fe04781-59d8-422e-9414-36666e0757f1', l.id, 1, '2026-04-23T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '56046d90-c6cf-4899-a6d4-82f8076edf27', l.id, 1, '2026-04-23T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b815b77f-9c2e-4842-a6ce-e8592772d351', l.id, 2, '2026-04-30T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '54e91bf7-3aa3-4238-ad6f-526e2e5bdf47', l.id, 2, '2026-04-30T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '52b84dfd-0ba3-428a-b864-457d6f4d1251', l.id, 3, '2026-05-07T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'ceeb3032-6a16-454a-977b-bd88f4fd75c6', l.id, 3, '2026-05-07T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f85fe1f2-7070-446f-a516-3662f4ebf609', l.id, 4, '2026-05-14T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'dd4b0643-7f77-41b1-8daa-ae39bf7c47d2', l.id, 4, '2026-05-14T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6f76c6f1-70d3-4418-83df-70e9847e9cc1', l.id, 5, '2026-05-21T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '1f3507c6-8218-4665-b221-6eff6c548ac5', l.id, 5, '2026-05-21T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '507ca282-cac0-43de-b047-d6ecd7550d31', l.id, 6, '2026-05-28T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'f322c021-6b88-46e3-92c7-16c13c9a2baf', l.id, 6, '2026-05-28T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c2cdb8ef-93aa-4b28-bc75-8916b53c0e91', l.id, 7, '2026-06-04T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '5692b11c-795d-411c-bd58-c89c2dba34d6', l.id, 7, '2026-06-04T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a24625f4-0cd4-4623-b9e7-f9d1b24dd3d6', l.id, 8, '2026-06-11T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'a1d3e642-43b7-4dab-9721-79628c9e7956', l.id, 8, '2026-06-11T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8fcfa51a-ad8f-4cfb-ac26-abdcfdf9230a', l.id, 9, '2026-06-18T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '4a3de5ea-2d3d-4142-8d4c-eb17fcb3103a', l.id, 9, '2026-06-18T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '23d07806-6234-47ce-9f10-b0c77ce53403', l.id, 10, '2026-06-25T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '7893317e-c559-454e-838c-e95c316d7e3b', l.id, 10, '2026-06-25T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-002'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #3: venkatesan (kv)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('8648a13c-5416-49b9-89d6-8a3ed22efe7c', '9655550366', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('4ca29114-8f3b-4248-8ae5-79e9d799c4c3', '9655550366', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '9a2ab77d-5fa0-4e1a-87dc-50dadf3ba6cd', u.id, 'venkatesan (kv)', '9655550366', 'ACTIVE', NOW(), NOW()
+SELECT '208d0c78-4b4f-4de5-83da-75f01f3f6ea1', u.id, 'venkatesan (kv)', '9655550366', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9655550366'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '7b85e89e-0093-4956-9aa5-287d9d5a429d', c.id, 'LN-003', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-04-15T00:00:00.000Z', '2026-06-24T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT '576d74bc-cf26-418f-9977-1289ce6f2d12', c.id, 'LN-003', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-04-15T00:00:00.000Z', '2026-06-24T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9655550366'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a2f340e4-705e-471a-aa39-2ce89408532a', l.id, 1, '2026-04-22T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'c0b38bac-c494-4aee-9695-97754a2c0fd1', l.id, 1, '2026-04-22T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '48238ae5-b6c9-4b9a-ad37-0cbf28635224', l.id, 2, '2026-04-29T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '5831763b-c2c6-4aad-928a-9b2a403f920e', l.id, 2, '2026-04-29T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '16e1222c-e33a-46ed-bf79-85953dcc53c4', l.id, 3, '2026-05-06T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '25dbf9d5-ddaa-4252-9499-6c5f3a6fe479', l.id, 3, '2026-05-06T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c12ee10c-85ff-40e6-a6da-56131902a224', l.id, 4, '2026-05-13T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'f9d91e9f-760c-4cbe-85ed-a08196d5d87f', l.id, 4, '2026-05-13T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1bfaa1fd-b304-4f94-bac2-8122d94be460', l.id, 5, '2026-05-20T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'bcbafd8a-2025-480c-9e82-f08592afac30', l.id, 5, '2026-05-20T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '44e19e9c-673f-414e-92e4-d26b38424390', l.id, 6, '2026-05-27T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '823dc3b6-16f2-49bd-9af4-6bbd646b4506', l.id, 6, '2026-05-27T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd2173226-7c9a-438c-85b1-3b70df9a6b80', l.id, 7, '2026-06-03T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '3bef8670-373e-4ed9-8e15-7397648f88f5', l.id, 7, '2026-06-03T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c9c40d2c-c363-4673-9700-16f897d76f36', l.id, 8, '2026-06-10T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'af358f0d-1dba-49e4-821b-d81c3fabb3e8', l.id, 8, '2026-06-10T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f06894ba-0d22-4753-aa31-890d6b14c061', l.id, 9, '2026-06-17T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '2d8d042b-f645-4ac6-88bb-65ed74910bfa', l.id, 9, '2026-06-17T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a4163f3b-a109-439a-be6a-3f4647490c00', l.id, 10, '2026-06-24T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '3f73bb55-21c2-4f58-b247-64d5cce8e495', l.id, 10, '2026-06-24T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-003'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #4: naga (mesthiri)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('5c2d8183-b9c2-4acc-a0f7-6f3efebb1059', '6383153440', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('ac5c5d9f-c1e4-4354-8637-fda92c6d9afe', '6383153440', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '9c89246f-1f02-493b-bcaf-1159e12c6a58', u.id, 'naga (mesthiri)', '6383153440', 'ACTIVE', NOW(), NOW()
+SELECT '72441a88-2eb6-4281-8872-31c1db601940', u.id, 'naga (mesthiri)', '6383153440', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '6383153440'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '1269f4b0-882c-4487-89c8-9a66553fd684', c.id, 'LN-004', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT 'b180018a-bd5f-4667-841b-992fb5cbccfc', c.id, 'LN-004', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '6383153440'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2374bc67-e70f-47e8-8356-afda87d8532e', l.id, 1, '2026-04-27T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '360e9865-c38a-4767-8414-60839d32db97', l.id, 1, '2026-04-27T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ab857ae2-3a0a-4512-9611-7ffc529eacf4', l.id, 2, '2026-05-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'f49bbeed-56f3-40bb-ac91-6ee6fb355435', l.id, 2, '2026-05-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '41fdc3da-b9d5-4b62-87ef-3feb6234da15', l.id, 3, '2026-05-11T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '0f1cceb9-6bb0-4c3f-bd8b-0ff38cc41874', l.id, 3, '2026-05-11T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8a265c68-bc41-415a-9b98-e4953605dfd9', l.id, 4, '2026-05-18T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '535ee876-5f64-445e-b457-a3807ae6ef1d', l.id, 4, '2026-05-18T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'cb94fde5-19a1-41bd-99b7-a4b5eb12df15', l.id, 5, '2026-05-25T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '708842a2-aa89-49bd-b48d-49a5b3603963', l.id, 5, '2026-05-25T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '37a714ee-9f52-4f16-96c9-50d262f8d348', l.id, 6, '2026-06-01T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '5b588381-1a6e-4335-8893-237391b4846d', l.id, 6, '2026-06-01T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5924b1fd-fc80-429a-99ac-f2d860dac7be', l.id, 7, '2026-06-08T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '4497686f-a4ab-4f79-8103-a22cab263962', l.id, 7, '2026-06-08T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8646cd40-8e98-4308-b9b7-1629ed2cd821', l.id, 8, '2026-06-15T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '3fc1abee-b05c-46be-8a67-fd10a4eee585', l.id, 8, '2026-06-15T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2a66be31-2374-4140-8151-6dc8c818bc21', l.id, 9, '2026-06-22T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'e781637b-1741-4068-bb42-393c4926ee8a', l.id, 9, '2026-06-22T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6b03acc3-ddb0-4ac4-b726-f6ea5fd2eeed', l.id, 10, '2026-06-29T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '4a60fe08-b55c-478e-9213-3004e7da8f68', l.id, 10, '2026-06-29T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-004'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #5: ajith aali
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('0a36dc02-7463-498f-8ba2-4f0a61b50054', '9100000005', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('bf951701-af97-41f8-ba40-c8fcfab02d92', '9100000005', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'af5a00ef-cd2f-4adc-9b73-0872101788c4', u.id, 'ajith aali', '9100000005', 'ACTIVE', NOW(), NOW()
+SELECT '2382ca5d-5725-42e2-8074-d3e17da720d3', u.id, 'ajith aali', '9100000005', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000005'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '5b6bd336-4998-4e5a-9807-1437cfc5dbdd', c.id, 'LN-005', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT 'a5cee186-6757-44d6-873e-3c7d336d4389', c.id, 'LN-005', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000005'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'dd3f4881-5453-4c8d-8763-5df73cd94646', l.id, 1, '2026-04-27T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'e606dc83-4a4f-42eb-afab-cfae4275f3c5', l.id, 1, '2026-04-27T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4a2cbe40-6934-47c8-b236-2121e36bb427', l.id, 2, '2026-05-04T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'b3b213a1-fc2e-4194-9071-391069d5ea5a', l.id, 2, '2026-05-04T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '77d9e8f9-9ab7-4593-b274-0b993c0b8bc0', l.id, 3, '2026-05-11T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '425f597f-4067-4cd3-be83-7a1239674796', l.id, 3, '2026-05-11T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '313f536b-f937-40bd-817c-016dac1e42af', l.id, 4, '2026-05-18T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '4570996b-75e1-4b07-aa7b-c700328c5865', l.id, 4, '2026-05-18T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ff11ad71-d093-482b-b527-9528728a063d', l.id, 5, '2026-05-25T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '37068e08-1c1b-4d66-a80e-666868375173', l.id, 5, '2026-05-25T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5c60aed0-cf49-4835-9f30-0f8ffc3184eb', l.id, 6, '2026-06-01T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'abf3b6cc-ce6e-45d2-9db2-d9fb0e958766', l.id, 6, '2026-06-01T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '335ae49e-5285-4944-bf60-bbc78cd5cf33', l.id, 7, '2026-06-08T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '7bfac57b-2de0-4333-8bc4-33fe9c6ca736', l.id, 7, '2026-06-08T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b1d3729e-2372-4ef6-b4e6-180c723523e1', l.id, 8, '2026-06-15T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'c10c1db4-45b8-4233-8ced-8741dd5d4bb2', l.id, 8, '2026-06-15T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ea9b4b8f-d7b1-44ae-8d9d-cc15354bad4d', l.id, 9, '2026-06-22T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '048457be-49be-43e0-804e-6a2a596d94a6', l.id, 9, '2026-06-22T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '945b45e6-3b5d-4523-a490-f99088337eef', l.id, 10, '2026-06-29T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'b40361e4-74d3-4891-b2e7-7f8b9ff47f7c', l.id, 10, '2026-06-29T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-005'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #6: praveen (baguti)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('ef356b11-78d9-40ef-93e2-1bc39ddd0160', '7825985142', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('53ee28d9-8d5a-48d7-9d27-1f5ae3b23a47', '7825985142', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'a8312b5b-6f17-4694-ad33-995f4e44f4e9', u.id, 'praveen (baguti)', '7825985142', 'ACTIVE', NOW(), NOW()
+SELECT '679cc63b-7b25-40ae-8553-5610ef5cbf41', u.id, 'praveen (baguti)', '7825985142', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '7825985142'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'b68a98fc-d17c-4c29-98c3-8711a1222e51', c.id, 'LN-006', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT 'b47b4ded-f665-440c-99d6-75f56730e844', c.id, 'LN-006', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '7825985142'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b1cadca6-5ba8-4b82-97fb-64baca331676', l.id, 1, '2026-04-27T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'bf955c3c-4ca4-406d-9e43-ff2394f13f64', l.id, 1, '2026-04-27T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '883ced24-1f64-40b6-aaaa-8d9b57f6f6bb', l.id, 2, '2026-05-04T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'e20b8703-0b00-4a43-a62b-be73cc48193e', l.id, 2, '2026-05-04T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ee59512e-1942-4b19-b770-e8dbe4db605d', l.id, 3, '2026-05-11T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '75379873-08b0-4c26-a61c-d4d414334669', l.id, 3, '2026-05-11T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '994e008b-45b9-4ddb-b3b1-b99e07828cdd', l.id, 4, '2026-05-18T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '5f09c958-8202-4dbf-838d-dc29a8a3092c', l.id, 4, '2026-05-18T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1890ebfd-a0ff-4ef8-909b-0f2ca43941cc', l.id, 5, '2026-05-25T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '51868196-4cb0-434b-ad0f-197651e6e427', l.id, 5, '2026-05-25T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f90c8dca-a7c9-4d05-9841-6fd89d6964c9', l.id, 6, '2026-06-01T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '655344e1-76ef-4c9c-bab0-fca403ee89bf', l.id, 6, '2026-06-01T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b72a2572-b033-4c25-ac57-20a1e9f716d6', l.id, 7, '2026-06-08T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '8f67ab17-784c-4947-89c0-16dc625c0f59', l.id, 7, '2026-06-08T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '51e82a54-eb85-4321-95de-cb0b8dfe0fcf', l.id, 8, '2026-06-15T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'c4d9bca4-3175-4104-9738-69f2c77036f3', l.id, 8, '2026-06-15T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7cecc682-1a1b-4209-9c02-53181f21228b', l.id, 9, '2026-06-22T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '16be31c6-1e4e-4cb8-a47a-6b27629cf0cb', l.id, 9, '2026-06-22T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '09cc3164-a54d-4360-8284-10685963a8ae', l.id, 10, '2026-06-29T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '9e2fbca8-5ec0-4021-82a5-53850a111357', l.id, 10, '2026-06-29T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-006'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #7: elango (pigga)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('7ad913f2-ec6e-4f92-acfa-e44c0ef66ea9', '9100000007', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('bd8e111b-43cc-43fa-8d46-ee5afcb1b075', '9100000007', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'dfdf8218-25d9-4965-a947-a0ecfac58b0a', u.id, 'elango (pigga)', '9100000007', 'ACTIVE', NOW(), NOW()
+SELECT '9cca03cf-2ca9-410a-b5d5-d9eaabd3ad8c', u.id, 'elango (pigga)', '9100000007', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000007'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '3d3d6504-6687-4b7c-80a9-7912dcdc65dc', c.id, 'LN-007', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT '4b2bab4f-59b8-49eb-917d-eae504686969', c.id, 'LN-007', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-04-20T00:00:00.000Z', '2026-06-29T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000007'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '35e5b41f-f7a6-4310-8584-cf8e351f3b54', l.id, 1, '2026-04-27T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '56acb54c-7bf4-4252-b04d-b5900147d8f1', l.id, 1, '2026-04-27T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '84865a38-5d21-4fb7-9e7a-6abf7813939a', l.id, 2, '2026-05-04T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '75b57cdf-8fc6-4711-beb4-aa1da0636559', l.id, 2, '2026-05-04T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6d1de629-0bd6-4f3b-937e-46d6b957fcc7', l.id, 3, '2026-05-11T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '043e18cc-7508-4cdc-af9f-47608c3cee3f', l.id, 3, '2026-05-11T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '841294d1-8189-4136-9276-44f5fbaa6778', l.id, 4, '2026-05-18T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'ef3a98b3-ac7b-46db-8543-c69f9cdad576', l.id, 4, '2026-05-18T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ec36748c-9bb3-4045-bfbf-64208f0347c7', l.id, 5, '2026-05-25T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '508a8d26-03ce-457f-aadb-5c81caf38b76', l.id, 5, '2026-05-25T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '51302942-dec5-4326-aa8e-e5beaa74f6b0', l.id, 6, '2026-06-01T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '9186267a-a0f7-48af-8644-fe3e1ad7a9dc', l.id, 6, '2026-06-01T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f4eff182-a5e3-47ff-a705-a8744292fb83', l.id, 7, '2026-06-08T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '36a5ba5e-1d8b-4911-83bb-7d736c16aa23', l.id, 7, '2026-06-08T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2b3812b9-3622-4807-937c-6d1671f77143', l.id, 8, '2026-06-15T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '1cbec56e-374d-4179-98bd-7f3bf344e8bc', l.id, 8, '2026-06-15T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9a67baa4-b325-478e-8cd8-94b9b3a4d415', l.id, 9, '2026-06-22T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '0218e8f1-1575-4ceb-8e1d-930ff2922afe', l.id, 9, '2026-06-22T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c935c259-92c9-4bad-b487-570b1b94b2db', l.id, 10, '2026-06-29T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'c3a34a2d-b1d6-4ec8-9418-2541f48c5926', l.id, 10, '2026-06-29T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-007'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #8: arvind (sb)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('97e28899-9ed9-4963-95ae-3cbb6ea532b1', '9100000008', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('a975f678-1067-4291-a206-8200247742fc', '9100000008', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'c3ca6f24-fa99-4bb6-87a2-0f4f51357602', u.id, 'arvind (sb)', '9100000008', 'ACTIVE', NOW(), NOW()
+SELECT '18339aae-4f6a-4418-ae7e-dccdbf934248', u.id, 'arvind (sb)', '9100000008', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000008'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '0be49e88-c4a0-44b6-a644-8097150b32b7', c.id, 'LN-008', 'WEEKLY', 25000, 10, 0, 22500, 0.00, '2026-04-25T00:00:00.000Z', '2026-07-04T00:00:00.000Z', 10, 2500, 'ACTIVE', NOW(), NOW()
+SELECT '644d3519-19f2-4126-ab13-a1510d0fe159', c.id, 'LN-008', 'WEEKLY', 25000, 10, 0, 22500, 0.00, '2026-04-25T00:00:00.000Z', '2026-07-04T00:00:00.000Z', 10, 2500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000008'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '81a168f3-01c0-46e5-89a7-2ee5c436ec56', l.id, 1, '2026-05-02T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '150843be-3d24-44c0-af09-98f663beeeda', l.id, 1, '2026-05-02T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '603f9f82-7195-4d3e-91e1-16c300e107ca', l.id, 2, '2026-05-09T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '4b93885b-bd14-4db3-bc80-569df7241128', l.id, 2, '2026-05-09T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9f3007cd-f054-4fab-b827-a34db9022d6e', l.id, 3, '2026-05-16T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '1a39947f-3a02-4a97-b8bd-1ca7c0d0b327', l.id, 3, '2026-05-16T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5f33ce15-5ec0-4567-895c-28f6ad9531f0', l.id, 4, '2026-05-23T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '716d884a-b7c9-4ee9-9f43-1be80814088d', l.id, 4, '2026-05-23T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2ebc25e8-b192-4b89-ad20-490c91f40081', l.id, 5, '2026-05-30T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '79968330-9760-47a2-b67c-6eebae1f62ed', l.id, 5, '2026-05-30T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1fd7362d-3c30-4ac0-8b55-8347f0a7e63f', l.id, 6, '2026-06-06T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT 'f0ba18e0-978c-49ae-95ab-e572249512da', l.id, 6, '2026-06-06T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7812211c-28e0-47ea-99d1-e1d133c14f0b', l.id, 7, '2026-06-13T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '0198fa43-ce08-4537-948a-f0b9942a0e1c', l.id, 7, '2026-06-13T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ab0f0885-135e-4c3c-a341-9264dcd80a9e', l.id, 8, '2026-06-20T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '5e372393-a81e-49aa-aa6b-4475626cf746', l.id, 8, '2026-06-20T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '594d77ba-c87e-424b-b0cf-70a6e6c5b706', l.id, 9, '2026-06-27T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '4fa0e03f-6ea3-4594-bd78-717b42fad1d4', l.id, 9, '2026-06-27T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '41695739-47f1-41e1-8dc9-3234aedeaeec', l.id, 10, '2026-07-04T00:00:00.000Z', 2500, 'PENDING', NOW()
+SELECT '04acf055-238d-4325-bdda-aaa308d9a7d6', l.id, 10, '2026-07-04T00:00:00.000Z', 2500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-008'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #9: sakthivel
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('bb4801ff-9832-4ed4-94d4-da1d4fa807b2', '9100000009', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('3352c014-be5a-4cc3-9bbf-369a3bf286c1', '9100000009', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '3d496e61-5e37-4387-a739-5c35223b4b2f', u.id, 'sakthivel', '9100000009', 'ACTIVE', NOW(), NOW()
+SELECT 'f6e2f994-965b-4d08-8daf-2ad9c6f70873', u.id, 'sakthivel', '9100000009', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000009'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '9faa139c-0c10-459f-8c41-de6648998272', c.id, 'LN-009', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-04-28T00:00:00.000Z', '2026-07-07T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT 'be5c3e3c-e685-4c08-9ba6-cd423f6653c7', c.id, 'LN-009', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-04-28T00:00:00.000Z', '2026-07-07T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000009'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ff0ba220-889e-467f-b97c-0a9ddb9a5f44', l.id, 1, '2026-05-05T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '2917ee0f-0e49-4b86-a6cf-dbde80ea9099', l.id, 1, '2026-05-05T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '41adc701-7e97-4c5e-aa7f-7fa1b4703001', l.id, 2, '2026-05-12T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '0a862a47-0632-4b0a-a990-2ca1ad124554', l.id, 2, '2026-05-12T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e3952602-5bf4-4453-a181-ae0073f86232', l.id, 3, '2026-05-19T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '559a7994-51ba-47fd-ade7-f9790aec568e', l.id, 3, '2026-05-19T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2d25c3e6-a691-4e46-9d90-72f516dfe3db', l.id, 4, '2026-05-26T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '1efcee39-ae8d-48af-8431-33f94303451d', l.id, 4, '2026-05-26T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f63ac2d4-a8ae-4bfd-9558-9f48e167b88a', l.id, 5, '2026-06-02T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '05f868da-502e-4a6d-b653-7cc3797fc0d9', l.id, 5, '2026-06-02T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '613a201a-6cfa-4c75-9be2-57ce03faf4f6', l.id, 6, '2026-06-09T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '223953c8-5eb2-454e-b8f8-525e24a104cd', l.id, 6, '2026-06-09T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7f9f60a0-0883-473f-9048-992991c6a20a', l.id, 7, '2026-06-16T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'f5144a1e-dc5b-4921-ab92-9b7fb7af1aac', l.id, 7, '2026-06-16T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'baf097b4-3c01-4406-b7c0-74fa2917f23b', l.id, 8, '2026-06-23T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '480cc47b-9267-4db4-86d1-4ac6f0987856', l.id, 8, '2026-06-23T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b325779e-e0f2-40db-a2b6-c2678e66e569', l.id, 9, '2026-06-30T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'bd4549ee-b7f9-4f86-be2a-fd13347d5cfc', l.id, 9, '2026-06-30T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'eca9a540-6bfd-4995-a1d5-7688edcfe828', l.id, 10, '2026-07-07T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '9c167aa7-b7e1-4866-88b6-7897699fac58', l.id, 10, '2026-07-07T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-009'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #10: kisoth (sappa)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('3b4e4c8d-ec42-4dc7-875d-7cd10f8a826a', '9100000010', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('2ffbe7e7-962a-4319-874d-ece0037bbcb9', '9100000010', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'f8675b80-406e-4f4d-a159-1b0b8d17b949', u.id, 'kisoth (sappa)', '9100000010', 'ACTIVE', NOW(), NOW()
+SELECT '40e4968c-d289-428c-a153-a81b3daf8b7a', u.id, 'kisoth (sappa)', '9100000010', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000010'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '8e392809-13c4-402e-94c8-5f4b304cc15f', c.id, 'LN-010', 'MONTHLY', 15000, 15, 0, 12750, 0.00, '2026-04-28T00:00:00.000Z', '2026-09-28T00:00:00.000Z', 5, 3450, 'ACTIVE', NOW(), NOW()
+SELECT '580f91d9-ad51-4a6f-bf3e-fa9d193ddb72', c.id, 'LN-010', 'MONTHLY', 15000, 15, 0, 12750, 0.00, '2026-04-28T00:00:00.000Z', '2026-09-28T00:00:00.000Z', 5, 3000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000010'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '27c0982d-a2f0-4911-845f-ef9629935921', l.id, 1, '2026-05-28T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT 'f8e3e5da-2e83-4eb5-b78d-65cb8b478c36', l.id, 1, '2026-05-28T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-010'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '3a70fe6b-4808-4bb0-9975-29607dcdf266', l.id, 2, '2026-06-28T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT '12af428c-0382-4061-9f50-a5634b541ffe', l.id, 2, '2026-06-28T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-010'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '99e3d0c0-adfe-4b45-93db-5f14ee77dcd2', l.id, 3, '2026-07-28T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT '7de4a8d9-1e97-41c5-955a-2f35d1e7c4ad', l.id, 3, '2026-07-28T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-010'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '48ee5906-99b6-4ef1-91de-33a18f5e1383', l.id, 4, '2026-08-28T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT 'd5d2d204-340a-40b7-a814-3bab4a2744b3', l.id, 4, '2026-08-28T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-010'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2131dab0-b63a-4636-a79f-54a0e417f006', l.id, 5, '2026-09-28T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT '234e56cd-ba46-4348-94a9-df5838a8d4e1', l.id, 5, '2026-09-28T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-010'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #11: balaraman
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('cb2519c9-96d0-498d-9866-d51c416fca80', '9100000011', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('87625215-835c-41eb-bc71-26e8ba453ee7', '9100000011', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'aff769a8-8008-4d10-a9a4-badfc0fc7804', u.id, 'balaraman', '9100000011', 'ACTIVE', NOW(), NOW()
+SELECT '7e355c70-3096-42d8-9e28-cff9b778cada', u.id, 'balaraman', '9100000011', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000011'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'd587cb34-1f18-4d65-b500-d78a0613d829', c.id, 'LN-011', 'WEEKLY', 30000, 10, 0, 27000, 0.00, '2026-04-27T00:00:00.000Z', '2026-07-06T00:00:00.000Z', 10, 3000, 'ACTIVE', NOW(), NOW()
+SELECT '973886fb-b962-432a-b212-8eb42bea474a', c.id, 'LN-011', 'WEEKLY', 30000, 10, 0, 27000, 0.00, '2026-04-27T00:00:00.000Z', '2026-07-06T00:00:00.000Z', 10, 3000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000011'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '31ca7702-acea-45ef-9297-c8f26dc19684', l.id, 1, '2026-05-04T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT 'e35db9f6-c271-479c-9b92-b281e42e7cb4', l.id, 1, '2026-05-04T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'fbbcf0a9-6624-4275-ad7c-6e86db91a245', l.id, 2, '2026-05-11T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT 'e662863d-5b72-41b1-9a7a-e54a4ce7a5d8', l.id, 2, '2026-05-11T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '864a7705-f63e-4ddc-a5c7-6d462ff816d5', l.id, 3, '2026-05-18T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT 'dbf96b12-d53c-4588-a9be-53f887fd2419', l.id, 3, '2026-05-18T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '76ea1b61-d11e-4967-b98b-5e07ad4b7553', l.id, 4, '2026-05-25T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT '0a8a1e93-2a1d-4184-b8b6-5cda5399534f', l.id, 4, '2026-05-25T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '81568c96-55d9-412a-80e5-5129e2fbd490', l.id, 5, '2026-06-01T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT 'b4b598e2-b3bd-4cca-9eb4-01f1dd6f0228', l.id, 5, '2026-06-01T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4a9af988-e56f-4a5d-9790-ce94f4f073ca', l.id, 6, '2026-06-08T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT '6c378af4-914f-4a07-86f8-31184a0e7db7', l.id, 6, '2026-06-08T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4ff74362-3e22-468f-8f93-b7e28f4935c5', l.id, 7, '2026-06-15T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT '52c65f0a-d98b-4955-a803-a8dba2cb8b44', l.id, 7, '2026-06-15T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ade8f9bc-576e-43cf-99d8-6dca5be29ff9', l.id, 8, '2026-06-22T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT '9b5d674e-bf94-4893-b554-6a2541bd6b36', l.id, 8, '2026-06-22T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'daa5b326-2e4a-4ae0-bfd8-fa9e907847b7', l.id, 9, '2026-06-29T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT 'ec9169dd-16b1-4d82-b3e8-e5d9abb9869a', l.id, 9, '2026-06-29T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'fb503180-f4a3-4c64-ad6f-756d3c68cb23', l.id, 10, '2026-07-06T00:00:00.000Z', 3000, 'PENDING', NOW()
+SELECT '925037e8-fc01-45cb-9fbf-861bd1fbcf94', l.id, 10, '2026-07-06T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-011'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #12: ajith (metu)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('12fd9792-db00-4504-9e04-b0f723d5ee6e', '7270276690', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('8cf4b6a6-9eeb-483d-837d-275372321be3', '7270276690', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'e63b6db6-3d9b-4062-8cb7-cde93d9fcdd6', u.id, 'ajith (metu)', '7270276690', 'ACTIVE', NOW(), NOW()
+SELECT '02b9ad99-bb83-43f9-aee9-39e3a92cf658', u.id, 'ajith (metu)', '7270276690', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '7270276690'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '4fd650b0-55c7-4c34-bf7c-d8b19c17b84b', c.id, 'LN-012', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-09T00:00:00.000Z', '2026-06-18T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT '2b6d9a7e-5ba0-4f29-ad8d-4d818dfa5e91', c.id, 'LN-012', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-09T00:00:00.000Z', '2026-06-18T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '7270276690'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ad959679-d385-484a-9365-4d2d9593951c', l.id, 1, '2026-04-16T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '01d37322-fb2e-4847-814f-8465b9163eb4', l.id, 1, '2026-04-16T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8256c141-a67b-4ba8-a44e-7f1cf5bd9204', l.id, 2, '2026-04-23T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '9c5547bb-4269-4808-9a1b-7acfae88f526', l.id, 2, '2026-04-23T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '621e9087-adbf-46df-a788-62123100eafb', l.id, 3, '2026-04-30T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '71d2eb10-bfcc-4d08-9dcb-782b6bfa0b9e', l.id, 3, '2026-04-30T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '986216f2-0a56-42b3-9a08-429d18ce2465', l.id, 4, '2026-05-07T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'd8ae9966-e021-455c-b168-584f1367abfb', l.id, 4, '2026-05-07T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c08477c1-f181-4dff-b229-a1833805f379', l.id, 5, '2026-05-14T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '729ba31f-a1b8-4ca1-bacb-abc5bb0935ba', l.id, 5, '2026-05-14T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5081e761-8ff5-403d-aa49-d318a08f5913', l.id, 6, '2026-05-21T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'ec76ee7a-6964-4b7a-b3e9-32f4321295a8', l.id, 6, '2026-05-21T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '466068e9-2a77-473e-a184-c7b7255294ad', l.id, 7, '2026-05-28T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '045ea24c-49fb-44f2-a140-a615d24c39ce', l.id, 7, '2026-05-28T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ac3ac8df-0ea5-4c39-a29a-1f16d9f2e316', l.id, 8, '2026-06-04T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '1513e490-d2da-4cb4-b750-ce9970c32745', l.id, 8, '2026-06-04T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '32630553-e645-401b-9934-398c7be2068d', l.id, 9, '2026-06-11T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'f059e9b7-9670-4691-add0-450ba1551172', l.id, 9, '2026-06-11T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '091145b4-cc6a-41fe-ac4f-ea2d68da5410', l.id, 10, '2026-06-18T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '46ed4a63-592a-47bf-8283-f157710d65a9', l.id, 10, '2026-06-18T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-012'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #13: manimaran (laddu)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('0423ef16-6694-4396-86e9-a43fc72acae5', '9100000013', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('14805441-e8e3-468b-bb86-93072cd23c3e', '9100000013', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'bd758c76-0847-4c26-8751-26b9b859b6d2', u.id, 'manimaran (laddu)', '9100000013', 'ACTIVE', NOW(), NOW()
+SELECT '6d2b6f6a-8395-4f79-9f4f-9476e26ef644', u.id, 'manimaran (laddu)', '9100000013', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000013'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'a59ea710-bb23-4afa-b7c9-5a4faaf855f8', c.id, 'LN-013', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-29T00:00:00.000Z', '2026-07-08T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT '4387188f-a382-4d7f-b922-050a1cd7ee5f', c.id, 'LN-013', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-04-29T00:00:00.000Z', '2026-07-08T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000013'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '60f97996-3398-408d-9982-abc00c301a24', l.id, 1, '2026-05-06T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '7baacd0d-6c50-4b1f-a571-bf7cfd300f85', l.id, 1, '2026-05-06T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0d08481e-b208-4e2f-a550-9343ada18ffc', l.id, 2, '2026-05-13T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '2d23a97a-68ed-4eef-bd67-3acedb74180f', l.id, 2, '2026-05-13T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '20976c10-53bb-4b58-94e7-e5f4eea74137', l.id, 3, '2026-05-20T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '364875b7-338d-45e8-8d4a-aa49b814e2c4', l.id, 3, '2026-05-20T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '45b5efc8-799a-43e1-bb9a-5a096e78585a', l.id, 4, '2026-05-27T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '1f959991-abd0-4423-a843-5c976d351032', l.id, 4, '2026-05-27T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e5120260-c19c-463f-b2c7-f9c0e1f4d3af', l.id, 5, '2026-06-03T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '4c422362-1ccf-48df-8612-c0ab733b8482', l.id, 5, '2026-06-03T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '37448296-5b14-4e1a-b5c7-3263d7697992', l.id, 6, '2026-06-10T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '8c86d914-07d4-4d44-b03b-1acbc50d2da0', l.id, 6, '2026-06-10T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b9fa953b-0ef3-4f6c-a3b1-1714b7d73240', l.id, 7, '2026-06-17T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'f95f3374-beed-49b7-8a15-f1f2f7a289cc', l.id, 7, '2026-06-17T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '26e09f96-897a-4801-9120-773ba37b232f', l.id, 8, '2026-06-24T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '75815990-84cb-4fbc-82c0-541706c11542', l.id, 8, '2026-06-24T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '88b74d0a-97b7-42f7-89c3-e8f986620ef3', l.id, 9, '2026-07-01T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '5cf2458d-fc04-439b-bd41-2e34698cc863', l.id, 9, '2026-07-01T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '05ce669d-a7b0-4b35-bf35-6f7b8216ddee', l.id, 10, '2026-07-08T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'eec69e89-dccc-46c7-be39-0678ab6aafce', l.id, 10, '2026-07-08T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-013'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #14: yuvaraj (goindthan)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('71d1d2ab-1e0c-4514-865f-b52a9f143946', '6383032175', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('63132771-125b-4fa5-a1f9-7ea28dc4cd31', '6383032175', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'd1144c92-277f-4028-8ed0-84b0d48fb8a2', u.id, 'yuvaraj (goindthan)', '6383032175', 'ACTIVE', NOW(), NOW()
+SELECT '953296e0-aa40-4df0-8651-4f9f8b3a368c', u.id, 'yuvaraj (goindthan)', '6383032175', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '6383032175'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'f5ef8694-e21c-4bb6-8bab-837a3b396a03', c.id, 'LN-014', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-07T00:00:00.000Z', '2026-07-16T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT '5b10722e-03ca-4742-a51e-5aad7dbdac05', c.id, 'LN-014', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-07T00:00:00.000Z', '2026-07-16T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '6383032175'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '556f5423-6697-451b-8b66-7f08e4317a90', l.id, 1, '2026-05-14T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '3e807c03-1e1f-4e29-9f33-3c2b58473640', l.id, 1, '2026-05-14T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'dda34b91-755f-4daf-97a8-0f1e229e0c74', l.id, 2, '2026-05-21T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'c1d2b58e-a489-4431-a000-d50ac779fe14', l.id, 2, '2026-05-21T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2f396a95-b190-4b8f-8346-03dd3d0fba32', l.id, 3, '2026-05-28T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '26b9a679-de71-483e-a3ca-0efd0a163cb3', l.id, 3, '2026-05-28T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a14b768b-8bd0-42b7-9006-7fd8a8a70334', l.id, 4, '2026-06-04T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '3cede64f-2523-4846-99f7-28c6666af783', l.id, 4, '2026-06-04T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f6af321a-91cc-45f0-b1a5-d047c0e3d83f', l.id, 5, '2026-06-11T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '82daeb8d-df4d-43eb-9b47-32be324f8fc1', l.id, 5, '2026-06-11T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '607fffdf-bf92-4072-b2a6-3937f316c3ff', l.id, 6, '2026-06-18T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '77b3d4b8-c284-4778-a866-66e66de632a9', l.id, 6, '2026-06-18T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '071ba212-f4bf-405a-8994-302be252946b', l.id, 7, '2026-06-25T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'b0864e4e-cb32-4777-9be5-edc990fa2654', l.id, 7, '2026-06-25T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8741a528-c782-4cee-b719-7d2cd9697eac', l.id, 8, '2026-07-02T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'cdeeb58e-612c-429f-bcbd-8dbf28e7f565', l.id, 8, '2026-07-02T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '18a68794-6497-41e2-8315-580ec70030d0', l.id, 9, '2026-07-09T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '6448fb4b-8c29-4eaa-9b60-7b6e3a3bbe35', l.id, 9, '2026-07-09T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '48d99a9e-cc46-40e0-a34a-fa7ac532b439', l.id, 10, '2026-07-16T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'bcf79cd3-f013-402b-bc9f-6eba7092fff5', l.id, 10, '2026-07-16T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-014'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #15: Dayalan (manda)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('7302b05d-dde9-4d1d-b5e9-b95dbbd13ad4', '9100000015', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('7b29948a-275a-4430-9d98-33016e2d890a', '9100000015', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '9a140414-59e7-4a9a-b2ba-6ecf199d5660', u.id, 'Dayalan (manda)', '9100000015', 'ACTIVE', NOW(), NOW()
+SELECT '254e9203-89c5-41aa-8e3b-19ad7bd9bfdb', u.id, 'Dayalan (manda)', '9100000015', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000015'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '4c08129b-72bf-4073-8cf6-58251a9eacd3', c.id, 'LN-015', 'WEEKLY', 6000, 10, 0, 5400, 0.00, '2026-05-31T00:00:00.000Z', '2026-08-09T00:00:00.000Z', 10, 600, 'ACTIVE', NOW(), NOW()
+SELECT 'cd6f397a-7483-4cdb-9615-df5ba0431ab5', c.id, 'LN-015', 'WEEKLY', 6000, 10, 0, 5400, 0.00, '2026-05-31T00:00:00.000Z', '2026-08-09T00:00:00.000Z', 10, 600, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000015'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '42d3c0a6-cab6-42cf-8de5-353077e34a7c', l.id, 1, '2026-06-07T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '186d88c1-fe78-440e-a8f1-40c48c987a69', l.id, 1, '2026-06-07T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b638e11c-b7c1-4640-8ed2-8225052dd8eb', l.id, 2, '2026-06-14T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '41a183a7-fc39-4e14-bb23-30d07dcb66aa', l.id, 2, '2026-06-14T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c7dfed0e-1235-4625-b402-890f1b4c0abe', l.id, 3, '2026-06-21T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '68f4586d-e4d1-4f45-aced-62bf51bcdbeb', l.id, 3, '2026-06-21T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f3723d7a-c5d3-4405-b820-c7faab729bab', l.id, 4, '2026-06-28T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '6f40f40f-5806-49cc-bfde-71eec5a11fd9', l.id, 4, '2026-06-28T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6ee7e6a0-2b95-4cad-8d0d-567982b59bd5', l.id, 5, '2026-07-05T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT 'fda85a3b-6dc7-461f-a91f-b03b119dc857', l.id, 5, '2026-07-05T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '75b91353-7a9a-4829-b339-bd75de6ffc74', l.id, 6, '2026-07-12T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '502b5fbb-7bf3-462a-b479-854d1ecbb858', l.id, 6, '2026-07-12T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '301653d6-0c69-456b-ac88-ea35c1860470', l.id, 7, '2026-07-19T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '30b5d816-0c98-43c2-9400-82e94acc9aab', l.id, 7, '2026-07-19T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '915c0ea0-e1f2-4ffe-a7b1-7b6519f7b367', l.id, 8, '2026-07-26T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT 'de86c0b6-cb73-4f39-bcbd-6cd51bc78417', l.id, 8, '2026-07-26T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'da303dcb-7a98-446c-9f77-d0874b8f986c', l.id, 9, '2026-08-02T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '042715aa-8359-489a-8342-a2ba0ba89cec', l.id, 9, '2026-08-02T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '180ff12b-cd37-4f4c-9787-b90889f9ac14', l.id, 10, '2026-08-09T00:00:00.000Z', 600, 'PENDING', NOW()
+SELECT '69736435-9e7d-40ef-a8ed-39b6bdb18edf', l.id, 10, '2026-08-09T00:00:00.000Z', 600, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-015'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #16: Mani (Jolly)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('1d591aa7-24f4-4b25-b679-b176e2257e97', '9345396573', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('db19c7e0-771f-4bb4-ac3d-9defe94d145d', '9345396573', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '7c72e1bd-2d7a-416e-a3e7-f0af02b9a333', u.id, 'Mani (Jolly)', '9345396573', 'ACTIVE', NOW(), NOW()
+SELECT 'a092cc6c-0046-4c9f-a407-8ff7da8f399c', u.id, 'Mani (Jolly)', '9345396573', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9345396573'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '41a11da1-bce2-4ac9-add9-d36beb002138', c.id, 'LN-016', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-05-31T00:00:00.000Z', '2026-08-09T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT '76ebee9a-7aae-4dd6-adfa-2ff008c2224f', c.id, 'LN-016', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-05-31T00:00:00.000Z', '2026-08-09T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9345396573'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c6b354e8-ac7f-4836-aed9-29d7df47d6f8', l.id, 1, '2026-06-07T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '3f16002d-4dd3-4894-8b79-8a197c0ed8e9', l.id, 1, '2026-06-07T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '62643c0d-e55f-4f77-a603-5ba5b26f44b8', l.id, 2, '2026-06-14T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '4de2a0dd-40e7-4f7b-bf71-cda199509c7e', l.id, 2, '2026-06-14T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7210f75f-12cb-47e9-b4f2-f33e9a404968', l.id, 3, '2026-06-21T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '3df5fe16-aba0-458f-a1da-7efcd98d5b83', l.id, 3, '2026-06-21T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9c540ffd-c67e-46bc-b0e5-3a73f8d5ee29', l.id, 4, '2026-06-28T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '40cce7cd-cfd0-4bf4-aad7-a14096ae8a59', l.id, 4, '2026-06-28T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c988de89-b0fd-495e-884e-bd958f3c0ec9', l.id, 5, '2026-07-05T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'b3fed898-b1c9-4a2e-8268-81faa2da4eb1', l.id, 5, '2026-07-05T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1cda81b7-2a95-4b02-9c43-9c88fe071471', l.id, 6, '2026-07-12T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '9ee4249d-2831-41d6-8917-7beab593947d', l.id, 6, '2026-07-12T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a1fa8f00-6eb4-498c-98da-1f3ab8cf6687', l.id, 7, '2026-07-19T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '7783339b-e5e7-4809-a243-4fcb738e5b5b', l.id, 7, '2026-07-19T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a4653332-0f82-4602-9163-9ddd23752aa9', l.id, 8, '2026-07-26T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '68c8f8bf-fb0c-4164-9343-64d482088fbf', l.id, 8, '2026-07-26T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'cc202f67-b5f4-45f7-adba-1143efc24593', l.id, 9, '2026-08-02T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'b0c79b26-6344-41b6-a597-46dd02f16adb', l.id, 9, '2026-08-02T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '874c057c-e4f7-4134-9139-1a6fa783bd95', l.id, 10, '2026-08-09T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '1adfaf5e-5087-47e0-922c-3692493f29ee', l.id, 10, '2026-08-09T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-016'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #17: Ashok
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('709a0a18-7e9f-4c5e-be35-db723fba3979', '9100000017', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('2a2e4a9a-9434-41b4-8cb7-6d1581428f58', '9100000017', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '177bbd9a-d393-4563-a6a5-2c7abbee6e1f', u.id, 'Ashok', '9100000017', 'ACTIVE', NOW(), NOW()
+SELECT '035fac95-2d01-4a26-a9d4-e0036c7254c1', u.id, 'Ashok', '9100000017', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000017'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '8f9516b6-3779-4d48-b4fa-63b564e9a08f', c.id, 'LN-017', 'WEEKLY', 35000, 10, 0, 31500, 0.00, '2026-05-21T00:00:00.000Z', '2026-07-30T00:00:00.000Z', 10, 3500, 'ACTIVE', NOW(), NOW()
+SELECT '03e1254f-6e9b-4a94-b27f-12a4d5721c10', c.id, 'LN-017', 'WEEKLY', 35000, 10, 0, 31500, 0.00, '2026-05-21T00:00:00.000Z', '2026-07-30T00:00:00.000Z', 10, 3500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000017'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e81b71d0-ebe7-4903-9dd8-a49a2b0c5be6', l.id, 1, '2026-05-28T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '071d360a-dcf4-4af6-a8e3-6c322a9a1174', l.id, 1, '2026-05-28T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b62dcd81-60b8-4c13-9fcf-5ec4b754dddb', l.id, 2, '2026-06-04T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '9805db07-224c-4be6-9b52-f25c46ffc4ce', l.id, 2, '2026-06-04T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'eb342e88-2fd0-4fb0-bfa6-6b4bf4d3e5eb', l.id, 3, '2026-06-11T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '18989e00-c83c-4441-8eed-3f7d888c2edd', l.id, 3, '2026-06-11T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'da9103b5-8e97-4eb0-91b4-7b9d2b0f4340', l.id, 4, '2026-06-18T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '4f233b7d-40ae-457d-95b0-6e064bd3c739', l.id, 4, '2026-06-18T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9027b974-f2fc-4a97-b5aa-2d54a0921948', l.id, 5, '2026-06-25T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '77effed1-9162-4dad-92bf-9f5dc92519ed', l.id, 5, '2026-06-25T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e8f8ef11-e043-487a-89e9-16efefd54ac7', l.id, 6, '2026-07-02T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'b5b0bc93-e010-4566-9845-3bf577888572', l.id, 6, '2026-07-02T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7144a9a8-0195-45bc-9a47-d9802827650b', l.id, 7, '2026-07-09T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '2b09d214-2f16-4a8b-ae70-bd7846598ed3', l.id, 7, '2026-07-09T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5e1c54b9-2fe8-4b80-bee4-d83724a898d8', l.id, 8, '2026-07-16T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '31aa6cfc-1466-4fe7-85d4-74c8b4f6c6b9', l.id, 8, '2026-07-16T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '37f7dc65-d296-4874-9a83-1cf45a5bb7e0', l.id, 9, '2026-07-23T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'c56423f2-8bb2-4952-b694-629518e9de73', l.id, 9, '2026-07-23T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c7abb4cc-5bae-4492-8637-fdc97d9ac70b', l.id, 10, '2026-07-30T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'c2ac3b9b-1ac6-4604-a631-1c11e90d90c9', l.id, 10, '2026-07-30T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-017'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #18: Raj (rice)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('d4de838e-532a-4bf6-87a4-895f02602176', '9100000018', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('f9f0ab81-9ffb-4199-a419-025bf4cc486b', '9100000018', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'b57c46c3-234e-4e91-80f4-1481e363b300', u.id, 'Raj (rice)', '9100000018', 'ACTIVE', NOW(), NOW()
+SELECT '793605e1-ade6-4088-9898-5e625a206b39', u.id, 'Raj (rice)', '9100000018', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000018'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '37bf3609-9fd2-4c68-8a1b-cf7715ccc2a2', c.id, 'LN-018', 'WEEKLY', 20000, 10, 0, 18000, 0.00, '2026-05-20T00:00:00.000Z', '2026-07-29T00:00:00.000Z', 10, 2000, 'ACTIVE', NOW(), NOW()
+SELECT 'c56a472b-1deb-4934-9958-299ec2380ebb', c.id, 'LN-018', 'WEEKLY', 20000, 10, 0, 18000, 0.00, '2026-05-20T00:00:00.000Z', '2026-07-29T00:00:00.000Z', 10, 2000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000018'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0bd19458-848a-4ab9-88cc-c012d8aea063', l.id, 1, '2026-05-27T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '4de4a382-ab8d-4632-ae40-b28a656577c4', l.id, 1, '2026-05-27T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0266e393-1ae4-4dea-8db7-2472a7711c28', l.id, 2, '2026-06-03T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '2ec7f98d-73c8-4b3c-ae90-a09e0aa4f454', l.id, 2, '2026-06-03T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4cab5a1b-109b-436f-ad2a-c473a87af396', l.id, 3, '2026-06-10T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT 'd4d6ba3b-9de0-4125-95d0-c38988c57b07', l.id, 3, '2026-06-10T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'bb067ceb-ae9f-41eb-8831-f5bc58fe86aa', l.id, 4, '2026-06-17T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '15bce035-182c-4601-a726-27278d35114b', l.id, 4, '2026-06-17T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'bfd93990-bfcf-4abe-b994-47dbe165d42f', l.id, 5, '2026-06-24T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '058ece95-59cb-484d-b47f-f30a043e05eb', l.id, 5, '2026-06-24T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2ab7ea07-9191-4420-be4d-8c319916fab5', l.id, 6, '2026-07-01T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT 'f0a43c78-bea9-4f0f-8f94-5d8330e5c248', l.id, 6, '2026-07-01T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f554cf9c-da47-4307-b5b3-b1cefd9a1641', l.id, 7, '2026-07-08T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '77bceec6-45e7-48f3-87cb-e326eeb97d2c', l.id, 7, '2026-07-08T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8e273526-98b3-4ec6-af26-1f2af689a7d9', l.id, 8, '2026-07-15T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '6dfb701b-00df-4de8-a678-1f16eb112596', l.id, 8, '2026-07-15T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9aad6aea-b10c-4f67-bceb-7ee2d9d0f076', l.id, 9, '2026-07-22T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '86eb10e1-889e-4545-b29c-14a86ba57e60', l.id, 9, '2026-07-22T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c889564a-260a-4244-861a-20fdb0620c39', l.id, 10, '2026-07-29T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '86d03a2c-7a98-4215-80ba-8ad12faa1e25', l.id, 10, '2026-07-29T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-018'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #19: sakthivel (mangalam)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('f5ad7934-c688-4171-b6b5-6f5786e89ea1', '9848757747', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('f7ddc2eb-ee24-4795-a1ba-9b91da05219a', '9848757747', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '64beb64a-b7a3-42e5-a29e-5a011e299f55', u.id, 'sakthivel (mangalam)', '9848757747', 'ACTIVE', NOW(), NOW()
+SELECT 'b4e6b6c2-955b-462d-8a71-cc7262005586', u.id, 'sakthivel (mangalam)', '9848757747', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9848757747'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '3e75ae22-fbfc-409e-975d-39c37340ba9b', c.id, 'LN-019', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-05-16T00:00:00.000Z', '2026-07-25T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT 'c71ded3d-7d0e-4f8f-a1de-1ff92ee2b11b', c.id, 'LN-019', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-05-16T00:00:00.000Z', '2026-07-25T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9848757747'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c0403db8-ced4-4ba2-aec4-662faef80e95', l.id, 1, '2026-05-23T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'b710df2c-6462-488f-bc4c-04b8f5b001d5', l.id, 1, '2026-05-23T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '196bfe9d-21e1-4793-a39d-e8f78ace3880', l.id, 2, '2026-05-30T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '9f71c643-1044-45ce-9f38-6c01616af560', l.id, 2, '2026-05-30T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '61bdd3f9-e8c9-4e72-8034-8c8002d79d84', l.id, 3, '2026-06-06T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '28658b16-ce20-4872-8e80-0bb77d0e5ad4', l.id, 3, '2026-06-06T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '69607abf-f6c5-444c-b34b-40eb89f89fe8', l.id, 4, '2026-06-13T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'd263eec1-9b56-4d45-b0f3-9217ff5a2a2e', l.id, 4, '2026-06-13T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9aa66abc-d069-4d98-89a8-1c57435ed5a7', l.id, 5, '2026-06-20T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'bee4029a-0181-43ba-9885-6c7d2be2208e', l.id, 5, '2026-06-20T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '3c8454cf-3e82-488a-8fcc-406959173c7b', l.id, 6, '2026-06-27T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'e9356e53-aa34-4d3f-a490-064f76460d64', l.id, 6, '2026-06-27T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '77c58f96-7741-4c65-adaf-170a90755f9a', l.id, 7, '2026-07-04T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '11cd5760-00c8-40fd-9f78-5b1e05a9c38f', l.id, 7, '2026-07-04T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2324ecba-8d66-49a6-ba4b-3ae85aa7a45f', l.id, 8, '2026-07-11T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '519b40ff-f01c-4a70-a523-2ee0eaf8afff', l.id, 8, '2026-07-11T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd7df445c-0719-490b-95f5-cd529d1222af', l.id, 9, '2026-07-18T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'bf3119ff-ab7e-4e0a-a6bc-a36264909e56', l.id, 9, '2026-07-18T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9c8ffdd0-95e6-4636-bac4-a63f6c184faf', l.id, 10, '2026-07-25T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'a443ca23-0c16-4209-a4a3-f5db230a01b1', l.id, 10, '2026-07-25T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-019'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #20: murugan (painter)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('db5eff7d-7ed1-412a-81be-f458b7b37ca5', '9843173422', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('42c12b6b-ce58-4804-b1df-851fb6e0af99', '9843173422', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '0f89c121-9cf8-4e14-88b0-2999ca1b5e8b', u.id, 'murugan (painter)', '9843173422', 'ACTIVE', NOW(), NOW()
+SELECT '4070dff3-801a-461f-8b3c-f9d48bc70534', u.id, 'murugan (painter)', '9843173422', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9843173422'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '4e293673-0322-4321-8e26-988d6bd7534a', c.id, 'LN-020', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-16T00:00:00.000Z', '2026-07-25T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT 'd6b4f365-7902-47ad-bb7b-7e0367574028', c.id, 'LN-020', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-16T00:00:00.000Z', '2026-07-25T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9843173422'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ad5176e9-7cd9-4cc6-be4b-1c79a1e97f38', l.id, 1, '2026-05-23T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '73050b52-cc52-4c0c-a556-6436f38f50b6', l.id, 1, '2026-05-23T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8705748d-3e27-48fe-b164-e13d940e2b20', l.id, 2, '2026-05-30T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '21859ebb-7330-4c89-9c75-d2cad3802237', l.id, 2, '2026-05-30T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '37b6e052-caf4-4c1c-8e7d-7cfea993ff1a', l.id, 3, '2026-06-06T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'be31d5a4-014a-40dd-884f-fa14ae80d148', l.id, 3, '2026-06-06T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '11a2c97b-4a59-4028-9510-e867c47a9247', l.id, 4, '2026-06-13T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '0592c120-7c62-468f-a4fc-92e7f6057dfe', l.id, 4, '2026-06-13T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1715af5b-d8c1-415a-926f-3c9148726496', l.id, 5, '2026-06-20T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '84c46b7f-5bd5-4d8c-9e2e-b69d9cce53fe', l.id, 5, '2026-06-20T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '485dec74-4363-4c05-af21-11f6ddf11427', l.id, 6, '2026-06-27T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'e041de4d-d5a2-42fe-96dc-f6424f9334e4', l.id, 6, '2026-06-27T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'bf792994-272f-4d17-b922-eed80356ac6d', l.id, 7, '2026-07-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'ebdbb5c9-2d47-4ab8-9ca2-2511c9ffd138', l.id, 7, '2026-07-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '773136db-4fe6-41e7-ab0d-acb700ff52ca', l.id, 8, '2026-07-11T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '0bc184f0-6602-48e3-9dd8-c2edd9b68ef5', l.id, 8, '2026-07-11T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9a18a11d-337f-44dd-b3cd-a1e2a94f7f59', l.id, 9, '2026-07-18T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'fc51a8fe-3da3-44eb-abe7-89b7a325e15f', l.id, 9, '2026-07-18T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '754aedb0-1444-4644-890e-40d13a9b4e36', l.id, 10, '2026-07-25T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '9edbae84-676c-4016-a664-25da2f393d24', l.id, 10, '2026-07-25T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-020'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #21: raghul (naren)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('fd4d375f-a77a-44ee-81c6-8a365a60cfa9', '9100000021', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('33fb8a3d-ebfd-4e52-a1d5-e93cdb506533', '9100000021', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'd4ec664c-6a8c-45c9-9469-dfe1eb291413', u.id, 'raghul (naren)', '9100000021', 'ACTIVE', NOW(), NOW()
+SELECT '6d0d2a69-7e31-4a47-ac54-d73a45ff73e0', u.id, 'raghul (naren)', '9100000021', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000021'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'b165c05f-cd47-4b8c-849a-7e3bfa522e24', c.id, 'LN-021', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-21T00:00:00.000Z', '2026-07-30T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT 'cc4d79a4-0ff1-41b2-a80f-e54b4bd3581e', c.id, 'LN-021', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-21T00:00:00.000Z', '2026-07-30T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000021'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '18d3758f-32c6-4d3a-b438-1e9a00ac6b46', l.id, 1, '2026-05-28T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '2b1029b0-9ba4-469e-ba46-9cb8c7ad4f72', l.id, 1, '2026-05-28T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a7de08e7-d80a-4a44-8f46-35f68ed4a616', l.id, 2, '2026-06-04T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'c2155727-24a1-41c3-98a6-8fc1b0690477', l.id, 2, '2026-06-04T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd2de1d11-6ce6-4bc7-8f64-de8ffb295b71', l.id, 3, '2026-06-11T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'a6c71028-a5c2-4ee4-ae02-f67dff041cb5', l.id, 3, '2026-06-11T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7b006175-3779-497c-8896-e7c30a324056', l.id, 4, '2026-06-18T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '4c214bc4-145c-4d07-9751-abace56c7179', l.id, 4, '2026-06-18T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e5381264-01c2-4aeb-adeb-88992653e32e', l.id, 5, '2026-06-25T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'c7486ab4-5f4f-4742-b71b-810ad0efce0f', l.id, 5, '2026-06-25T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '912a4cae-5199-4ed2-a0fc-7e9f7b7c14fb', l.id, 6, '2026-07-02T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'bbd85511-8340-4d7b-a5c7-f8881e835b97', l.id, 6, '2026-07-02T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '691ac1b7-39ca-4650-91f9-f0be062c0726', l.id, 7, '2026-07-09T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '634c3ef2-291d-4f30-ae58-b71113e18311', l.id, 7, '2026-07-09T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '462a04ae-abb2-4c45-a206-343f54921274', l.id, 8, '2026-07-16T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '9b748cb5-44e8-48ad-8b83-ea4bd883ce42', l.id, 8, '2026-07-16T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2194f14d-fb67-4db6-8a95-720cfac207e1', l.id, 9, '2026-07-23T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'c0797a09-5c46-4f13-b1bc-06df3b6ba3e5', l.id, 9, '2026-07-23T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7c336eb7-a806-408d-a08d-685d5ba89869', l.id, 10, '2026-07-30T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '440f4b93-74ff-4bca-8c05-caf7aa89152b', l.id, 10, '2026-07-30T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-021'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #22: Jai (pichai)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('e7f17610-01e9-49d2-842d-e1273d46eff8', '9100000022', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('f3fa6249-c99a-4032-bf36-299ebe51a682', '9100000022', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'e5f7eaac-ccb4-4168-ab00-580af1c414e6', u.id, 'Jai (pichai)', '9100000022', 'ACTIVE', NOW(), NOW()
+SELECT 'c30919fe-ce98-47a2-84fb-921ab6662a23', u.id, 'Jai (pichai)', '9100000022', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000022'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'aebbb0d2-684d-41b4-9e26-01092c293c03', c.id, 'LN-022', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-23T00:00:00.000Z', '2026-08-01T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT 'bc95fcb4-c97e-415b-a5b7-48e64566f780', c.id, 'LN-022', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-23T00:00:00.000Z', '2026-08-01T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000022'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0ccb0fbe-38e9-4a2c-9b2d-ea76ad2d2a07', l.id, 1, '2026-05-30T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'aaa918ce-12f3-4d5f-9cdc-e7be03629ad9', l.id, 1, '2026-05-30T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b654b042-09d9-42e2-8a0d-b5cd08ba50cc', l.id, 2, '2026-06-06T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'ecde5f4b-08cf-4952-ba91-24e4eb0a544f', l.id, 2, '2026-06-06T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e4c6d9a7-6f3b-469a-aab5-338f3dec94ad', l.id, 3, '2026-06-13T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'a34260c3-31a6-42bf-8531-4ccbb99cafbc', l.id, 3, '2026-06-13T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '3dcc23ee-7903-4339-83dd-4deaf928db2b', l.id, 4, '2026-06-20T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '533aa224-a636-4ed7-be6b-1ea3967ec93d', l.id, 4, '2026-06-20T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7fa28604-bc35-4cd8-821f-91c8666bda39', l.id, 5, '2026-06-27T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '7a00a491-b55e-4475-ba10-a4d304cb16b4', l.id, 5, '2026-06-27T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ebd7c3b4-c8a5-496a-960a-0295ed835e4d', l.id, 6, '2026-07-04T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '8292e242-79a6-4443-9f7f-13e03651e148', l.id, 6, '2026-07-04T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ac8c6655-416d-4293-8ee7-9b44f3ec7e10', l.id, 7, '2026-07-11T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '0d359291-8f71-4123-adb6-a7a89d389888', l.id, 7, '2026-07-11T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7e516664-6b92-4082-999a-7416d989a404', l.id, 8, '2026-07-18T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '9962f27a-88a5-47b2-bee3-0085907af147', l.id, 8, '2026-07-18T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '29e36ab4-5d56-43b6-abd1-9f7956ed45cb', l.id, 9, '2026-07-25T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'aee5dc0d-0f54-4c58-b0c6-4f14a91efd06', l.id, 9, '2026-07-25T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'bb6a40f0-1052-400a-ae94-a163f3c3230c', l.id, 10, '2026-08-01T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'fb227da0-9982-4dc6-86ee-55f46c90915e', l.id, 10, '2026-08-01T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-022'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #23: ragupathy
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('4c2d52c2-0dd7-4db9-ba12-db1d3ec58c87', '9100000023', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('1c81accf-5743-453c-96a2-0445a4a156de', '9100000023', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '853501b6-69f1-40e0-a043-a488a28561d3', u.id, 'ragupathy', '9100000023', 'ACTIVE', NOW(), NOW()
+SELECT '63077fdb-9997-4182-98f2-b1091e868036', u.id, 'ragupathy', '9100000023', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000023'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'fa636ae9-e929-4708-b193-aa2eba5af780', c.id, 'LN-023', 'WEEKLY', 20000, 10, 0, 18000, 0.00, '2026-05-25T00:00:00.000Z', '2026-08-03T00:00:00.000Z', 10, 2000, 'ACTIVE', NOW(), NOW()
+SELECT 'c183d01f-c198-441a-a37a-ecf53daddf01', c.id, 'LN-023', 'WEEKLY', 20000, 10, 0, 18000, 0.00, '2026-05-25T00:00:00.000Z', '2026-08-03T00:00:00.000Z', 10, 2000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000023'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'fca950a8-6010-4230-9cff-907145942a55', l.id, 1, '2026-06-01T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT 'a69a664d-9c6d-4d1d-b936-93027e20c914', l.id, 1, '2026-06-01T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '589a7c4e-b661-4639-9206-31677e729ab5', l.id, 2, '2026-06-08T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '0fb2d394-7e6d-4a0a-9aa1-813000b55410', l.id, 2, '2026-06-08T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8d72b226-2774-4946-956f-283352d611bc', l.id, 3, '2026-06-15T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '8a406fd4-2f6c-44ff-9909-fc4590010194', l.id, 3, '2026-06-15T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'fb447d3f-9346-4474-8c5d-08389d446dd1', l.id, 4, '2026-06-22T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '9d1a8c34-b9a1-4be0-9e2c-db62be2ee5d4', l.id, 4, '2026-06-22T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '15ba07f1-a801-46a1-8019-cfeb2c8c1ce6', l.id, 5, '2026-06-29T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '74d8e195-e214-40b0-814d-908124604709', l.id, 5, '2026-06-29T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a57c3005-95b5-4ccb-9978-02c83b7a02bc', l.id, 6, '2026-07-06T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '18e3ca99-b598-4ed6-b4ef-73bba6916601', l.id, 6, '2026-07-06T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '10fdca40-eb21-4276-8019-f31501ba16fa', l.id, 7, '2026-07-13T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT 'd247d601-e631-44d8-ab64-a822742e67c7', l.id, 7, '2026-07-13T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'cf4dc0a0-462d-44dd-9882-25fc36926b6e', l.id, 8, '2026-07-20T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT 'cb983de5-6487-49f6-8db6-c9e50a1f8f80', l.id, 8, '2026-07-20T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '676ec20b-ee6a-4f28-a615-9781e51c30c8', l.id, 9, '2026-07-27T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT 'dc4ab68a-6a68-4270-a5a8-b842ddb827f5', l.id, 9, '2026-07-27T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9853e0b2-b4e1-4c7c-b521-dcf53e08e7f7', l.id, 10, '2026-08-03T00:00:00.000Z', 2000, 'PENDING', NOW()
+SELECT '60732f42-336a-4e37-9c80-cf1f9d89ab61', l.id, 10, '2026-08-03T00:00:00.000Z', 2000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-023'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #24: ranjith
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('3d42b605-d4b3-4e69-a7b9-483ae513fd70', '9100000024', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('681f1630-ac7f-4ad0-bf97-8a434be10956', '9100000024', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'b4701625-2508-4fcb-a5da-23f8a1153bd4', u.id, 'ranjith', '9100000024', 'ACTIVE', NOW(), NOW()
+SELECT '3267f87a-8962-49bd-8a3d-e86bdf89490b', u.id, 'ranjith', '9100000024', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000024'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '1ca06c23-2155-4bd5-90ae-61b6570a0f49', c.id, 'LN-024', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-25T00:00:00.000Z', '2026-08-03T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT 'a7c85dba-1e26-4ef3-b311-35039b2a5fec', c.id, 'LN-024', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-25T00:00:00.000Z', '2026-08-03T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000024'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c91d7763-2228-4d9a-a785-48bfdac929d7', l.id, 1, '2026-06-01T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '2f4ef85c-54ee-42c4-84e2-da14664af00c', l.id, 1, '2026-06-01T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1805e5f3-ebfd-4d5d-bdfd-1e1f9a3a4add', l.id, 2, '2026-06-08T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'c9c073a4-6149-4ee1-8f7b-7d44d79d00d3', l.id, 2, '2026-06-08T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f997a7d2-b0c2-426f-8290-c7b1ed747f63', l.id, 3, '2026-06-15T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'ee0fb847-3d75-42b9-b75b-2d89e3538893', l.id, 3, '2026-06-15T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5f8a2b23-dff0-4980-ac85-e75872f4a94d', l.id, 4, '2026-06-22T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '50585365-02b7-4331-b2fa-c729d3b72abe', l.id, 4, '2026-06-22T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '293ed12e-6ef3-4470-8aa6-89d331b19ec7', l.id, 5, '2026-06-29T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'bfc28dfd-6f06-4355-a2ca-1522468bf1fe', l.id, 5, '2026-06-29T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e09bf032-119e-40bd-b110-512d69705050', l.id, 6, '2026-07-06T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'c9d85df3-9827-4f1e-805b-93e5bd5263a7', l.id, 6, '2026-07-06T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9a8171f2-2f31-4a97-acba-e4b8726461b3', l.id, 7, '2026-07-13T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'cdeaf042-13a0-4878-b1b4-979ff6a0b4bd', l.id, 7, '2026-07-13T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6de28ad9-cedf-4455-9adc-67255fae44ce', l.id, 8, '2026-07-20T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '5971e567-5258-4ba5-a824-4e5871cea2b4', l.id, 8, '2026-07-20T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a6cce3e1-e57d-4193-83ae-a1dcbfaa06c3', l.id, 9, '2026-07-27T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'a093f9d8-156a-43db-800d-99fec85210e9', l.id, 9, '2026-07-27T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '13921f07-c64e-47f9-9e9b-0620b45a1ed5', l.id, 10, '2026-08-03T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '9cbbcbd6-67ba-4d38-856e-ed3288072560', l.id, 10, '2026-08-03T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-024'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #25: Shanmugavel (KP)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('4cfdb206-73ac-41b6-a122-0188d8501ff5', '9100000025', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('91f849b6-1eda-4544-9b44-3d4ee21e20d7', '9100000025', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '7e5ea66d-adee-492a-9c5a-5e2695278d49', u.id, 'Shanmugavel (KP)', '9100000025', 'ACTIVE', NOW(), NOW()
+SELECT 'fa685452-98c3-4d1e-bd07-d3310cce7fc1', u.id, 'Shanmugavel (KP)', '9100000025', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000025'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '92139bdd-5372-4479-aac4-f0e0814ee42f', c.id, 'LN-025', 'WEEKLY', 35000, 10, 0, 31500, 0.00, '2026-05-25T00:00:00.000Z', '2026-08-03T00:00:00.000Z', 10, 3500, 'ACTIVE', NOW(), NOW()
+SELECT 'a38bcd6f-f338-4cfb-a845-b7aa99eef4b5', c.id, 'LN-025', 'WEEKLY', 35000, 10, 0, 31500, 0.00, '2026-05-25T00:00:00.000Z', '2026-08-03T00:00:00.000Z', 10, 3500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000025'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b234f3e7-a1f7-4989-bdef-1273112c7497', l.id, 1, '2026-06-01T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'f71e8670-3974-46f4-bf63-72a3a352cf69', l.id, 1, '2026-06-01T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '48892176-7fa8-4ab9-922c-0ca81e266cda', l.id, 2, '2026-06-08T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'cb41cbb2-05d5-4035-b10c-b658d49d813c', l.id, 2, '2026-06-08T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c0c5e7bc-2aa5-4d89-a28f-bf738871b99c', l.id, 3, '2026-06-15T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'b003aa31-6c9e-4f24-a98e-42869047c327', l.id, 3, '2026-06-15T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '151aee5f-f363-41df-8620-1bba60b71eb5', l.id, 4, '2026-06-22T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'c0bb7e89-15ee-4db4-bdbd-99392c17f841', l.id, 4, '2026-06-22T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2975dbdf-8a3a-4950-ad05-f558570a8ac1', l.id, 5, '2026-06-29T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '9fe350e0-71e7-4073-9ae9-4e4fce219b9b', l.id, 5, '2026-06-29T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f744502a-3b8e-4c3e-b81a-d96627ba9aa5', l.id, 6, '2026-07-06T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'baed036a-1957-4cce-b436-0aaec70256e8', l.id, 6, '2026-07-06T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6ad4bbca-ddb8-4771-9385-8d8d2cdce913', l.id, 7, '2026-07-13T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'ffc881d0-bdd7-4045-bd83-b266d628d65a', l.id, 7, '2026-07-13T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'efbb822e-5792-4a81-8dc3-5a7ec514ac29', l.id, 8, '2026-07-20T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'ebbd5942-bc2c-479f-8bc9-cbc08a393b47', l.id, 8, '2026-07-20T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1617a195-ff7c-44a1-85b5-af43311d7b65', l.id, 9, '2026-07-27T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT 'd872b56c-e73d-45a2-8bc3-e3a9e23cc223', l.id, 9, '2026-07-27T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '16dfa086-f97b-4abc-b879-5ba54c1d0e36', l.id, 10, '2026-08-03T00:00:00.000Z', 3500, 'PENDING', NOW()
+SELECT '692f3503-43a4-4ad6-8ccc-6298d6157bc2', l.id, 10, '2026-08-03T00:00:00.000Z', 3500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-025'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #26: mani (tails)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('9278742d-0dcb-45be-be78-5cbb8397d615', '9100000026', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('ce45d53d-62a7-4f15-901d-dc37860627c7', '9100000026', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'a4099b36-2adb-4dfa-9857-b698e91341a2', u.id, 'mani (tails)', '9100000026', 'ACTIVE', NOW(), NOW()
+SELECT '2ca10d97-fa48-4e4f-9360-141baee7329f', u.id, 'mani (tails)', '9100000026', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000026'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'c548b503-ab9a-4af4-ab44-0e57b16be085', c.id, 'LN-026', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-05-26T00:00:00.000Z', '2026-08-04T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
+SELECT '2be6bc53-6b74-45da-81e5-d39da61aecec', c.id, 'LN-026', 'WEEKLY', 10000, 10, 0, 9000, 0.00, '2026-05-26T00:00:00.000Z', '2026-08-04T00:00:00.000Z', 10, 1000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000026'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '400d92a4-f05d-420a-a683-c398c6a9d10c', l.id, 1, '2026-06-02T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '62e7aa65-1b73-4688-86f3-32fce200dd3a', l.id, 1, '2026-06-02T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8181be99-f800-41c2-9dcf-f69f163affd0', l.id, 2, '2026-06-09T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '0c1653ee-1f35-419f-9479-6096762fe1e3', l.id, 2, '2026-06-09T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1c7d1698-750e-4ff3-9278-45808ab9996e', l.id, 3, '2026-06-16T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'cfbd6584-a5b9-425e-b2ce-dd5397daecc0', l.id, 3, '2026-06-16T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1eebb4f0-2bce-4160-b0f2-3898dd2de557', l.id, 4, '2026-06-23T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'ae4c26bb-5f8b-4592-a5eb-1d22c4e34ba8', l.id, 4, '2026-06-23T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '721aeae7-f293-408c-a043-bc0d7ec94677', l.id, 5, '2026-06-30T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '917e9c82-ec3f-4236-9b92-2536d04239d8', l.id, 5, '2026-06-30T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7f422b6a-2b72-4a51-85ff-ffabcd03ec2d', l.id, 6, '2026-07-07T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '653978a9-782e-4823-ba8b-88aba43c33b7', l.id, 6, '2026-07-07T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '1caf9435-9a77-4a2c-b4b0-ebc9416fee4f', l.id, 7, '2026-07-14T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '2d09c812-9fed-451f-86c5-ce2caa88e372', l.id, 7, '2026-07-14T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b8cb035a-90d1-45a3-9e5b-985f57d11775', l.id, 8, '2026-07-21T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '07384122-ae80-4c24-a8fe-d03bd06945aa', l.id, 8, '2026-07-21T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0867d5be-bf3f-4bdc-850b-6b1398f04478', l.id, 9, '2026-07-28T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT '7b0fc170-a838-4c69-82e6-cfa850c8ccf2', l.id, 9, '2026-07-28T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd0a9af6b-ef37-456d-ac92-7f1187017d65', l.id, 10, '2026-08-04T00:00:00.000Z', 1000, 'PENDING', NOW()
+SELECT 'e1afdb9b-7ad4-41b4-a94a-d473da0a3a1c', l.id, 10, '2026-08-04T00:00:00.000Z', 1000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-026'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #27: praveen (baguti)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('3fc14019-6ffd-497a-ae40-9f1c7b0a6927', '9100000027', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('4939ee45-3009-4684-b585-3d1be98fce49', '9100000027', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'd0544a6b-6c73-4f2a-ac3e-4244c6110a7b', u.id, 'praveen (baguti)', '9100000027', 'ACTIVE', NOW(), NOW()
+SELECT '82271b91-fe5e-4f21-8e1f-702f79a48b65', u.id, 'praveen (baguti)', '9100000027', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000027'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '1e0e211d-42fd-4780-83d5-102976c62888', c.id, 'LN-027', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-26T00:00:00.000Z', '2026-08-04T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT '9c0daeed-82a3-4cfd-9fca-bf094e783a1f', c.id, 'LN-027', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-26T00:00:00.000Z', '2026-08-04T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000027'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c8d4a29a-6189-44be-b4a8-ee72b448dc7b', l.id, 1, '2026-06-02T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '354058f6-ab16-4df8-a95d-5178e78115b9', l.id, 1, '2026-06-02T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '581530da-b2e2-4b36-8a68-38981064aba7', l.id, 2, '2026-06-09T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '27430749-7a09-424f-ae60-dfc3cd89695d', l.id, 2, '2026-06-09T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c4be9ac0-22e9-4190-b6b9-7ae36a12bb8f', l.id, 3, '2026-06-16T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '7caf4fee-8b60-4163-9919-a873df2d0991', l.id, 3, '2026-06-16T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '58ea8da5-db7d-41f8-ae49-f50c98131444', l.id, 4, '2026-06-23T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'd26dca61-c9b8-49a3-bb6f-b9458f92a2d4', l.id, 4, '2026-06-23T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'acc13acd-640b-4816-8ffb-3058c545de1b', l.id, 5, '2026-06-30T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '9649db90-1079-44bb-85a6-e5be92babdd7', l.id, 5, '2026-06-30T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '406f0700-a4ad-4386-a9b3-3a1133f518c2', l.id, 6, '2026-07-07T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '11fffd3b-e423-489d-9fe7-a9aecf0c09c1', l.id, 6, '2026-07-07T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'e4ca6cf1-c7cd-43e8-b4ab-e50714e31386', l.id, 7, '2026-07-14T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '2b02df1a-dc52-4e6d-bca7-d0543436f3a2', l.id, 7, '2026-07-14T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ecad09f0-920c-4606-bda2-30c0b01c15a4', l.id, 8, '2026-07-21T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'f926cc39-83d3-4569-8a91-65f10e94c8fe', l.id, 8, '2026-07-21T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8425ea5b-4b66-494e-ad90-021567b133fb', l.id, 9, '2026-07-28T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '66a3d047-18ef-4d73-8ca3-8dbc71137dd1', l.id, 9, '2026-07-28T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '450df1cb-6c44-462c-b37b-4487a1c50ee6', l.id, 10, '2026-08-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '249cd65f-6cd1-40c8-a186-97bd977cb2e2', l.id, 10, '2026-08-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-027'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #28: arunachalam (master)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('d6475991-59be-4b59-b7e9-09cd7dd5aea4', '9100000028', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('5fef2f78-744c-4a84-ad16-7dbdd3f40201', '9100000028', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '2cd1b274-1155-41bf-9a08-d9821b6cc2a4', u.id, 'arunachalam (master)', '9100000028', 'ACTIVE', NOW(), NOW()
+SELECT '1700c304-7bd9-428e-982e-ca06daec397a', u.id, 'arunachalam (master)', '9100000028', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000028'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '7ea07de5-5fb9-4221-92a3-55a813fd9979', c.id, 'LN-028', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-26T00:00:00.000Z', '2026-08-04T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT '42e1c8d9-bb28-4d1c-b137-f93112cdb3ff', c.id, 'LN-028', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-26T00:00:00.000Z', '2026-08-04T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000028'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ffdec078-865d-47c7-a4b6-8fcdea35d4b7', l.id, 1, '2026-06-02T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'be466944-43a3-4aef-a647-675937a67814', l.id, 1, '2026-06-02T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd6f4214f-723b-4a81-a1a3-6dd6ad502e0d', l.id, 2, '2026-06-09T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '7da90f8b-0cea-477c-a763-5432de3d2961', l.id, 2, '2026-06-09T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'cbdd21bf-13b3-4be8-bc5f-f9de4fcc5f71', l.id, 3, '2026-06-16T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '81bfff89-daba-467e-9eeb-c9c8cdfa8d17', l.id, 3, '2026-06-16T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '873257b2-8ea7-4466-8d37-a1a2e03b31d6', l.id, 4, '2026-06-23T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '40982115-4c6d-41ba-aee8-4020c3163baf', l.id, 4, '2026-06-23T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '46f970a3-008e-426b-8652-ab1a646c7ab4', l.id, 5, '2026-06-30T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '7696ef87-51de-4f08-924d-e1680e3563bb', l.id, 5, '2026-06-30T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9eb71b8e-3f01-4ad0-9379-812b6ac9dcb2', l.id, 6, '2026-07-07T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '231f95e2-3bc8-4962-8271-eef4855da8fe', l.id, 6, '2026-07-07T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ad2e943b-3c9d-46f1-a8a8-d19a1fe7b0be', l.id, 7, '2026-07-14T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'e6fc5f14-aca2-4568-b09e-14d8af286d0a', l.id, 7, '2026-07-14T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '880f2c00-519f-4f83-99ee-3aa6e1f824b9', l.id, 8, '2026-07-21T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '977564db-78cb-47a0-b95e-77f96a9b92af', l.id, 8, '2026-07-21T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2e26f95b-c7f4-445a-9f70-e62a5d47112a', l.id, 9, '2026-07-28T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '98509e9e-fd2b-4707-b6c6-059a4e55dade', l.id, 9, '2026-07-28T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd56a5501-7e95-4d1f-adea-aaa9c5f66311', l.id, 10, '2026-08-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '6667a0f8-9e5d-47f5-84a1-afb619f2ef62', l.id, 10, '2026-08-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-028'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #29: ajith (aali)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('aefda556-b1d0-498b-aef6-b94969860820', '9100000029', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('c8e379e3-6f5b-44c5-83cf-37233ae907a0', '9100000029', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '47954456-9b58-49cb-9efb-209f324b8de7', u.id, 'ajith (aali)', '9100000029', 'ACTIVE', NOW(), NOW()
+SELECT '318feaf6-64d7-4c43-b578-ccaa4cbdf1ec', u.id, 'ajith (aali)', '9100000029', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000029'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'ceb49cd1-3bb4-498a-b835-e0bad3239535', c.id, 'LN-029', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-30T00:00:00.000Z', '2026-08-08T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT '90fd7215-f88b-4af3-999e-711c38ec6a5c', c.id, 'LN-029', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-05-30T00:00:00.000Z', '2026-08-08T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000029'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4fedb7f3-6a59-46b0-8683-1f9e87509ea9', l.id, 1, '2026-06-06T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '92703ebf-0118-4630-ad43-ddfb198f014c', l.id, 1, '2026-06-06T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '32e037a6-12c0-4146-9fcd-24d0c8b4c25a', l.id, 2, '2026-06-13T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '6d74b4b2-988d-4233-a2ee-355d7c808c7d', l.id, 2, '2026-06-13T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'c88f442a-f929-42d5-bd30-3d90e2ab7f80', l.id, 3, '2026-06-20T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '7e6c5d26-6504-428f-a517-976f2001e8e5', l.id, 3, '2026-06-20T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '20a04631-f00e-4cca-9172-1ca38e7b6c6d', l.id, 4, '2026-06-27T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '313746b7-bb32-4502-8ce2-7205991b5f2c', l.id, 4, '2026-06-27T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a4e0a1c7-d3ef-4db0-b843-300367db6ff9', l.id, 5, '2026-07-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '7d60b425-1d6d-4ec9-88ce-e8b1f58bd886', l.id, 5, '2026-07-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '2bdacbd6-9928-49f8-8687-613561443f20', l.id, 6, '2026-07-11T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'ed7e8f12-e3d8-4fdb-89e3-b1f4dff5baf4', l.id, 6, '2026-07-11T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4427cc76-a069-406a-b450-0b26bd36c0a5', l.id, 7, '2026-07-18T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '38c91047-47ee-4562-aff5-6e3452619a26', l.id, 7, '2026-07-18T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '13515713-5b69-467e-8b2f-1ea9a05a2a88', l.id, 8, '2026-07-25T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'd2d57750-0ccc-4235-a800-12920d312430', l.id, 8, '2026-07-25T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'adec484b-622a-48c0-a0fd-5007ff75279a', l.id, 9, '2026-08-01T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'b795a3bb-2d2d-4c9f-8e36-48b93f586cf8', l.id, 9, '2026-08-01T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'df3f14c9-d232-46ed-bc17-d391c656248e', l.id, 10, '2026-08-08T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'f85662b8-29a8-44e0-86e7-78c61d21f1a4', l.id, 10, '2026-08-08T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-029'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #30: vicky (metu)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('66da3289-f733-41de-b820-9a735c07e12d', '9100000030', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('47442fbe-5327-4cb3-b547-c600953e03a4', '9100000030', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'e3702c19-4d63-4433-9ff8-0ac490faedd3', u.id, 'vicky (metu)', '9100000030', 'ACTIVE', NOW(), NOW()
+SELECT 'cd1352db-5cd1-4fe7-b52a-47144b26b2ec', u.id, 'vicky (metu)', '9100000030', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000030'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '0080fbfe-c8ca-4eda-9c80-d518a935ff56', c.id, 'LN-030', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-31T00:00:00.000Z', '2026-08-09T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT 'c9425304-d513-435c-ba9a-eab8dacbd769', c.id, 'LN-030', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-05-31T00:00:00.000Z', '2026-08-09T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000030'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f1256a49-bc1e-47b4-934a-316702a5de51', l.id, 1, '2026-06-07T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'c0ed4e51-f9b7-41d9-bfd3-abe7824e1666', l.id, 1, '2026-06-07T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9b3e0655-2170-4042-9f94-1c720b61c666', l.id, 2, '2026-06-14T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '29356b7f-cfc1-495e-b15a-94400cc1249b', l.id, 2, '2026-06-14T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '02ce6b00-834d-47b7-a427-46caebc79498', l.id, 3, '2026-06-21T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'ac342e8e-607f-456b-8192-722547d2eb62', l.id, 3, '2026-06-21T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd31ecd23-841a-4705-9b54-afd225e5b3ad', l.id, 4, '2026-06-28T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'cb410ab5-c8a6-4431-a1c0-c922cca32883', l.id, 4, '2026-06-28T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ca9ab13d-d2cc-458b-96a6-7587bf65dd7e', l.id, 5, '2026-07-05T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '8376c4e5-db24-4ea0-b8d6-b0a3071d99b5', l.id, 5, '2026-07-05T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0475107e-947f-45e8-a78c-e87c6691d1b7', l.id, 6, '2026-07-12T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '5c40434f-1714-4c28-a8ad-876c6cd21699', l.id, 6, '2026-07-12T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '3547571b-6b73-4f35-8684-1bc1d9a35b23', l.id, 7, '2026-07-19T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '61a6fbaf-4942-4072-8ae2-c769ae66333a', l.id, 7, '2026-07-19T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '80063b19-649c-4674-996d-d29fd7ee895c', l.id, 8, '2026-07-26T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'bdaf091b-0a5a-4b21-ae28-778ac79c54bc', l.id, 8, '2026-07-26T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a68f3693-e0d6-4a68-bccc-a67d79853c2c', l.id, 9, '2026-08-02T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '1c1b0dd9-5886-4870-8587-b96d0a84018d', l.id, 9, '2026-08-02T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6208fcfa-1362-4f17-a6ea-7ef5acb60d8b', l.id, 10, '2026-08-09T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'e373fab2-97de-41ce-8439-1773186c9dea', l.id, 10, '2026-08-09T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-030'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #31: yuvaraj (3)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('1a09a39f-8d26-431c-a7ca-d03d05af2892', '9100000031', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('ac2e554c-1061-4e81-83d9-d87f09543d30', '9100000031', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT 'a309c56d-1a19-4bf3-b729-43b8e037c1c1', u.id, 'yuvaraj (3)', '9100000031', 'ACTIVE', NOW(), NOW()
+SELECT '09a9acfa-a05a-49f4-9ae5-dd69505412f5', u.id, 'yuvaraj (3)', '9100000031', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000031'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'ea6e05b9-dc36-4d44-b4a6-e2630b4a2f0a', c.id, 'LN-031', 'MONTHLY', 15000, 15, 0, 12750, 0.00, '2026-06-06T00:00:00.000Z', '2026-11-06T00:00:00.000Z', 5, 3450, 'ACTIVE', NOW(), NOW()
+SELECT 'b1c232d5-335b-4061-84c5-541e807c3c99', c.id, 'LN-031', 'MONTHLY', 15000, 15, 0, 12750, 0.00, '2026-06-06T00:00:00.000Z', '2026-11-06T00:00:00.000Z', 5, 3000, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000031'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ffb3367a-fd53-46d5-ba7f-f60f16d61287', l.id, 1, '2026-07-06T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT 'a5ba03e0-8bf1-45f5-8309-b6c91474f4e4', l.id, 1, '2026-07-06T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-031'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0480624e-be5d-47a5-b9a8-526b03d20223', l.id, 2, '2026-08-06T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT 'ed27d31d-3465-47d1-b722-4a780747f7b0', l.id, 2, '2026-08-06T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-031'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '257cb9dd-8cc4-4ab4-b98b-24466fe3e2fd', l.id, 3, '2026-09-06T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT 'fee64c6b-b31e-405d-bf57-66a35752dc46', l.id, 3, '2026-09-06T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-031'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '71d4c913-6253-401a-b994-3fe086acb395', l.id, 4, '2026-10-06T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT '35a7db46-ad65-4284-9ed1-df1f29dd8802', l.id, 4, '2026-10-06T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-031'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a8c99fad-b634-4b9d-9ca5-08c9ce032fa6', l.id, 5, '2026-11-06T00:00:00.000Z', 3450, 'PENDING', NOW()
+SELECT '97fc48ee-d87f-444e-a454-bb5c8b5a0713', l.id, 5, '2026-11-06T00:00:00.000Z', 3000, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-031'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #32: ragupathy
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('2ab41bd9-8fff-4a93-8ddf-82fb64619a9e', '9100000032', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('e77681f1-c179-4ca1-99a1-28ae57b34cea', '9100000032', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '0a1322a5-6951-4457-9d74-57b2e488f85b', u.id, 'ragupathy', '9100000032', 'ACTIVE', NOW(), NOW()
+SELECT '31e0a620-ceeb-41b4-99c4-c55d8062219d', u.id, 'ragupathy', '9100000032', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000032'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '830f6d94-b0c2-4481-9fbb-4dfbabdb209d', c.id, 'LN-032', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-06-09T00:00:00.000Z', '2026-08-18T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT '53370a4a-b94b-43bf-a26d-9a0b9e677131', c.id, 'LN-032', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-06-09T00:00:00.000Z', '2026-08-18T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000032'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'cfdc3b65-dd3f-477c-aa67-2e44407fa442', l.id, 1, '2026-06-16T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '02710460-7cb3-4dc4-811c-c02bcff9eb45', l.id, 1, '2026-06-16T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'a326eb89-3cba-4f91-9535-2a5557f730a9', l.id, 2, '2026-06-23T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'd08c6cee-cd55-4510-b3bf-b3a6870bf407', l.id, 2, '2026-06-23T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '5c6307fc-160f-4ec3-a741-77dd7d6cce10', l.id, 3, '2026-06-30T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '50ac7f73-b685-4427-a505-cadac5961e88', l.id, 3, '2026-06-30T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '15b3e14b-f99a-47b6-b032-f187c9cd8beb', l.id, 4, '2026-07-07T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '5079093a-4003-46cb-a0a6-5c9c80b9e2d6', l.id, 4, '2026-07-07T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '24eaebc5-0381-43de-8c2a-1a9a20e100ad', l.id, 5, '2026-07-14T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '261c103c-8646-4a62-a2a6-d75a28b797bc', l.id, 5, '2026-07-14T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '07d87ddb-d0ed-41f2-9db6-07bed093c1c8', l.id, 6, '2026-07-21T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '3a35b273-10e5-4832-ae32-16a19cf35147', l.id, 6, '2026-07-21T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '96ae6ad2-4125-4baf-a9c4-baf986573e32', l.id, 7, '2026-07-28T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '6bf17b5c-5863-48b3-bc3b-e467b3e0ee77', l.id, 7, '2026-07-28T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'df1ec0eb-6874-4fca-8c42-ae5b3a002398', l.id, 8, '2026-08-04T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '43abd015-037e-4278-bd4d-1503a28f6a39', l.id, 8, '2026-08-04T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0eb5cdfa-15a2-43f3-a869-1502d2e7444f', l.id, 9, '2026-08-11T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'c3c9fb04-9cc0-48d6-92ed-fe16ef612b8a', l.id, 9, '2026-08-11T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0c5aefb1-244b-4862-bc7d-e624dda007db', l.id, 10, '2026-08-18T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '640eea1d-1b58-4f1c-8973-a7759c8be095', l.id, 10, '2026-08-18T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-032'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #33: babu (metu)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('d1fbed14-f34a-4f47-ae1f-5cebacd75ce9', '9100000033', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('282f99be-1914-4ac4-b1ba-3c2f5bdc9443', '9100000033', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '60fd4de2-7137-4f8b-ac0c-8cd990ba0124', u.id, 'babu (metu)', '9100000033', 'ACTIVE', NOW(), NOW()
+SELECT '9fefc857-ce36-46de-be1f-3800a0c15b52', u.id, 'babu (metu)', '9100000033', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000033'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'd6fd2fdc-5c65-4e4a-a099-a5c176c59324', c.id, 'LN-033', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-06-13T00:00:00.000Z', '2026-08-22T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
+SELECT 'b5206b90-f799-4203-bd52-bbff21d5d6f6', c.id, 'LN-033', 'WEEKLY', 5000, 10, 0, 4500, 0.00, '2026-06-13T00:00:00.000Z', '2026-08-22T00:00:00.000Z', 10, 500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000033'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'b452c584-2d64-460c-b43c-6fb42a78ae19', l.id, 1, '2026-06-20T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '0eb06bd0-32ee-46ce-8e55-55c81d7e01af', l.id, 1, '2026-06-20T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4efa8e35-00f9-438b-af56-92914bedf8b3', l.id, 2, '2026-06-27T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '39f624fc-e1db-47a1-9fcf-23ef2f2bf369', l.id, 2, '2026-06-27T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'bd46d7ae-554c-42c7-99a7-6c9ae2ee60e6', l.id, 3, '2026-07-04T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '92aedfc6-6b25-4290-a7d5-877cf7310805', l.id, 3, '2026-07-04T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '375bf852-ffa7-4919-be54-bc90a2cd7a3f', l.id, 4, '2026-07-11T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '02333709-6cd4-4142-82b4-245dd4270083', l.id, 4, '2026-07-11T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f2769955-4fd7-4d4a-9ec1-be5b51a534c5', l.id, 5, '2026-07-18T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '9f6fafb0-806d-4143-96ee-3bb60402d0d8', l.id, 5, '2026-07-18T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'cce1b718-15ce-429b-be4a-baf9003b6f80', l.id, 6, '2026-07-25T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT 'bf35688e-ba93-4c79-b6f1-aad36d4c02cf', l.id, 6, '2026-07-25T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'f4fb9ac8-b5d3-4e84-b6e0-155fcb0edc6a', l.id, 7, '2026-08-01T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '8ee83f2b-94c6-4f4f-b241-f371c96f349b', l.id, 7, '2026-08-01T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '931bc6d9-2a04-4b84-89e0-aeb5c9af0d40', l.id, 8, '2026-08-08T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '0f62a4d7-493d-4425-8975-e390d794fe4c', l.id, 8, '2026-08-08T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '62c813d3-0d88-4c11-b7ca-b8710ce4b4fd', l.id, 9, '2026-08-15T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '2800ba5e-8c05-42bc-92c8-cec281c51638', l.id, 9, '2026-08-15T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '4beb7365-161a-458f-a304-e28cf3ae5b98', l.id, 10, '2026-08-22T00:00:00.000Z', 500, 'PENDING', NOW()
+SELECT '89e76d9b-35f1-4ce8-b37b-d131581254cb', l.id, 10, '2026-08-22T00:00:00.000Z', 500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-033'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #34: venkatesan (kv)
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('affcfcf4-e956-454b-9bd5-ce218dbf3e5b', '9100000034', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('eeba987c-df65-4fbd-b763-1128b1948de2', '9100000034', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '1f978081-8fce-4b32-8739-0fba00782c25', u.id, 'venkatesan (kv)', '9100000034', 'ACTIVE', NOW(), NOW()
+SELECT '4a6070b4-6475-409d-beab-a82165bd4f65', u.id, 'venkatesan (kv)', '9100000034', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000034'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT 'c0b18ffa-1a19-4239-91f5-a3978a827d08', c.id, 'LN-034', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-06-14T00:00:00.000Z', '2026-08-23T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
+SELECT 'a30970a4-8966-4d90-ac46-7b1038be931f', c.id, 'LN-034', 'WEEKLY', 15000, 10, 0, 13500, 0.00, '2026-06-14T00:00:00.000Z', '2026-08-23T00:00:00.000Z', 10, 1500, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000034'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'df956339-b107-462e-abeb-90438e0c09af', l.id, 1, '2026-06-21T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '85fc8d78-0b41-4c2e-9061-2cf7c3c6bbb1', l.id, 1, '2026-06-21T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'aa470c90-70c8-4836-ba00-3939f260096b', l.id, 2, '2026-06-28T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'ec38c87d-f5dc-4114-896b-2cb0a8dfdd22', l.id, 2, '2026-06-28T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7817cc49-4888-4d6c-91f9-65d5234e75bf', l.id, 3, '2026-07-05T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '5159a86c-44a4-474c-ab58-225e7c0ab423', l.id, 3, '2026-07-05T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '32777f3a-e9fd-4b51-99b8-fa5bdee2f555', l.id, 4, '2026-07-12T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '3d471d12-2b08-43c1-bc53-35f754b4037f', l.id, 4, '2026-07-12T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '7f43bbb8-5441-4ff9-be98-07df2b39717d', l.id, 5, '2026-07-19T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'baff0eee-875e-4d79-9151-9f115ae68cad', l.id, 5, '2026-07-19T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '700c2f7b-acd9-42cd-827a-36a87e2e7e1f', l.id, 6, '2026-07-26T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'bbd22a72-9d83-46bb-ba43-21851e4c32da', l.id, 6, '2026-07-26T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd97d7e31-54ae-4821-b10b-c7239f9bdab1', l.id, 7, '2026-08-02T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'c1f474e3-a4c8-44f9-b5ff-5090581abd3c', l.id, 7, '2026-08-02T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0b0b0181-3db4-459d-89a0-dccc0f17722e', l.id, 8, '2026-08-09T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '7450b1ba-f166-48e8-a54e-9bbe6ae42494', l.id, 8, '2026-08-09T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '143d8f97-ae0f-427b-89c2-ce1a81317d0a', l.id, 9, '2026-08-16T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT 'e2b8f5a4-16cc-4e59-a886-fd029d163a2f', l.id, 9, '2026-08-16T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '686d000e-e467-42a3-a6c6-5b61e9f28928', l.id, 10, '2026-08-23T00:00:00.000Z', 1500, 'PENDING', NOW()
+SELECT '512228ca-a914-4131-bd77-e88a69aba8fe', l.id, 10, '2026-08-23T00:00:00.000Z', 1500, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-034'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 
 -- Record #35: Ashok
 INSERT INTO users (id, phone, "passwordHash", role, "isActive", "createdAt", "updatedAt")
-VALUES ('bcf9aa8f-e0bb-4a92-ae8a-3b1cc08611d9', '9100000035', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
+VALUES ('846af790-60cf-482b-96e7-c5c2483284ba', '9100000035', '$2a$10$7rMhR9L7.B3K5a5M8bLwLeH7pIu4fN6y6yZJz4Z9H3i7u8a9b0c1.', 'CUSTOMER', true, NOW(), NOW())
 ON CONFLICT (phone) DO NOTHING;
 INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-SELECT '98e88082-34c3-467d-b46b-c3017d3f8532', u.id, 'Ashok', '9100000035', 'ACTIVE', NOW(), NOW()
+SELECT 'c286457e-b14c-491a-b34f-b2dbcfd4f6e1', u.id, 'Ashok', '9100000035', 'ACTIVE', NOW(), NOW()
 FROM users u WHERE u.phone = '9100000035'
 LIMIT 1
 ON CONFLICT ("userId") DO NOTHING;
 INSERT INTO loans (id, "customerId", "loanNumber", type, principal, "interestRate", "agreementFee", "disbursedAmount", "totalCollection", "startDate", "endDate", "termCount", "installmentAmount", status, "createdAt", "updatedAt")
-SELECT '5a00933e-9af1-4596-89fe-47a0b87cd9b8', c.id, 'LN-035', 'WEEKLY', 3500, 10, 0, 3150, 0.00, '2026-06-15T00:00:00.000Z', '2026-08-24T00:00:00.000Z', 10, 350, 'ACTIVE', NOW(), NOW()
+SELECT 'f976e57f-2a71-4b80-a686-09bd754eeea7', c.id, 'LN-035', 'WEEKLY', 3500, 10, 0, 3150, 0.00, '2026-06-15T00:00:00.000Z', '2026-08-24T00:00:00.000Z', 10, 350, 'ACTIVE', NOW(), NOW()
 FROM customers c WHERE c.phone = '9100000035'
 LIMIT 1
 ON CONFLICT ("loanNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '9f00fa41-ec59-49cd-88c6-9fd798ed9198', l.id, 1, '2026-06-22T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '780f4b31-95df-4244-ad29-1af2f599d2ac', l.id, 1, '2026-06-22T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '54172289-b589-42f3-9f14-6a453e94fa87', l.id, 2, '2026-06-29T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '61563bc4-797e-46bf-8d54-400e790591c4', l.id, 2, '2026-06-29T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '0fc92e57-ee9d-45d2-bd88-2a99772d522d', l.id, 3, '2026-07-06T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT 'c68bc3f5-6c10-4f20-9e48-d132604cf195', l.id, 3, '2026-07-06T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'ee03a83f-54f7-4908-b7f3-083f5d78b86f', l.id, 4, '2026-07-13T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT 'b17554c5-ee81-4974-99bb-bd699d14a195', l.id, 4, '2026-07-13T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'd76cc2c1-7e9f-42f7-8c39-4652a6c6803d', l.id, 5, '2026-07-20T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '66aa8061-8501-4532-89ea-58f7ea8e3bb9', l.id, 5, '2026-07-20T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT 'df61f03b-5465-4161-80db-918f0383c967', l.id, 6, '2026-07-27T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '14b6c542-9463-4185-9df0-dcb7fa1ab8e9', l.id, 6, '2026-07-27T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '518c46e1-80b8-472b-af51-f5c8e3c28647', l.id, 7, '2026-08-03T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '4e994fcf-8e15-4120-9582-ba1b3d93113a', l.id, 7, '2026-08-03T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '8b733216-89dc-4f32-91c2-6c9b83c91d37', l.id, 8, '2026-08-10T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '229e7692-1f73-44cc-b8c6-2706eed84c71', l.id, 8, '2026-08-10T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '6b48091e-037a-4115-8c41-150f9a4e1e96', l.id, 9, '2026-08-17T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '3c001e52-ba76-45cc-8591-1f38aeaf76ca', l.id, 9, '2026-08-17T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
 INSERT INTO dues (id, "loanId", "dueNumber", "dueDate", amount, status, "createdAt")
-SELECT '3152c90f-27e0-4e74-a2ce-433d13a4ffe9', l.id, 10, '2026-08-24T00:00:00.000Z', 350, 'PENDING', NOW()
+SELECT '91d771b9-82ea-4ca4-8208-4e96dc58c241', l.id, 10, '2026-08-24T00:00:00.000Z', 350, 'PENDING', NOW()
 FROM loans l WHERE l."loanNumber" = 'LN-035'
 LIMIT 1
 ON CONFLICT ("loanId", "dueNumber") DO NOTHING;
