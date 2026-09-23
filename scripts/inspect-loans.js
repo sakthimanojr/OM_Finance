@@ -1,23 +1,26 @@
-const path = require('path');
-require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const { neon } = require('@neondatabase/serverless');
-const sql = neon(process.env.DATABASE_URL);
+
+const url = 'postgresql://neondb_owner:npg_i9BGatICcSr2@ep-patient-shadow-ae69sqix-pooler.c-2.us-east-2.aws.neon.tech/neondb?sslmode=require';
+const sql = neon(url);
 
 async function main() {
-  const query = `
-    DO $$
-    DECLARE
-      v_uid text;
-      v_cid text;
-    BEGIN
-      SELECT id INTO v_uid FROM users LIMIT 1;
-      SELECT id INTO v_cid FROM customers WHERE "userId" = v_uid LIMIT 1;
-      RAISE NOTICE 'v_uid = %, v_cid = %', v_uid, v_cid;
-    END $$;
+  const tables = await sql`
+    SELECT table_name 
+    FROM information_schema.tables 
+    WHERE table_schema = 'public'
+    ORDER BY table_name
   `;
-  const res = await sql.query(query);
-  console.log('DO block with text vars executed successfully:', res);
+  console.log('Tables in ep-patient-shadow:', tables.map(t => t.table_name));
+
+  const loanSample = await sql`
+    SELECT "loanNumber", status FROM loans WHERE "loanNumber" LIKE 'LN-%' ORDER BY "loanNumber" LIMIT 10
+  `;
+  console.log('Sample loans in ep-patient-shadow:', loanSample);
 }
 
 main().catch(console.error);
+
+
+
+
 

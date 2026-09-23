@@ -144,8 +144,10 @@ async function run() {
       // 2. Customer
       statements.push(`
         INSERT INTO customers (id, "userId", name, phone, status, "createdAt", "updatedAt")
-        VALUES (gen_random_uuid()::text, v_uid, ${escapeSql(item.customerName)}, ${escapeSql(item.phone)}, 'ACTIVE', NOW(), NOW())
-        ON CONFLICT ("userId") DO UPDATE SET name = ${escapeSql(item.customerName)};
+        VALUES (gen_random_uuid()::text, v_uid, ${escapeSql(item.customerName)}, ${escapeSql(item.phone)}, ${escapeSql(isClosed ? 'CLOSED' : 'ACTIVE')}::"CustomerStatus", NOW(), NOW())
+        ON CONFLICT ("userId") DO UPDATE SET 
+          name = ${escapeSql(item.customerName)},
+          status = CASE WHEN ${isClosed} THEN 'CLOSED'::"CustomerStatus" ELSE customers.status END;
         SELECT id INTO v_cid FROM customers WHERE "userId" = v_uid LIMIT 1;
       `);
 

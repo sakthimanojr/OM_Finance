@@ -33,6 +33,24 @@ describe('Loan Calculators', () => {
   });
 
 
+  test('monthly loan: 20,000 @15% + 100 fee over 5 months -> 3,100 deductions, 16,900 disbursed, 4,000/mo', () => {
+    const result = monthlyCalc.calculate({
+      principal: 20000,
+      interestRate: 15,
+      agreementFee: 100,
+      termCount: 5,
+      startDate: new Date('2026-01-01'),
+    });
+    expect(result.interestAmount).toBe(3000); // 15% of 20,000
+    expect(result.upfrontDeductions).toBe(3100); // 3000 + 100
+    expect(result.disbursedAmount).toBe(16900); // 20000 - 3100
+    expect(result.totalRepayable).toBe(20000);
+    expect(result.installmentAmount).toBe(4000); // 20,000 / 5
+    expect(result.dueSchedule).toHaveLength(5);
+    const totalDues = result.dueSchedule.reduce((s, d) => s + d.amount, 0);
+    expect(Math.round(totalDues * 100) / 100).toBe(20000);
+  });
+
   test('monthly loan: 10,000 @15% + 100 fee over 5 months (20% monthly)', () => {
     const result = monthlyCalc.calculate({
       principal: 10000,
@@ -42,6 +60,7 @@ describe('Loan Calculators', () => {
       startDate: new Date('2026-01-01'),
     });
     expect(result.interestAmount).toBe(1500); // Upfront income 1
+    expect(result.upfrontDeductions).toBe(1600); // 1500 + 100
     expect(result.disbursedAmount).toBe(8400); // 10000 - 1500 (interest) - 100 (fee)
     expect(result.totalRepayable).toBe(10000); // Repays 100% of principal
     expect(result.installmentAmount).toBe(2000); // 20% of 10,000

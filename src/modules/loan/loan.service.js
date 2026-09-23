@@ -27,9 +27,9 @@ async function createLoan(payload) {
   } else if (payload.type === 'MONTHLY') {
     calcResult = monthlyCalc.calculate({
       principal: payload.principal,
-      interestRate: payload.interestRate,
-      agreementFee: payload.agreementFee || 0,
-      termCount: payload.termCount,
+      interestRate: payload.interestRate !== undefined ? payload.interestRate : 15,
+      agreementFee: payload.agreementFee !== undefined ? payload.agreementFee : 100,
+      termCount: payload.termCount || 5,
       startDate,
     });
   } else if (payload.type === 'HIGH_VALUE') {
@@ -218,9 +218,9 @@ async function updateLoan(id, payload) {
       } else if (loan.type === 'MONTHLY') {
         calcResult = monthlyCalc.calculate({
           principal: newPrincipal,
-          interestRate: newInterestRate,
-          agreementFee: newAgreementFee,
-          termCount: newTermCount,
+          interestRate: newInterestRate !== undefined ? newInterestRate : 15,
+          agreementFee: newAgreementFee !== undefined ? newAgreementFee : 100,
+          termCount: newTermCount || 5,
           startDate: newStartDate,
         });
       } else if (loan.type === 'HIGH_VALUE') {
