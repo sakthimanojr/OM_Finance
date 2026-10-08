@@ -283,47 +283,46 @@ async function updateLoan(id, payload) {
           },
         });
       } else {
-        // WEEKLY or MONTHLY
-        let totalRepayable = newPrincipal;
+        // WEEKLY or MONTHLY — update ALL dues (paid + unpaid) to a uniform
+        // installment = principal ÷ termCount.  This ensures no mixed amounts
+        // appear in the due schedule regardless of when the edit happens.
         let disbursedAmount = newPrincipal;
-        if (loan.type === 'WEEKLY') {
+        if (loan.type === 'WEEKLY' || loan.type === 'MONTHLY') {
           const interestAmount = round2((newPrincipal * newInterestRate) / 100);
           disbursedAmount = round2(newPrincipal - interestAmount - newAgreementFee);
-          totalRepayable = newPrincipal;
-        } else if (loan.type === 'MONTHLY') {
-          const interestAmount = round2((newPrincipal * newInterestRate) / 100);
-          disbursedAmount = round2(newPrincipal - interestAmount - newAgreementFee);
-          totalRepayable = newPrincipal;
         }
 
-        const totalAlreadyPaid = paidDues.reduce((s, d) => s + Number(d.amount), 0);
-        const remainingToCollect = Math.max(0, round2(totalRepayable - totalAlreadyPaid));
+        const allDues = loan.dues.sort((a, b) => a.dueNumber - b.dueNumber);
+        const effectiveTermCount = newTermCount || allDues.length;
+        const baseInstallment = round2(newPrincipal / effectiveTermCount);
 
-        if (unpaidDues.length > 0) {
-          const newInstallment = round2(remainingToCollect / unpaidDues.length);
-          let runningSum = 0;
-          for (let i = 0; i < unpaidDues.length; i++) {
-            const due = unpaidDues[i];
-            const amt = (i === unpaidDues.length - 1) ? round2(remainingToCollect - runningSum) : newInstallment;
-            runningSum = round2(runningSum + amt);
-            await tx.due.update({
-              where: { id: due.id },
-              data: { amount: amt },
-            });
-          }
-
-          await tx.loan.update({
-            where: { id },
-            data: {
-              principal: newPrincipal,
-              interestRate: newInterestRate,
-              agreementFee: newAgreementFee,
-              disbursedAmount,
-              installmentAmount: newInstallment,
-              updatedAt: new Date(),
-            },
+        // Distribute across ALL dues; last due absorbs rounding remainder
+        let runningSum = 0;
+        for (let i = 0; i < allDues.length; i++) {
+          const due = allDues[i];
+          const isLast = i === allDues.length - 1;
+          const amt = isLast
+            ? round2(newPrincipal - runningSum)
+            : baseInstallment;
+          runningSum = round2(runningSum + amt);
+          await tx.due.update({
+            where: { id: due.id },
+            data: { amount: amt },
           });
         }
+
+        await tx.loan.update({
+          where: { id },
+          data: {
+            principal: newPrincipal,
+            interestRate: newInterestRate,
+            agreementFee: newAgreementFee,
+            disbursedAmount,
+            installmentAmount: baseInstallment,
+            termCount: effectiveTermCount,
+            updatedAt: new Date(),
+          },
+        });
       }
     }
   });
