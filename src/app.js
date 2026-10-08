@@ -17,6 +17,11 @@ const logger = require('./utils/logger');
 
 const app = express();
 
+// Trust the first proxy hop (Render's load balancer / reverse proxy).
+// Without this, express-rate-limit sees Render's internal proxy IP for every
+// request, causing all users to share a single rate-limit bucket.
+app.set('trust proxy', 1);
+
 app.use(helmet());
 
 // CORS — restrict origins in production.  Set CORS_ORIGIN in .env to a
