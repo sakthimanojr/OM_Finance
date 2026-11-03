@@ -45,7 +45,7 @@ async function getOverdue() {
   return prisma.due.findMany({
     where: { status: { in: ['PENDING', 'MISSED'] }, dueDate: { lt: now } },
     include: { loan: { include: { customer: true } } },
-    orderBy: { dueDate: 'asc' },
+    orderBy: { loan: { loanNumber: 'asc' } },
   });
 }
 
@@ -100,7 +100,7 @@ async function getTodaysDues() {
       dueDate: { gte: startOfDay, lte: endOfDay },
     },
     include: { loan: { include: { customer: { select: { id: true, name: true, phone: true } } } } },
-    orderBy: { dueDate: 'asc' },
+    orderBy: { loan: { loanNumber: 'asc' } },
   });
 }
 
@@ -118,7 +118,7 @@ async function getDuesByCustomer() {
       dueDate: { lte: endOfDay }
     },
     include: { loan: { include: { customer: { select: { id: true, name: true, phone: true } } } } },
-    orderBy: { dueDate: 'asc' },
+    orderBy: { loan: { loanNumber: 'asc' } },
   });
 
   // Group by customer
@@ -131,6 +131,7 @@ async function getDuesByCustomer() {
         customerId: customer.id,
         customerName: customer.name,
         customerPhone: customer.phone,
+        loanNumber: due.loan?.loanNumber || null,
         pendingCount: 0,
         totalAmount: 0,
         dues: [],
@@ -141,7 +142,12 @@ async function getDuesByCustomer() {
     grouped[customer.id].dues.push(due);
   }
 
-  return Object.values(grouped).sort((a, b) => b.pendingCount - a.pendingCount);
+  // Sort by loan number numerically
+  return Object.values(grouped).sort((a, b) => {
+    const numA = a.loanNumber ? parseInt(a.loanNumber.replace(/\D/g, ''), 10) : Infinity;
+    const numB = b.loanNumber ? parseInt(b.loanNumber.replace(/\D/g, ''), 10) : Infinity;
+    return numA - numB;
+  });
 }
 
 module.exports = { listDues, getUpcoming, getOverdue, getDueById, markOverdueDues, getTodaysDues, getDuesByCustomer };

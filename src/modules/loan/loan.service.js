@@ -115,7 +115,7 @@ async function listLoans({ customerId, status, type, page, limit }) {
     prisma.loan.findMany({
       where,
       include: { customer: { select: { id: true, name: true, phone: true } } },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { loanNumber: 'asc' },
       skip: (page - 1) * limit,
       take: limit,
     }),

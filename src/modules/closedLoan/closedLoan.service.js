@@ -73,7 +73,7 @@ async function listClosedLoans({ page = 1, limit = 20, customerName } = {}) {
   const [items, total] = await Promise.all([
     prisma.closedLoan.findMany({
       where,
-      orderBy: { closedAt: 'desc' },
+      orderBy: { loanNumber: 'asc' },
       skip: (page - 1) * limit,
       take: limit,
     }),

@@ -135,15 +135,24 @@ async function listCustomers({ search, status, page, limit }) {
           orderBy: { createdAt: 'desc' },
         },
       },
-      orderBy: { createdAt: 'desc' },
+      orderBy: { createdAt: 'asc' },
       skip: (page - 1) * limit,
       take: limit,
     }),
     prisma.customer.count({ where }),
   ]);
 
+  const sanitized = items.map(sanitizeCustomer);
+
+  // Sort by loan number numerically (e.g. LN-001 < LN-099)
+  sanitized.sort((a, b) => {
+    const numA = a.loanNumber ? parseInt(a.loanNumber.replace(/\D/g, ''), 10) : Infinity;
+    const numB = b.loanNumber ? parseInt(b.loanNumber.replace(/\D/g, ''), 10) : Infinity;
+    return numA - numB;
+  });
+
   return {
-    items: items.map(sanitizeCustomer),
+    items: sanitized,
     total,
     page,
     limit,

@@ -14,7 +14,7 @@ const createCustomer = {
     guarantorName: Joi.string().max(100).optional().allow(''),
     guarantorPhone: Joi.string().pattern(/^[0-9]{10}$/).optional().allow(''),
     emergencyContact: Joi.string().pattern(/^[0-9]{10}$/).optional().allow(''),
-    password: Joi.string().min(4).max(100).optional().allow('', null),
+    password: Joi.string().min(6).max(100).optional().allow('', null),
   }),
 };
 
@@ -34,7 +34,7 @@ const updateCustomer = {
     guarantorPhone: Joi.string().pattern(/^[0-9]{10}$/).optional().allow('', null),
     emergencyContact: Joi.string().pattern(/^[0-9]{10}$/).optional().allow('', null),
     status: Joi.string().valid('ACTIVE', 'SUSPENDED', 'CLOSED').optional(),
-    password: Joi.string().min(4).max(100).optional().allow('', null),
+    password: Joi.string().min(6).max(100).optional().allow('', null),
   }),
 };
 
