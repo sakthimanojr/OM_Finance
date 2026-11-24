@@ -14,6 +14,11 @@ const server = app.listen(env.PORT, '0.0.0.0', () => {
   scheduleDueReminderJob();
   scheduleOverdueCheckerJob();
   scheduleBackupJob();
+
+  // Auto-ensure users table has canEdit column on startup
+  prisma.$executeRawUnsafe('ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "canEdit" BOOLEAN DEFAULT false;').catch((err) => {
+    logger.warn(`canEdit column check warning: ${err.message}`);
+  });
 });
 
 async function shutdown(signal) {

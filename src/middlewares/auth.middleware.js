@@ -23,7 +23,13 @@ async function authMiddleware(req, res, next) {
       throw ApiError.unauthorized('User no longer active');
     }
 
-    req.user = { id: user.id, role: user.role, phone: user.phone, email: user.email };
+    req.user = {
+      id: user.id,
+      role: user.role,
+      phone: user.phone,
+      email: user.email,
+      canEdit: user.role === 'SUPER_ADMIN' ? true : !!user.canEdit,
+    };
     next();
   } catch (err) {
     next(err);

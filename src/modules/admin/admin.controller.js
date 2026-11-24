@@ -30,6 +30,19 @@ async function setAdminActive(req, res, next) {
   }
 }
 
+async function setAdminCanEdit(req, res, next) {
+  try {
+    const admin = await adminService.setAdminCanEdit(req.params.id, req.body.canEdit);
+    if (req.audit) await req.audit('SET_ADMIN_CAN_EDIT', 'User', admin.id, { canEdit: req.body.canEdit });
+    return ApiResponse.success(res, {
+      message: `Edit access ${req.body.canEdit ? 'granted' : 'revoked'} successfully`,
+      data: admin,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function getConfig(req, res, next) {
   try {
     const config = await adminService.getConfig();
@@ -59,4 +72,4 @@ async function importLegacyLoans(req, res, next) {
   }
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, getConfig, updateConfig, importLegacyLoans };
+module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans };

@@ -14,15 +14,19 @@ function generateOtp() {
 }
 
 function signAccessToken(user) {
-  return jwt.sign({ sub: user.id, role: user.role }, env.JWT_ACCESS_SECRET, {
-    expiresIn: env.JWT_ACCESS_EXPIRES_IN,
-  });
+  return jwt.sign(
+    { sub: user.id, role: user.role, canEdit: user.role === 'SUPER_ADMIN' ? true : !!user.canEdit },
+    env.JWT_ACCESS_SECRET,
+    { expiresIn: env.JWT_ACCESS_EXPIRES_IN }
+  );
 }
 
 function signRefreshToken(user) {
-  return jwt.sign({ sub: user.id, role: user.role }, env.JWT_REFRESH_SECRET, {
-    expiresIn: env.JWT_REFRESH_EXPIRES_IN,
-  });
+  return jwt.sign(
+    { sub: user.id, role: user.role, canEdit: user.role === 'SUPER_ADMIN' ? true : !!user.canEdit },
+    env.JWT_REFRESH_SECRET,
+    { expiresIn: env.JWT_REFRESH_EXPIRES_IN }
+  );
 }
 
 async function login(phone, password) {
@@ -38,7 +42,13 @@ async function login(phone, password) {
   return {
     accessToken,
     refreshToken,
-    user: { id: user.id, role: user.role, phone: user.phone, email: user.email },
+    user: {
+      id: user.id,
+      role: user.role,
+      phone: user.phone,
+      email: user.email,
+      canEdit: user.role === 'SUPER_ADMIN' ? true : !!user.canEdit,
+    },
   };
 }
 
@@ -72,7 +82,13 @@ async function verifyOtp(phone, otp) {
   return {
     accessToken,
     refreshToken,
-    user: { id: user.id, role: user.role, phone: user.phone, email: user.email },
+    user: {
+      id: user.id,
+      role: user.role,
+      phone: user.phone,
+      email: user.email,
+      canEdit: user.role === 'SUPER_ADMIN' ? true : !!user.canEdit,
+    },
   };
 }
 

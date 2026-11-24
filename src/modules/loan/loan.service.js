@@ -182,7 +182,7 @@ async function listLoans({ customerId, status, type, page, limit }) {
       where,
       include: {
         customer: { select: { id: true, name: true, phone: true } },
-        dues: { select: { id: true, status: true, dueDate: true } },
+        dues: { orderBy: { dueNumber: 'asc' } },
       },
       orderBy: { loanNumber: 'asc' },
       skip: (page - 1) * limit,

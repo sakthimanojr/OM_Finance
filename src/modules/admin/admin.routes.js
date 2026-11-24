@@ -15,6 +15,7 @@ router.post(
       phone: Joi.string().pattern(/^[0-9]{10}$/).required(),
       email: Joi.string().email().optional().allow(''),
       password: Joi.string().min(6).required(),
+      canEdit: Joi.boolean().optional(),
     }),
   }),
   controller.createViewAdmin
@@ -27,6 +28,14 @@ router.patch(
     body: Joi.object({ isActive: Joi.boolean().required() }),
   }),
   controller.setAdminActive
+);
+router.patch(
+  '/view-admins/:id/permissions',
+  validate({
+    params: Joi.object({ id: Joi.string().uuid().required() }),
+    body: Joi.object({ canEdit: Joi.boolean().required() }),
+  }),
+  controller.setAdminCanEdit
 );
 
 router.get('/config', controller.getConfig);

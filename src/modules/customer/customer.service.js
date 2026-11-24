@@ -103,6 +103,8 @@ function sanitizeCustomer(customer) {
     loanNumber: latestLoan?.loanNumber || null,
     activeLoanNumber: activeLoan?.loanNumber || null,
     loanStatus: latestLoan?.status || null,
+    loanStartDate: latestLoan?.startDate || null,
+    loanCreatedAt: latestLoan?.createdAt || null,
   };
 }
 
@@ -174,6 +176,8 @@ async function listCustomers({ search, status, page, limit }) {
             principal: true,
             disbursedAmount: true,
             totalCollection: true,
+            startDate: true,
+            createdAt: true,
             dues: {
               select: {
                 id: true,

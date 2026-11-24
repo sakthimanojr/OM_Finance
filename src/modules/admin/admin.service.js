@@ -3,25 +3,43 @@ const prisma = require('../../config/database');
 const ApiError = require('../../utils/apiError');
 const { encrypt, decrypt } = require('../../utils/encryption');
 
-async function createViewAdmin({ phone, email, password }) {
+let canEditColumnEnsured = false;
+async function ensureCanEditColumn() {
+  if (canEditColumnEnsured) return;
+  try {
+    await prisma.$executeRawUnsafe(`
+      ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "canEdit" BOOLEAN DEFAULT false;
+    `);
+    canEditColumnEnsured = true;
+  } catch (err) {
+    console.warn('ensureCanEditColumn warning:', err.message);
+  }
+}
+
+async function createViewAdmin({ phone, email, password, canEdit = false }) {
+  await ensureCanEditColumn();
   const existing = await prisma.user.findUnique({ where: { phone } });
   if (existing) throw ApiError.conflict('A user with this phone number already exists');
 
   const passwordHash = await bcrypt.hash(password, 10);
   const user = await prisma.user.create({
-    data: { role: 'VIEW_ADMIN', phone, email: email || null, passwordHash },
+    data: { role: 'VIEW_ADMIN', phone, email: email || null, passwordHash, canEdit: !!canEdit },
   });
   const { passwordHash: _, ...safeUser } = user;
   return safeUser;
 }
 
 async function listAdmins() {
+  await ensureCanEditColumn();
   const admins = await prisma.user.findMany({
     where: { role: { in: ['SUPER_ADMIN', 'VIEW_ADMIN'] } },
-    select: { id: true, phone: true, email: true, role: true, isActive: true, createdAt: true },
+    select: { id: true, phone: true, email: true, role: true, isActive: true, canEdit: true, createdAt: true },
     orderBy: { createdAt: 'asc' },
   });
-  return admins;
+  return admins.map((a) => ({
+    ...a,
+    canEdit: a.role === 'SUPER_ADMIN' ? true : !!a.canEdit,
+  }));
 }
 
 async function setAdminActive(id, isActive) {
@@ -30,6 +48,19 @@ async function setAdminActive(id, isActive) {
   if (user.role === 'SUPER_ADMIN') throw ApiError.forbidden('Cannot deactivate the super admin');
 
   return prisma.user.update({ where: { id }, data: { isActive } });
+}
+
+async function setAdminCanEdit(id, canEdit) {
+  await ensureCanEditColumn();
+  const user = await prisma.user.findUnique({ where: { id } });
+  if (!user) throw ApiError.notFound('Admin not found');
+  if (user.role === 'SUPER_ADMIN') throw ApiError.forbidden('Super admin already has full edit access');
+
+  return prisma.user.update({
+    where: { id },
+    data: { canEdit: !!canEdit },
+    select: { id: true, phone: true, email: true, role: true, isActive: true, canEdit: true },
+  });
 }
 
 async function getConfig() {
@@ -137,5 +168,5 @@ async function importLegacyLoans() {
   return { total: records.length, importedCount, skippedCount };
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, getConfig, updateConfig, importLegacyLoans };
+module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans };
 
