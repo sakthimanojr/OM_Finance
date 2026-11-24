@@ -1,17 +1,58 @@
 const prisma = require('../../config/database');
 const ApiError = require('../../utils/apiError');
+const customerService = require('../customer/customer.service');
 const weeklyCalc = require('./calculators/weeklyLoan.calculator');
 const monthlyCalc = require('./calculators/monthlyEmiLoan.calculator');
 const highValueCalc = require('./calculators/highValueLoan.calculator');
 const { round2 } = require('../../utils/currencyFormatter');
 
 async function createLoan(payload) {
-  const customer = await prisma.customer.findUnique({ where: { id: payload.customerId } });
-  if (!customer) throw ApiError.notFound('Customer not found');
-  if (customer.status !== 'ACTIVE') throw ApiError.badRequest('Customer is not active');
+  let customer;
 
-  const existingLoan = await prisma.loan.findUnique({ where: { loanNumber: payload.loanNumber } });
-  if (existingLoan) throw ApiError.conflict('A loan with this loan number already exists');
+  // 1. Look up by customerId if provided (uuid, phone, or name)
+  if (payload.customerId && String(payload.customerId).trim().length > 0) {
+    const rawId = String(payload.customerId).trim();
+    const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(rawId);
+    if (isUuid) {
+      customer = await prisma.customer.findUnique({ where: { id: rawId } });
+    }
+    if (!customer) {
+      customer = await prisma.customer.findFirst({
+        where: {
+          OR: [
+            { phone: rawId },
+            { name: { equals: rawId, mode: 'insensitive' } },
+          ],
+        },
+      });
+    }
+  }
+
+  // 2. If customer object provided (new customer or recognized by phone for 2nd loan)
+  if (!customer && payload.customer) {
+    const phone = payload.customer.phone ? String(payload.customer.phone).trim() : null;
+    if (phone) {
+      customer = await prisma.customer.findFirst({ where: { phone } });
+    }
+
+    if (!customer) {
+      // Auto-create new customer profile
+      customer = await customerService.createCustomer(payload.customer);
+    }
+  }
+
+  if (!customer) throw ApiError.notFound('Customer details required or customer not found');
+  if (customer.status !== 'ACTIVE') throw ApiError.badRequest('Customer is not active');
+  payload.customerId = customer.id;
+
+  // 3. Auto-generate loan number if not provided
+  if (!payload.loanNumber || !String(payload.loanNumber).trim()) {
+    payload.loanNumber = await getNextLoanNumber();
+  } else {
+    payload.loanNumber = String(payload.loanNumber).trim();
+    const existingLoan = await prisma.loan.findUnique({ where: { loanNumber: payload.loanNumber } });
+    if (existingLoan) throw ApiError.conflict('A loan with this loan number already exists');
+  }
 
   const startDate = new Date(payload.startDate);
   let calcResult;
@@ -85,6 +126,31 @@ async function getLoanById(id) {
     },
   });
   if (!loan) throw ApiError.notFound('Loan not found');
+
+  // Verify and self-heal loan status based on actual dues
+  if (!['CLOSED', 'COMPLETED'].includes(loan.status) && Array.isArray(loan.dues)) {
+    const now = new Date();
+    const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const hasOverdueDues = loan.dues.some(
+      (d) => d.status === 'MISSED' || (d.status === 'PENDING' && new Date(d.dueDate) < startOfDay)
+    );
+    const allPaid = loan.dues.length > 0 && loan.dues.every((d) => d.status === 'PAID');
+
+    let correctStatus = loan.status;
+    if (allPaid) {
+      correctStatus = 'COMPLETED';
+    } else if (hasOverdueDues) {
+      correctStatus = 'OVERDUE';
+    } else {
+      correctStatus = 'ACTIVE';
+    }
+
+    if (correctStatus !== loan.status) {
+      loan.status = correctStatus;
+      prisma.loan.update({ where: { id: loan.id }, data: { status: correctStatus } }).catch(() => {});
+    }
+  }
+
   return loan;
 }
 
@@ -114,13 +180,42 @@ async function listLoans({ customerId, status, type, page, limit }) {
   const [items, total] = await Promise.all([
     prisma.loan.findMany({
       where,
-      include: { customer: { select: { id: true, name: true, phone: true } } },
+      include: {
+        customer: { select: { id: true, name: true, phone: true } },
+        dues: { select: { id: true, status: true, dueDate: true } },
+      },
       orderBy: { loanNumber: 'asc' },
       skip: (page - 1) * limit,
       take: limit,
     }),
     prisma.loan.count({ where }),
   ]);
+
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  for (const loan of items) {
+    if (!['CLOSED', 'COMPLETED'].includes(loan.status) && Array.isArray(loan.dues)) {
+      const hasOverdueDues = loan.dues.some(
+        (d) => d.status === 'MISSED' || (d.status === 'PENDING' && new Date(d.dueDate) < startOfDay)
+      );
+      const allPaid = loan.dues.length > 0 && loan.dues.every((d) => d.status === 'PAID');
+
+      let correctStatus = loan.status;
+      if (allPaid) {
+        correctStatus = 'COMPLETED';
+      } else if (hasOverdueDues) {
+        correctStatus = 'OVERDUE';
+      } else {
+        correctStatus = 'ACTIVE';
+      }
+
+      if (correctStatus !== loan.status) {
+        loan.status = correctStatus;
+        prisma.loan.update({ where: { id: loan.id }, data: { status: correctStatus } }).catch(() => {});
+      }
+    }
+  }
 
   return { items, total, page, limit, totalPages: Math.ceil(total / limit) };
 }
@@ -330,5 +425,20 @@ async function updateLoan(id, payload) {
   return getLoanById(id);
 }
 
-module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, repayPrincipal };
+/// Returns the next suggested loan number, e.g. LN-042 (one more than the
+/// highest existing numeric loan number).
+async function getNextLoanNumber() {
+  const loans = await prisma.loan.findMany({ select: { loanNumber: true } });
+  let maxNum = 0;
+  for (const l of loans) {
+    if (l.loanNumber) {
+      const n = parseInt(l.loanNumber.replace(/\D/g, ''), 10);
+      if (!isNaN(n) && n > maxNum) maxNum = n;
+    }
+  }
+  const next = maxNum + 1;
+  return `LN-${String(next).padStart(3, '0')}`;
+}
+
+module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, repayPrincipal, getNextLoanNumber };
 

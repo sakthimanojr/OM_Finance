@@ -149,6 +149,22 @@ async function _confirmPaymentCore(payment, { upiRefNumber, gatewaySignature, pa
     });
     if (remainingPending === 0) {
       await tx.loan.update({ where: { id: payment.loanId }, data: { status: 'COMPLETED' } });
+    } else {
+      const startOfDay = new Date();
+      startOfDay.setHours(0, 0, 0, 0);
+      const remainingMissed = await tx.due.count({
+        where: {
+          loanId: payment.loanId,
+          OR: [
+            { status: 'MISSED' },
+            { status: 'PENDING', dueDate: { lt: startOfDay } },
+          ],
+        },
+      });
+      if (remainingMissed === 0) {
+        // All overdue dues have been cleared — reset loan back to ACTIVE
+        await tx.loan.update({ where: { id: payment.loanId }, data: { status: 'ACTIVE' } });
+      }
     }
 
     return { updatedPayment, loanCompleted: remainingPending === 0 };

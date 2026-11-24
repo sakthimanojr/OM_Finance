@@ -2,6 +2,43 @@ const prisma = require('../../config/database');
 const ApiError = require('../../utils/apiError');
 const { round2 } = require('../../utils/currencyFormatter');
 
+let tableEnsured = false;
+async function ensureDailyRecordsTable() {
+  if (tableEnsured) return;
+  try {
+    await prisma.$executeRawUnsafe(`
+      CREATE TABLE IF NOT EXISTS "daily_records" (
+        "id" TEXT NOT NULL,
+        "recordDate" DATE NOT NULL,
+        "openingBalance" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "billIncome" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "otherIncome1Label" TEXT,
+        "otherIncome1Amount" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "otherIncome2Label" TEXT,
+        "otherIncome2Amount" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "expenses" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "expensesDetails" JSONB,
+        "loansGivenCount" INTEGER NOT NULL DEFAULT 0,
+        "loansGivenPrincipal" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "loansGivenIncome" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "loansGivenNetDisbursed" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "closingBalance" DECIMAL(15,2) NOT NULL DEFAULT 0,
+        "notes" TEXT,
+        "updatedBy" TEXT,
+        "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        "updatedAt" TIMESTAMP(3) NOT NULL,
+        CONSTRAINT "daily_records_pkey" PRIMARY KEY ("id")
+      );
+    `);
+    await prisma.$executeRawUnsafe(`
+      CREATE UNIQUE INDEX IF NOT EXISTS "daily_records_recordDate_key" ON "daily_records"("recordDate");
+    `);
+    tableEnsured = true;
+  } catch (err) {
+    console.error('ensureDailyRecordsTable failed:', err.message);
+  }
+}
+
 /**
  * Normalizes a YYYY-MM-DD string into a start-of-day UTC Date.
  */
@@ -28,21 +65,27 @@ function parseDateOnly(dateStr) {
  * Fetches daily record for a date along with live database stats (payments & loans).
  */
 async function getDailyRecord(queryDate) {
+  await ensureDailyRecordsTable();
   const { dateStr, startOfDay, endOfDay } = parseDateOnly(queryDate);
 
   // 1. Live Payments collected today (Finance loan repayments only)
-  const paymentsToday = await prisma.payment.findMany({
-    where: {
-      status: 'SUCCESS',
-      paidAt: { gte: startOfDay, lte: endOfDay },
-    },
-    include: {
-      customer: { select: { id: true, name: true, phone: true } },
-      loan: { select: { id: true, loanNumber: true, type: true } },
-      due: { select: { dueNumber: true } },
-    },
-    orderBy: { paidAt: 'asc' },
-  });
+  let paymentsToday = [];
+  try {
+    paymentsToday = await prisma.payment.findMany({
+      where: {
+        status: 'SUCCESS',
+        paidAt: { gte: startOfDay, lte: endOfDay },
+      },
+      include: {
+        customer: { select: { id: true, name: true, phone: true } },
+        loan: { select: { id: true, loanNumber: true, type: true } },
+        due: { select: { dueNumber: true } },
+      },
+      orderBy: { paidAt: 'asc' },
+    });
+  } catch (err) {
+    console.warn('dailyRecord.getDailyRecord payments error:', err.message);
+  }
 
   const autoBillIncome = round2(
     paymentsToday.reduce((sum, p) => sum + Number(p.amount), 0)
@@ -61,19 +104,24 @@ async function getDailyRecord(queryDate) {
   }));
 
   // 2. Live Loans given out today (startDate on this day or createdAt on this day)
-  const loansToday = await prisma.loan.findMany({
-    where: {
-      OR: [
-        { startDate: { gte: startOfDay, lte: endOfDay } },
-        { createdAt: { gte: startOfDay, lte: endOfDay } },
-      ],
-      status: { not: 'CLOSED' },
-    },
-    include: {
-      customer: { select: { id: true, name: true, phone: true } },
-    },
-    orderBy: { createdAt: 'asc' },
-  });
+  let loansToday = [];
+  try {
+    loansToday = await prisma.loan.findMany({
+      where: {
+        OR: [
+          { startDate: { gte: startOfDay, lte: endOfDay } },
+          { createdAt: { gte: startOfDay, lte: endOfDay } },
+        ],
+        status: { not: 'CLOSED' },
+      },
+      include: {
+        customer: { select: { id: true, name: true, phone: true } },
+      },
+      orderBy: { createdAt: 'asc' },
+    });
+  } catch (err) {
+    console.warn('dailyRecord.getDailyRecord loans error:', err.message);
+  }
 
   // Deduplicate by loan ID in case both conditions match
   const uniqueLoansMap = new Map();
@@ -114,15 +162,30 @@ async function getDailyRecord(queryDate) {
   );
 
   // 3. Check for existing saved DailyRecord
-  const savedRecord = await prisma.dailyRecord.findUnique({
-    where: { recordDate: startOfDay },
-  });
+  let savedRecord = null;
+  try {
+    savedRecord = await prisma.dailyRecord.findFirst({
+      where: {
+        recordDate: {
+          gte: startOfDay,
+          lte: endOfDay,
+        },
+      },
+    });
+  } catch (err) {
+    console.warn('dailyRecord.findFirst error:', err.message);
+  }
 
   // 4. Fetch previous day's closing balance (most recent record prior to this date)
-  const previousRecord = await prisma.dailyRecord.findFirst({
-    where: { recordDate: { lt: startOfDay } },
-    orderBy: { recordDate: 'desc' },
-  });
+  let previousRecord = null;
+  try {
+    previousRecord = await prisma.dailyRecord.findFirst({
+      where: { recordDate: { lt: startOfDay } },
+      orderBy: { recordDate: 'desc' },
+    });
+  } catch (err) {
+    console.warn('dailyRecord.previousRecord error:', err.message);
+  }
   const previousDayClosing = previousRecord ? Number(previousRecord.closingBalance) : 0;
 
   // Decide current active figures
@@ -197,6 +260,7 @@ async function getDailyRecord(queryDate) {
  * Saves (upserts) the daily record for a given date.
  */
 async function saveDailyRecord(payload, adminUserId = null) {
+  await ensureDailyRecordsTable();
   const { dateStr, startOfDay } = parseDateOnly(payload.date);
 
   const openingBalance = round2(Number(payload.openingBalance) || 0);
@@ -271,6 +335,12 @@ async function saveDailyRecord(payload, adminUserId = null) {
     message: `Daily record for ${dateStr} saved successfully`,
   };
 }
+
+module.exports = {
+  getDailyRecord,
+  saveDailyRecord,
+};
+
 
 module.exports = {
   getDailyRecord,

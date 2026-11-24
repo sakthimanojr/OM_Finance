@@ -42,8 +42,12 @@ async function getUpcoming(days = 7) {
 
 async function getOverdue() {
   const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   return prisma.due.findMany({
-    where: { status: { in: ['PENDING', 'MISSED'] }, dueDate: { lt: now } },
+    where: {
+      status: { in: ['PENDING', 'MISSED'] },
+      dueDate: { lt: startOfDay },
+    },
     include: { loan: { include: { customer: true } } },
     orderBy: { loan: { loanNumber: 'asc' } },
   });
@@ -60,28 +64,52 @@ async function getDueById(id) {
 
 /**
  * Marks all PENDING dues past their due date as MISSED.
- * Called by the overdueChecker cron job daily.
+ * Also restores any mistakenly MISSED future/today dues to PENDING.
+ * Synchronizes loan OVERDUE/ACTIVE statuses accordingly.
  */
 async function markOverdueDues() {
   const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // 1. Mark dues as MISSED only if their due date is strictly in the past (before today)
   const result = await prisma.due.updateMany({
-    where: { status: 'PENDING', dueDate: { lt: now } },
+    where: { status: 'PENDING', dueDate: { lt: startOfDay } },
     data: { status: 'MISSED' },
   });
 
-  // Loans with any MISSED due should be flagged OVERDUE
-  const overdueLoanIds = await prisma.due.findMany({
+  // 2. Self-heal: If any due has dueDate >= startOfDay (today or future), it must be PENDING, never MISSED
+  await prisma.due.updateMany({
+    where: { status: 'MISSED', dueDate: { gte: startOfDay } },
+    data: { status: 'PENDING' },
+  });
+
+  // 3. Find all active/overdue loans that currently have at least one MISSED due
+  const overdueLoanDues = await prisma.due.findMany({
     where: { status: 'MISSED' },
     select: { loanId: true },
     distinct: ['loanId'],
   });
+  const overdueIds = overdueLoanDues.map((d) => d.loanId);
 
-  if (overdueLoanIds.length > 0) {
+  // 4. Update loans with missed dues to OVERDUE (if they are not CLOSED or COMPLETED)
+  if (overdueIds.length > 0) {
     await prisma.loan.updateMany({
-      where: { id: { in: overdueLoanIds.map((d) => d.loanId) }, status: 'ACTIVE' },
+      where: {
+        id: { in: overdueIds },
+        status: { notIn: ['CLOSED', 'COMPLETED'] },
+      },
       data: { status: 'OVERDUE' },
     });
   }
+
+  // 5. Update loans that have NO missed dues back to ACTIVE (if they were marked OVERDUE)
+  await prisma.loan.updateMany({
+    where: {
+      id: { notIn: overdueIds },
+      status: 'OVERDUE',
+    },
+    data: { status: 'ACTIVE' },
+  });
 
   return { updatedCount: result.count };
 }

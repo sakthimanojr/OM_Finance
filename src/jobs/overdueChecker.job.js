@@ -20,11 +20,16 @@ async function runOverdueChecker() {
 }
 
 function scheduleOverdueCheckerJob() {
+  // Run on startup to heal and sync overdue/active statuses immediately
+  runOverdueChecker().catch((err) =>
+    logger.error(`Initial overdue checker run failed: ${err.message}`)
+  );
+
   // Runs every day at midnight
   cron.schedule('0 0 * * *', () => {
-    runOverdueChecker().catch((err) => require('../utils/logger').error(`Overdue checker job failed: ${err.message}`));
+    runOverdueChecker().catch((err) => logger.error(`Overdue checker job failed: ${err.message}`));
   });
-  require('../utils/logger').info('Overdue checker job scheduled (daily 00:00).');
+  logger.info('Overdue checker job scheduled (daily 00:00).');
 }
 
 module.exports = { scheduleOverdueCheckerJob, runOverdueChecker };

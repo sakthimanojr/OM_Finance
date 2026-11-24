@@ -74,5 +74,14 @@ async function updateLoan(req, res, next) {
   }
 }
 
-module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, repayPrincipal };
+async function nextLoanNumber(req, res, next) {
+  try {
+    const number = await loanService.getNextLoanNumber();
+    return ApiResponse.success(res, { data: { loanNumber: number } });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, repayPrincipal, nextLoanNumber };
 

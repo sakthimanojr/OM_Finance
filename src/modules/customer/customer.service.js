@@ -52,11 +52,42 @@ async function createCustomer(payload) {
 function sanitizeCustomer(customer) {
   const { aadhaarEncrypted, panEncrypted, loans, ...rest } = customer;
   const loansList = Array.isArray(loans) ? loans : [];
-  const activeLoan = loansList.find((l) => l.status === 'ACTIVE' || l.status === 'OVERDUE');
-  const latestLoan = activeLoan || loansList[0] || null;
+
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+  // Dynamically correct loan statuses based on real dues
+  const correctedLoans = loansList.map((loan) => {
+    if (['CLOSED', 'COMPLETED'].includes(loan.status)) return loan;
+    const dues = Array.isArray(loan.dues) ? loan.dues : [];
+    if (dues.length === 0) return loan;
+
+    const hasOverdueDues = dues.some(
+      (d) => d.status === 'MISSED' || (d.status === 'PENDING' && new Date(d.dueDate) < startOfDay)
+    );
+    const allPaid = dues.every((d) => d.status === 'PAID');
+
+    let correctedStatus = loan.status;
+    if (allPaid) {
+      correctedStatus = 'COMPLETED';
+    } else if (hasOverdueDues) {
+      correctedStatus = 'OVERDUE';
+    } else {
+      correctedStatus = 'ACTIVE';
+    }
+
+    if (correctedStatus !== loan.status) {
+      prisma.loan.update({ where: { id: loan.id }, data: { status: correctedStatus } }).catch(() => {});
+    }
+
+    return { ...loan, status: correctedStatus };
+  });
+
+  const activeLoan = correctedLoans.find((l) => l.status === 'ACTIVE' || l.status === 'OVERDUE');
+  const latestLoan = activeLoan || correctedLoans[0] || null;
 
   let effectiveStatus = rest.status || 'ACTIVE';
-  if (loansList.length > 0) {
+  if (correctedLoans.length > 0) {
     if (activeLoan) {
       effectiveStatus = activeLoan.status === 'OVERDUE' ? 'OVERDUE' : 'ACTIVE';
     } else {
@@ -68,7 +99,7 @@ function sanitizeCustomer(customer) {
     ...rest,
     status: effectiveStatus,
     pan: panEncrypted ? decrypt(panEncrypted) : null,
-    loans: loansList,
+    loans: correctedLoans,
     loanNumber: latestLoan?.loanNumber || null,
     activeLoanNumber: activeLoan?.loanNumber || null,
     loanStatus: latestLoan?.status || null,
@@ -78,7 +109,13 @@ function sanitizeCustomer(customer) {
 async function getCustomerByUserId(userId) {
   const customer = await prisma.customer.findUnique({
     where: { userId },
-    include: { documents: true, loans: { orderBy: { createdAt: 'desc' } } },
+    include: {
+      documents: true,
+      loans: {
+        include: { dues: { select: { id: true, status: true, dueDate: true } } },
+        orderBy: { createdAt: 'desc' },
+      },
+    },
   });
   if (!customer) throw ApiError.notFound('Customer profile not found');
   return sanitizeCustomer(customer);
@@ -87,7 +124,13 @@ async function getCustomerByUserId(userId) {
 async function getCustomerById(id) {
   const customer = await prisma.customer.findUnique({
     where: { id },
-    include: { documents: true, loans: { orderBy: { createdAt: 'desc' } } },
+    include: {
+      documents: true,
+      loans: {
+        include: { dues: { select: { id: true, status: true, dueDate: true } } },
+        orderBy: { createdAt: 'desc' },
+      },
+    },
   });
   if (!customer) throw ApiError.notFound('Customer not found');
   return sanitizeCustomer(customer);
@@ -131,6 +174,13 @@ async function listCustomers({ search, status, page, limit }) {
             principal: true,
             disbursedAmount: true,
             totalCollection: true,
+            dues: {
+              select: {
+                id: true,
+                status: true,
+                dueDate: true,
+              },
+            },
           },
           orderBy: { createdAt: 'desc' },
         },

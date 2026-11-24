@@ -2,11 +2,26 @@ const Joi = require('joi');
 
 const createLoan = {
   body: Joi.object({
-    customerId: Joi.string().uuid().required(),
-    loanNumber: Joi.string().max(50).required(),
+    customerId: Joi.string().allow('', null).optional(),
+    customer: Joi.object({
+      name: Joi.string().required(),
+      phone: Joi.string().required(),
+      fatherName: Joi.string().allow('', null).optional(),
+      email: Joi.string().email().allow('', null).optional(),
+      address: Joi.string().allow('', null).optional(),
+      aadhaar: Joi.string().allow('', null).optional(),
+      pan: Joi.string().allow('', null).optional(),
+      occupation: Joi.string().allow('', null).optional(),
+      monthlyIncome: Joi.number().allow(null).optional(),
+      emergencyContact: Joi.string().allow('', null).optional(),
+      guarantorName: Joi.string().allow('', null).optional(),
+      guarantorPhone: Joi.string().allow('', null).optional(),
+      password: Joi.string().allow('', null).optional(),
+    }).optional(),
+    loanNumber: Joi.string().max(50).allow('', null).optional(),
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').required(),
     principal: Joi.number().positive().required(),
-    interestRate: Joi.number().positive().required(),
+    interestRate: Joi.number().min(0).required(),
     agreementFee: Joi.number().min(0).default(0),
     termCount: Joi.when('type', {
       is: Joi.string().valid('WEEKLY', 'MONTHLY'),

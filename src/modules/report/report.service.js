@@ -85,8 +85,10 @@ async function loanPortfolioReport() {
 }
 
 async function overdueReport() {
+  const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const dues = await prisma.due.findMany({
-    where: { status: { in: ['MISSED', 'PENDING'] }, dueDate: { lt: new Date() } },
+    where: { status: { in: ['MISSED', 'PENDING'] }, dueDate: { lt: startOfDay } },
     include: { loan: { include: { customer: true } } },
     orderBy: { dueDate: 'asc' },
   });
@@ -103,7 +105,6 @@ async function overdueReport() {
     { header: 'Days Overdue', key: 'daysOverdue', width: 14 },
   ];
 
-  const now = new Date();
   dues.forEach((due) => {
     const daysOverdue = Math.floor((now - new Date(due.dueDate)) / (1000 * 60 * 60 * 24));
     sheet.addRow({
@@ -285,8 +286,9 @@ async function interestProfitSummary() {
 /** Overdue detail — customers with missed dues */
 async function overdueDetailJson() {
   const now = new Date();
+  const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   const dues = await prisma.due.findMany({
-    where: { status: { in: ['MISSED', 'PENDING'] }, dueDate: { lt: now } },
+    where: { status: { in: ['MISSED', 'PENDING'] }, dueDate: { lt: startOfDay } },
     include: {
       loan: {
         select: {
