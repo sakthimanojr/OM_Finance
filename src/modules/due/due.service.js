@@ -159,6 +159,7 @@ async function getDuesByCustomer() {
         customerId: customer.id,
         customerName: customer.name,
         customerPhone: customer.phone,
+        loanId: due.loan?.id || null,
         loanNumber: due.loan?.loanNumber || null,
         pendingCount: 0,
         totalAmount: 0,

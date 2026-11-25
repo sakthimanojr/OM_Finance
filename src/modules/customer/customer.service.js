@@ -100,6 +100,8 @@ function sanitizeCustomer(customer) {
     status: effectiveStatus,
     pan: panEncrypted ? decrypt(panEncrypted) : null,
     loans: correctedLoans,
+    loanId: latestLoan?.id || null,
+    activeLoanId: activeLoan?.id || null,
     loanNumber: latestLoan?.loanNumber || null,
     activeLoanNumber: activeLoan?.loanNumber || null,
     loanStatus: latestLoan?.status || null,
