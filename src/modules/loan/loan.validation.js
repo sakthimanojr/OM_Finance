@@ -29,6 +29,7 @@ const createLoan = {
       otherwise: Joi.number().integer().min(1).optional(),
     }),
     startDate: Joi.date().required(),
+    disbursementMethod: Joi.string().valid('CASH', 'BANK', 'BANK_TRANSFER').default('CASH').optional(),
   }),
 };
 

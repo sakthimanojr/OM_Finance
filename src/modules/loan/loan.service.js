@@ -97,6 +97,7 @@ async function createLoan(payload) {
         endDate: calcResult.endDate || null,
         termCount: payload.termCount || null,
         installmentAmount: calcResult.installmentAmount,
+        disbursementMethod: (payload.disbursementMethod && String(payload.disbursementMethod).toUpperCase().includes('BANK')) ? 'BANK' : 'CASH',
         status: 'ACTIVE',
       },
     });

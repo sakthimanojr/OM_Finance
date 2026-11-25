@@ -157,6 +157,7 @@ model Loan {
   status           LoanStatus @default(ACTIVE)
   termCount        Int?
   installmentAmount Decimal?  @db.Decimal(12, 2)
+  disbursementMethod String   @default("CASH")
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
 
@@ -579,18 +580,32 @@ model DailyRecord {
   id                     String   @id @default(uuid())
   recordDate             DateTime @unique @db.Date
   openingBalance         Decimal  @default(0) @db.Decimal(15, 2)
+  openingBalanceBag      Decimal  @default(0) @db.Decimal(15, 2)
+  openingBalanceBank     Decimal  @default(0) @db.Decimal(15, 2)
   billIncome             Decimal  @default(0) @db.Decimal(15, 2)
+  billIncomeBag          Decimal  @default(0) @db.Decimal(15, 2)
+  billIncomeBank         Decimal  @default(0) @db.Decimal(15, 2)
   otherIncome1Label      String?
   otherIncome1Amount     Decimal  @default(0) @db.Decimal(15, 2)
   otherIncome2Label      String?
   otherIncome2Amount     Decimal  @default(0) @db.Decimal(15, 2)
   expenses               Decimal  @default(0) @db.Decimal(15, 2)
+  expensesBag            Decimal  @default(0) @db.Decimal(15, 2)
+  expensesBank           Decimal  @default(0) @db.Decimal(15, 2)
   expensesDetails        Json?
   loansGivenCount        Int      @default(0)
   loansGivenPrincipal    Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenPrincipalBag Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenPrincipalBank Decimal @default(0) @db.Decimal(15, 2)
   loansGivenIncome       Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenIncomeBag    Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenIncomeBank   Decimal  @default(0) @db.Decimal(15, 2)
   loansGivenNetDisbursed Decimal  @default(0) @db.Decimal(15, 2)
+  loansGivenNetDisbursedBag Decimal @default(0) @db.Decimal(15, 2)
+  loansGivenNetDisbursedBank Decimal @default(0) @db.Decimal(15, 2)
   closingBalance         Decimal  @default(0) @db.Decimal(15, 2)
+  closingBalanceBag      Decimal  @default(0) @db.Decimal(15, 2)
+  closingBalanceBank     Decimal  @default(0) @db.Decimal(15, 2)
   notes                  String?
   updatedBy              String?
   createdAt              DateTime @default(now())
