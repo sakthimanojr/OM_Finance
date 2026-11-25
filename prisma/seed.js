@@ -11,6 +11,11 @@ async function main() {
 
   const passwordHash = await bcrypt.hash(password, 10);
 
+  // Ensure canEdit column exists in database in case seed runs before or independent of migrations
+  try {
+    await prisma.$executeRawUnsafe(`ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "canEdit" BOOLEAN NOT NULL DEFAULT false;`);
+  } catch (_) {}
+
   // Find the canonical record: prefer phone match, then fall back to email match.
   // We never delete — audit_log FK is RESTRICT, so deletion would fail.
   const byPhone = await prisma.user.findUnique({ where: { phone } });
