@@ -16,6 +16,7 @@ router.use(authMiddleware);
  *     tags: [Loans]
  */
 router.post('/', roleGuard('SUPER_ADMIN'), validate(schemas.createLoan), controller.createLoan);
+router.post('/batch-close', roleGuard('SUPER_ADMIN'), validate(schemas.batchCloseLoans), controller.batchCloseLoans);
 router.get('/next-number', controller.nextLoanNumber);
 router.get('/', validate(schemas.listLoans), controller.listLoans);
 router.get('/:id', validate(schemas.loanIdParam), controller.getLoan);

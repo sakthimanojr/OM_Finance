@@ -234,6 +234,122 @@ async function closeLoan(id, remarks) {
 }
 
 /**
+ * Settles all outstanding dues of specified loans via specified payment method
+ * (default: BANK_TRANSFER) on the given date (default: today), creates Payment records,
+ * and marks the loans as CLOSED.
+ */
+async function settleAndCloseLoans({ loanIds, paymentMethod = 'BANK_TRANSFER', paidAt = null, remarks = '' }) {
+  if (!Array.isArray(loanIds) || loanIds.length === 0) {
+    throw ApiError.badRequest('At least one loanId is required');
+  }
+
+  const effectivePaidAt = paidAt && !isNaN(new Date(paidAt).getTime())
+    ? new Date(paidAt)
+    : new Date();
+
+  const results = [];
+  let totalAmountSettled = 0;
+  let totalDuesSettled = 0;
+
+  for (const id of loanIds) {
+    const loan = await prisma.loan.findUnique({
+      where: { id },
+      include: {
+        customer: true,
+        dues: { orderBy: { dueNumber: 'asc' } },
+      },
+    });
+    if (!loan) continue;
+
+    let loanSettledAmount = 0;
+    const unpaidDues = loan.dues.filter((d) => d.status !== 'PAID');
+
+    await prisma.$transaction(async (tx) => {
+      // 1. Settle all unpaid dues
+      for (const due of unpaidDues) {
+        const totalDueAmt = Number(due.amount);
+        const alreadyPaid = Number(due.paidAmount || 0);
+        const remainingToPay = Math.max(0, round2(totalDueAmt - alreadyPaid));
+
+        if (remainingToPay > 0) {
+          await tx.payment.create({
+            data: {
+              dueId: due.id,
+              loanId: loan.id,
+              customerId: loan.customerId,
+              amount: remainingToPay,
+              method: paymentMethod,
+              status: 'SUCCESS',
+              paidAt: effectivePaidAt,
+            },
+          });
+          loanSettledAmount = round2(loanSettledAmount + remainingToPay);
+          totalDuesSettled += 1;
+        }
+
+        await tx.due.update({
+          where: { id: due.id },
+          data: {
+            status: 'PAID',
+            paidDate: effectivePaidAt,
+            paidAmount: totalDueAmt,
+            paymentMethod: paymentMethod,
+          },
+        });
+      }
+
+      // 2. High-value loans principal check
+      if (loan.type === 'HIGH_VALUE') {
+        const principal = Number(loan.principal);
+        const totalColl = Number(loan.totalCollection || 0);
+        const remainingPrincipal = Math.max(0, round2(principal - totalColl));
+        if (remainingPrincipal > 0) {
+          await tx.payment.create({
+            data: {
+              dueId: unpaidDues[0]?.id || null,
+              loanId: loan.id,
+              customerId: loan.customerId,
+              amount: remainingPrincipal,
+              method: paymentMethod,
+              status: 'SUCCESS',
+              paidAt: effectivePaidAt,
+            },
+          });
+          loanSettledAmount = round2(loanSettledAmount + remainingPrincipal);
+        }
+      }
+
+      // 3. Mark loan as CLOSED and update totalCollection
+      const updatedTotalCollection = round2(Number(loan.totalCollection || 0) + loanSettledAmount);
+      await tx.loan.update({
+        where: { id: loan.id },
+        data: {
+          status: 'CLOSED',
+          totalCollection: updatedTotalCollection,
+          updatedAt: effectivePaidAt,
+        },
+      });
+    });
+
+    totalAmountSettled = round2(totalAmountSettled + loanSettledAmount);
+    results.push({
+      loanId: loan.id,
+      loanNumber: loan.loanNumber,
+      customerName: loan.customer?.name,
+      settledAmount: loanSettledAmount,
+      status: 'CLOSED',
+    });
+  }
+
+  return {
+    closedCount: results.length,
+    totalAmountSettled,
+    totalDuesSettled,
+    loans: results,
+  };
+}
+
+/**
  * Handles a partial/full principal repayment on a HIGH_VALUE loan.
  * Recalculates future interest-only dues based on new outstanding principal.
  */
@@ -441,5 +557,5 @@ async function getNextLoanNumber() {
   return `LN-${String(next).padStart(3, '0')}`;
 }
 
-module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, repayPrincipal, getNextLoanNumber };
+module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, settleAndCloseLoans, repayPrincipal, getNextLoanNumber };
 

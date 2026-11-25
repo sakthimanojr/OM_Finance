@@ -58,6 +58,15 @@ const closeLoan = {
   }),
 };
 
+const batchCloseLoans = {
+  body: Joi.object({
+    loanIds: Joi.array().items(Joi.string().required()).min(1).required(),
+    paymentMethod: Joi.string().valid('BANK_TRANSFER', 'CASH', 'UPI', 'ONLINE').default('BANK_TRANSFER'),
+    paidAt: Joi.date().optional(),
+    remarks: Joi.string().allow('', null).optional(),
+  }),
+};
+
 const repayPrincipal = {
   params: Joi.object({
     id: Joi.string().uuid().required(),
@@ -81,6 +90,6 @@ const updateLoan = {
   }).min(1),
 };
 
-module.exports = { createLoan, updateLoan, listLoans, loanIdParam, closeLoan, repayPrincipal };
+module.exports = { createLoan, updateLoan, listLoans, loanIdParam, closeLoan, batchCloseLoans, repayPrincipal };
 
 

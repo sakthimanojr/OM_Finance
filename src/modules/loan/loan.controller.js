@@ -54,6 +54,30 @@ async function closeLoan(req, res, next) {
   }
 }
 
+async function batchCloseLoans(req, res, next) {
+  try {
+    const { loanIds, paymentMethod = 'BANK_TRANSFER', paidAt, remarks } = req.body;
+    const result = await loanService.settleAndCloseLoans({
+      loanIds,
+      paymentMethod,
+      paidAt,
+      remarks,
+    });
+    if (req.audit) {
+      await req.audit('BATCH_CLOSE_LOANS', 'Loan', null, {
+        closedCount: result.closedCount,
+        totalAmountSettled: result.totalAmountSettled,
+      });
+    }
+    return ApiResponse.success(res, {
+      message: `Successfully closed ${result.closedCount} loans (Total ₹${result.totalAmountSettled.toFixed(2)} settled via ${paymentMethod})`,
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
 async function repayPrincipal(req, res, next) {
   try {
     const result = await loanService.repayPrincipal(req.params.id, req.body.amount, req.body.paymentMethod);
@@ -83,5 +107,5 @@ async function nextLoanNumber(req, res, next) {
   }
 }
 
-module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, repayPrincipal, nextLoanNumber };
+module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, batchCloseLoans, repayPrincipal, nextLoanNumber };
 
