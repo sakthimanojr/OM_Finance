@@ -413,7 +413,7 @@ async function repayPrincipal(id, amount, paymentMethod) {
 
 async function updateLoan(id, payload) {
   const loan = await getLoanById(id);
-  if (['COMPLETED', 'CLOSED'].includes(loan.status)) {
+  if (['COMPLETED', 'CLOSED'].includes(loan.status) && payload.status !== 'ACTIVE') {
     throw ApiError.badRequest(`Cannot edit a loan with status ${loan.status}`);
   }
 
@@ -448,6 +448,58 @@ async function updateLoan(id, payload) {
   const unpaidDues = loan.dues.filter((d) => d.status !== 'PAID');
 
   await prisma.$transaction(async (tx) => {
+    // ── Handle reopening CLOSED / COMPLETED loan ────────────────────────────
+    if (['COMPLETED', 'CLOSED'].includes(loan.status) && payload.status === 'ACTIVE') {
+      await tx.closedLoan.deleteMany({ where: { loanId: id } }).catch(() => {});
+
+      const allDues = await tx.due.findMany({
+        where: { loanId: id },
+        orderBy: { dueNumber: 'asc' },
+      });
+
+      const targetPaid = payload.paidDuesCount !== undefined ? Math.max(0, Number(payload.paidDuesCount)) : 2;
+      let newTotalCollection = 0;
+
+      for (let i = 0; i < allDues.length; i++) {
+        const d = allDues[i];
+        if (i < targetPaid) {
+          newTotalCollection = round2(newTotalCollection + Number(d.paidAmount || d.amount));
+        } else {
+          await tx.payment.deleteMany({ where: { dueId: d.id } }).catch(() => {});
+          await tx.due.update({
+            where: { id: d.id },
+            data: {
+              status: 'PENDING',
+              paidDate: null,
+              paidAmount: 0,
+              paymentMethod: null,
+            },
+          });
+        }
+      }
+
+      metaUpdate.totalCollection = newTotalCollection;
+      metaUpdate.status = 'ACTIVE';
+    }
+
+    const hasFinancialChanges =
+      payload.principal !== undefined ||
+      payload.interestRate !== undefined ||
+      payload.agreementFee !== undefined ||
+      payload.termCount !== undefined ||
+      payload.startDate !== undefined;
+
+    if (!hasFinancialChanges) {
+      await tx.loan.update({
+        where: { id },
+        data: {
+          ...metaUpdate,
+          updatedAt: new Date(),
+        },
+      });
+      return;
+    }
+
     if (paidDues.length === 0) {
       // Clean slate: recalculate entire due schedule
       let calcResult;

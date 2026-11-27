@@ -168,5 +168,37 @@ async function importLegacyLoans() {
   return { total: records.length, importedCount, skippedCount };
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans };
+async function resetAdminPassword(id, newPassword) {
+  const user = await prisma.user.findUnique({ where: { id } });
+  if (!user) throw ApiError.notFound('Admin not found');
+  if (user.role === 'CUSTOMER') throw ApiError.forbidden('Cannot reset password for customers via this endpoint');
+
+  const passwordHash = await bcrypt.hash(newPassword, 10);
+  await prisma.user.update({ where: { id }, data: { passwordHash } });
+  return { success: true };
+}
+
+async function toggleAdminRole(id, requesterId) {
+  if (id === requesterId) throw ApiError.forbidden('You cannot change your own role');
+
+  const user = await prisma.user.findUnique({ where: { id } });
+  if (!user) throw ApiError.notFound('Admin not found');
+  if (user.role === 'CUSTOMER') throw ApiError.forbidden('Cannot change role of a customer');
+
+  if (user.role === 'SUPER_ADMIN') {
+    // Demoting: ensure at least one other super admin will remain
+    const superAdminCount = await prisma.user.count({ where: { role: 'SUPER_ADMIN' } });
+    if (superAdminCount <= 1) throw ApiError.forbidden('Cannot demote the last Super Admin');
+  }
+
+  const newRole = user.role === 'SUPER_ADMIN' ? 'VIEW_ADMIN' : 'SUPER_ADMIN';
+  const updated = await prisma.user.update({
+    where: { id },
+    data: { role: newRole },
+    select: { id: true, phone: true, email: true, role: true, isActive: true, canEdit: true },
+  });
+  return updated;
+}
+
+module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans, resetAdminPassword, toggleAdminRole };
 

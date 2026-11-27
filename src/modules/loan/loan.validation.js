@@ -95,6 +95,7 @@ const updateLoan = {
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').optional(),
     disbursementMethod: Joi.string().valid('CASH', 'BANK', 'BANK_TRANSFER').optional(),
     status: Joi.string().valid('ACTIVE', 'OVERDUE', 'COMPLETED', 'CLOSED').optional(),
+    paidDuesCount: Joi.number().integer().min(0).optional(),
   }).min(1),
 };
 

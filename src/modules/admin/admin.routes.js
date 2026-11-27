@@ -54,4 +54,21 @@ router.put(
 
 router.post('/import-legacy-loans', controller.importLegacyLoans);
 
+router.post(
+  '/view-admins/:id/reset-password',
+  validate({
+    params: Joi.object({ id: Joi.string().uuid().required() }),
+    body: Joi.object({ newPassword: Joi.string().min(6).required() }),
+  }),
+  controller.resetAdminPassword
+);
+
+router.patch(
+  '/view-admins/:id/toggle-role',
+  validate({
+    params: Joi.object({ id: Joi.string().uuid().required() }),
+  }),
+  controller.toggleAdminRole
+);
+
 module.exports = router;

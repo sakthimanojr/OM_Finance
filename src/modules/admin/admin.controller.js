@@ -72,4 +72,24 @@ async function importLegacyLoans(req, res, next) {
   }
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans };
+async function resetAdminPassword(req, res, next) {
+  try {
+    const result = await adminService.resetAdminPassword(req.params.id, req.body.newPassword);
+    if (req.audit) await req.audit('RESET_ADMIN_PASSWORD', 'User', req.params.id, {});
+    return ApiResponse.success(res, { message: 'Password reset successfully', data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+async function toggleAdminRole(req, res, next) {
+  try {
+    const admin = await adminService.toggleAdminRole(req.params.id, req.user.id);
+    if (req.audit) await req.audit('TOGGLE_ADMIN_ROLE', 'User', admin.id, { newRole: admin.role });
+    return ApiResponse.success(res, { message: `Role changed to ${admin.role}`, data: admin });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans, resetAdminPassword, toggleAdminRole };
