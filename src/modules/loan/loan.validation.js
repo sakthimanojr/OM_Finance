@@ -82,11 +82,19 @@ const updateLoan = {
     id: Joi.string().uuid().required(),
   }),
   body: Joi.object({
+    // Financial fields
     principal: Joi.number().positive().optional(),
     interestRate: Joi.number().positive().optional(),
     agreementFee: Joi.number().min(0).optional(),
     termCount: Joi.number().integer().min(1).optional(),
     startDate: Joi.date().optional(),
+    // Metadata fields (super admin full edit)
+    loanNumber: Joi.string().max(50).allow('', null).optional(),
+    customerName: Joi.string().max(200).allow('', null).optional(),
+    customerPhone: Joi.string().max(20).allow('', null).optional(),
+    type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').optional(),
+    disbursementMethod: Joi.string().valid('CASH', 'BANK', 'BANK_TRANSFER').optional(),
+    status: Joi.string().valid('ACTIVE', 'OVERDUE', 'COMPLETED', 'CLOSED').optional(),
   }).min(1),
 };
 

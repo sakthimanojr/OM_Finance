@@ -423,6 +423,27 @@ async function updateLoan(id, payload) {
   const newTermCount = payload.termCount !== undefined ? Number(payload.termCount) : loan.termCount;
   const newStartDate = payload.startDate ? new Date(payload.startDate) : new Date(loan.startDate);
 
+  // ── Pure metadata updates (no recalculation needed) ──────────────────────
+  const metaUpdate = {};
+  if (payload.loanNumber !== undefined && String(payload.loanNumber).trim()) {
+    // Check uniqueness (skip if same as current)
+    const existing = await prisma.loan.findUnique({ where: { loanNumber: String(payload.loanNumber).trim() } });
+    if (existing && existing.id !== id) throw ApiError.conflict('A loan with this loan number already exists');
+    metaUpdate.loanNumber = String(payload.loanNumber).trim();
+  }
+  if (payload.type !== undefined) metaUpdate.type = payload.type;
+  if (payload.disbursementMethod !== undefined) metaUpdate.disbursementMethod = payload.disbursementMethod;
+  if (payload.status !== undefined) metaUpdate.status = payload.status;
+
+  // ── Customer name / phone update ─────────────────────────────────────────
+  if (payload.customerName || payload.customerPhone) {
+    const customerData = {};
+    if (payload.customerName) customerData.name = String(payload.customerName).trim();
+    if (payload.customerPhone) customerData.phone = String(payload.customerPhone).trim();
+    await prisma.customer.update({ where: { id: loan.customerId }, data: customerData });
+  }
+
+  const effectiveType = payload.type || loan.type;
   const paidDues = loan.dues.filter((d) => d.status === 'PAID');
   const unpaidDues = loan.dues.filter((d) => d.status !== 'PAID');
 
@@ -430,7 +451,7 @@ async function updateLoan(id, payload) {
     if (paidDues.length === 0) {
       // Clean slate: recalculate entire due schedule
       let calcResult;
-      if (loan.type === 'WEEKLY') {
+      if (effectiveType === 'WEEKLY') {
         calcResult = weeklyCalc.calculate({
           principal: newPrincipal,
           interestRate: newInterestRate,
@@ -438,7 +459,7 @@ async function updateLoan(id, payload) {
           termCount: newTermCount,
           startDate: newStartDate,
         });
-      } else if (loan.type === 'MONTHLY') {
+      } else if (effectiveType === 'MONTHLY') {
         calcResult = monthlyCalc.calculate({
           principal: newPrincipal,
           interestRate: newInterestRate !== undefined ? newInterestRate : 15,
@@ -446,7 +467,7 @@ async function updateLoan(id, payload) {
           termCount: newTermCount || 5,
           startDate: newStartDate,
         });
-      } else if (loan.type === 'HIGH_VALUE') {
+      } else if (effectiveType === 'HIGH_VALUE') {
         calcResult = highValueCalc.calculate({
           principal: newPrincipal,
           interestRate: newInterestRate,
@@ -469,6 +490,7 @@ async function updateLoan(id, payload) {
       await tx.loan.update({
         where: { id },
         data: {
+          ...metaUpdate,
           principal: newPrincipal,
           interestRate: newInterestRate,
           agreementFee: newAgreementFee,
@@ -482,7 +504,7 @@ async function updateLoan(id, payload) {
       });
     } else {
       // Some dues already paid: preserve paid dues and adjust remaining unpaid dues
-      if (loan.type === 'HIGH_VALUE') {
+      if (effectiveType === 'HIGH_VALUE') {
         const paidPrincipalSoFar = loan.totalCollection ? Number(loan.totalCollection) : 0;
         const newOutstanding = Math.max(0, round2(newPrincipal - paidPrincipalSoFar));
         const newMonthlyInterest = highValueCalc.recalculateInterest({
@@ -498,10 +520,12 @@ async function updateLoan(id, payload) {
         await tx.loan.update({
           where: { id },
           data: {
+            ...metaUpdate,
             principal: newPrincipal,
             interestRate: newInterestRate,
             disbursedAmount: newPrincipal,
             installmentAmount: newMonthlyInterest,
+            startDate: newStartDate,
             updatedAt: new Date(),
           },
         });
@@ -510,7 +534,7 @@ async function updateLoan(id, payload) {
         // installment = principal ÷ termCount.  This ensures no mixed amounts
         // appear in the due schedule regardless of when the edit happens.
         let disbursedAmount = newPrincipal;
-        if (loan.type === 'WEEKLY' || loan.type === 'MONTHLY') {
+        if (effectiveType === 'WEEKLY' || effectiveType === 'MONTHLY') {
           const interestAmount = round2((newPrincipal * newInterestRate) / 100);
           disbursedAmount = round2(newPrincipal - interestAmount - newAgreementFee);
         }
@@ -537,18 +561,26 @@ async function updateLoan(id, payload) {
         await tx.loan.update({
           where: { id },
           data: {
+            ...metaUpdate,
             principal: newPrincipal,
             interestRate: newInterestRate,
             agreementFee: newAgreementFee,
             disbursedAmount,
             installmentAmount: baseInstallment,
             termCount: effectiveTermCount,
+            startDate: newStartDate,
             updatedAt: new Date(),
           },
         });
       }
     }
   });
+
+  // Apply any remaining metadata-only updates (loanNumber, status, type, disbursementMethod)
+  // These are safe to apply after the financial transaction
+  if (Object.keys(metaUpdate).length > 0) {
+    await prisma.loan.update({ where: { id }, data: metaUpdate }).catch(() => {});
+  }
 
   return getLoanById(id);
 }
