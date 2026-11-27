@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs');
 const prisma = require('../../config/database');
 const ApiError = require('../../utils/apiError');
 const customerService = require('../customer/customer.service');
@@ -44,6 +45,16 @@ async function createLoan(payload) {
   if (!customer) throw ApiError.notFound('Customer details required or customer not found');
   if (customer.status !== 'ACTIVE') throw ApiError.badRequest('Customer is not active');
   payload.customerId = customer.id;
+
+  // If customer already existed and an explicit password was given, update user password
+  if (customer.userId && payload.customer && payload.customer.password && String(payload.customer.password).trim().length > 0) {
+    const rawPassword = String(payload.customer.password).trim();
+    const passwordHash = await bcrypt.hash(rawPassword, 10);
+    await prisma.user.update({
+      where: { id: customer.userId },
+      data: { passwordHash },
+    }).catch(() => {});
+  }
 
   // 3. Auto-generate loan number if not provided
   if (!payload.loanNumber || !String(payload.loanNumber).trim()) {
