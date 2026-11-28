@@ -90,4 +90,14 @@ async function getLoanHistory(req, res, next) {
   }
 }
 
-module.exports = { createCustomer, getCustomer, getMyProfile, listCustomers, updateCustomer, uploadDocument, getLoanHistory };
+async function deleteCustomer(req, res, next) {
+  try {
+    const result = await customerService.deleteCustomer(req.params.id);
+    if (req.audit) await req.audit('DELETE_CUSTOMER', 'Customer', req.params.id, {});
+    return ApiResponse.success(res, { message: 'Customer deleted successfully', data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createCustomer, getCustomer, getMyProfile, listCustomers, updateCustomer, uploadDocument, getLoanHistory, deleteCustomer };

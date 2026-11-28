@@ -19,6 +19,18 @@ const server = app.listen(env.PORT, '0.0.0.0', () => {
   prisma.$executeRawUnsafe('ALTER TABLE "users" ADD COLUMN IF NOT EXISTS "canEdit" BOOLEAN DEFAULT false;').catch((err) => {
     logger.warn(`canEdit column check warning: ${err.message}`);
   });
+
+  // Auto-cleanup any invalid loans without numbers or customers with no loans
+  const { cleanupInvalidLoans } = require('./modules/admin/admin.service');
+  cleanupInvalidLoans()
+    .then((res) => {
+      if (res.deletedLoansCount > 0 || res.deletedCustomersCount > 0) {
+        logger.info(`Startup cleanup: removed ${res.deletedLoansCount} invalid loans and ${res.deletedCustomersCount} orphaned customers`);
+      }
+    })
+    .catch((err) => {
+      logger.warn(`Startup cleanup warning: ${err.message}`);
+    });
 });
 
 async function shutdown(signal) {

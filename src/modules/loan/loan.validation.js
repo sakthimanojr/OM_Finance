@@ -18,7 +18,10 @@ const createLoan = {
       guarantorPhone: Joi.string().allow('', null).optional(),
       password: Joi.string().allow('', null).optional(),
     }).optional(),
-    loanNumber: Joi.string().max(50).allow('', null).optional(),
+    loanNumber: Joi.string().trim().min(1).max(50).required().messages({
+      'string.empty': 'Loan number is required',
+      'any.required': 'Loan number is required',
+    }),
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').required(),
     principal: Joi.number().positive().required(),
     interestRate: Joi.number().min(0).required(),
@@ -89,7 +92,10 @@ const updateLoan = {
     termCount: Joi.number().integer().min(1).optional(),
     startDate: Joi.date().optional(),
     // Metadata fields (super admin full edit)
-    loanNumber: Joi.string().max(50).allow('', null).optional(),
+    loanNumber: Joi.string().trim().min(1).max(50).required().messages({
+      'string.empty': 'Loan number is required',
+      'any.required': 'Loan number is required',
+    }),
     customerName: Joi.string().max(200).allow('', null).optional(),
     customerPhone: Joi.string().max(20).allow('', null).optional(),
     type: Joi.string().valid('WEEKLY', 'MONTHLY', 'HIGH_VALUE').optional(),

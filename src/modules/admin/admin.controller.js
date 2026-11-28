@@ -92,4 +92,17 @@ async function toggleAdminRole(req, res, next) {
   }
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans, resetAdminPassword, toggleAdminRole };
+async function cleanupInvalidLoans(req, res, next) {
+  try {
+    const result = await adminService.cleanupInvalidLoans();
+    if (req.audit) await req.audit('CLEANUP_INVALID_LOANS', 'System', 'ALL', result);
+    return ApiResponse.success(res, {
+      message: `Cleaned up ${result.deletedLoansCount} loans without number and ${result.deletedCustomersCount} customers without loans`,
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans, resetAdminPassword, toggleAdminRole, cleanupInvalidLoans };

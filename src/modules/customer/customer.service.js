@@ -156,6 +156,9 @@ async function listCustomers({ search, status, page, limit }) {
     } else {
       where.status = status;
     }
+  } else {
+    // When viewing 'All Loans' (default), only list customers who actually have loans
+    where.loans = { some: {} };
   }
   if (search) {
     where.OR = [
@@ -358,6 +361,76 @@ async function getLoanHistory(customerId) {
   });
 }
 
+async function deleteCustomer(id) {
+  const customer = await prisma.customer.findUnique({
+    where: { id },
+    include: {
+      loans: { select: { id: true } },
+      payments: { select: { id: true } },
+    },
+  });
+  if (!customer) throw ApiError.notFound('Customer not found');
+
+  return prisma.$transaction(async (tx) => {
+    const loanIds = customer.loans.map((l) => l.id);
+    const paymentIds = customer.payments.map((p) => p.id);
+
+    // 1. Delete closed loans for this customer or their loans
+    await tx.closedLoan.deleteMany({
+      where: {
+        OR: [
+          { customerId: id },
+          ...(loanIds.length > 0 ? [{ loanId: { in: loanIds } }] : []),
+        ],
+      },
+    });
+
+    // 2. Delete receipts for customer payments or loan payments
+    if (paymentIds.length > 0) {
+      await tx.receipt.deleteMany({ where: { paymentId: { in: paymentIds } } });
+    }
+
+    // 3. Delete dues for all loans
+    if (loanIds.length > 0) {
+      await tx.due.deleteMany({ where: { loanId: { in: loanIds } } });
+    }
+
+    // 4. Delete payments
+    await tx.payment.deleteMany({
+      where: {
+        OR: [
+          { customerId: id },
+          ...(loanIds.length > 0 ? [{ loanId: { in: loanIds } }] : []),
+        ],
+      },
+    });
+
+    // 5. Delete loans
+    if (loanIds.length > 0) {
+      await tx.loan.deleteMany({ where: { id: { in: loanIds } } });
+    }
+
+    // 6. Delete chit memberships if any
+    await tx.chitMember.deleteMany({ where: { customerId: id } }).catch(() => {});
+
+    // 7. Delete documents
+    await tx.document.deleteMany({ where: { customerId: id } });
+
+    // 8. Delete notifications
+    await tx.notification.deleteMany({ where: { customerId: id } });
+
+    // 9. Delete the customer record
+    await tx.customer.delete({ where: { id } });
+
+    // 10. Delete the associated user account if exists
+    if (customer.userId) {
+      await tx.user.delete({ where: { id: customer.userId } }).catch(() => {});
+    }
+
+    return { message: 'Customer and all associated records deleted successfully' };
+  });
+}
+
 module.exports = {
   createCustomer,
   getCustomerById,
@@ -366,4 +439,5 @@ module.exports = {
   updateCustomer,
   addDocument,
   getLoanHistory,
+  deleteCustomer,
 };

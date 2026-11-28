@@ -8,6 +8,16 @@ const highValueCalc = require('./calculators/highValueLoan.calculator');
 const { round2 } = require('../../utils/currencyFormatter');
 
 async function createLoan(payload) {
+  // 0. Loan number is strictly required — never allow creating loans without loan number
+  if (!payload.loanNumber || !String(payload.loanNumber).trim()) {
+    throw ApiError.badRequest('Loan number is required to create a loan');
+  }
+  payload.loanNumber = String(payload.loanNumber).trim();
+  const existingLoan = await prisma.loan.findUnique({ where: { loanNumber: payload.loanNumber } });
+  if (existingLoan) {
+    throw ApiError.conflict(`A loan with loan number "${payload.loanNumber}" already exists`);
+  }
+
   let customer;
 
   // 1. Look up by customerId if provided (uuid, phone, or name)
@@ -56,14 +66,7 @@ async function createLoan(payload) {
     }).catch(() => {});
   }
 
-  // 3. Auto-generate loan number if not provided
-  if (!payload.loanNumber || !String(payload.loanNumber).trim()) {
-    payload.loanNumber = await getNextLoanNumber();
-  } else {
-    payload.loanNumber = String(payload.loanNumber).trim();
-    const existingLoan = await prisma.loan.findUnique({ where: { loanNumber: payload.loanNumber } });
-    if (existingLoan) throw ApiError.conflict('A loan with this loan number already exists');
-  }
+  // Loan number is already validated and trimmed above
 
   const startDate = new Date(payload.startDate);
   let calcResult;

@@ -16,6 +16,7 @@ router.get('/', roleGuard('SUPER_ADMIN', 'VIEW_ADMIN'), validate(schemas.listCus
 router.get('/me', controller.getMyProfile);
 router.get('/:id', validate(schemas.idParam), controller.getCustomer);
 router.patch('/:id', roleGuard('SUPER_ADMIN'), validate(schemas.updateCustomer), controller.updateCustomer);
+router.delete('/:id', roleGuard('SUPER_ADMIN'), validate(schemas.idParam), controller.deleteCustomer);
 router.get('/:id/loans', validate(schemas.idParam), controller.getLoanHistory);
 
 router.post(

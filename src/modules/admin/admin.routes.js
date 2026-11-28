@@ -71,4 +71,6 @@ router.patch(
   controller.toggleAdminRole
 );
 
+router.post('/cleanup-invalid-loans', controller.cleanupInvalidLoans);
+
 module.exports = router;

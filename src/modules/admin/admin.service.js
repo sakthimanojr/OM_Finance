@@ -200,5 +200,54 @@ async function toggleAdminRole(id, requesterId) {
   return updated;
 }
 
-module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans, resetAdminPassword, toggleAdminRole };
+async function cleanupInvalidLoans() {
+  const { deleteLoan } = require('../loan/loan.service');
+  const { deleteCustomer } = require('../customer/customer.service');
+
+  // 1. Find all loans where loanNumber is missing or empty
+  const allLoans = await prisma.loan.findMany({
+    select: { id: true, loanNumber: true },
+  });
+  const invalidLoans = allLoans.filter(
+    (l) => !l.loanNumber || !String(l.loanNumber).trim() || String(l.loanNumber).trim().toLowerCase() === 'null'
+  );
+
+  let deletedLoansCount = 0;
+  for (const loan of invalidLoans) {
+    try {
+      await deleteLoan(loan.id);
+      deletedLoansCount++;
+    } catch (e) {
+      console.error(`Error deleting invalid loan ${loan.id}:`, e.message);
+    }
+  }
+
+  // 2. Find any customer who has no loans at all
+  const customersWithNoLoans = await prisma.customer.findMany({
+    where: {
+      loans: { none: {} },
+    },
+    select: { id: true, name: true, phone: true },
+  });
+
+  let deletedCustomersCount = 0;
+  const deletedCustomers = [];
+  for (const cust of customersWithNoLoans) {
+    try {
+      await deleteCustomer(cust.id);
+      deletedCustomersCount++;
+      deletedCustomers.push({ id: cust.id, name: cust.name, phone: cust.phone });
+    } catch (e) {
+      console.error(`Error deleting customer without loans ${cust.id}:`, e.message);
+    }
+  }
+
+  return {
+    deletedLoansCount,
+    deletedCustomersCount,
+    deletedCustomers,
+  };
+}
+
+module.exports = { createViewAdmin, listAdmins, setAdminActive, setAdminCanEdit, getConfig, updateConfig, importLegacyLoans, resetAdminPassword, toggleAdminRole, cleanupInvalidLoans };
 
