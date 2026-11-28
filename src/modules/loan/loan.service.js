@@ -178,14 +178,10 @@ async function listLoans({ customerId, status, type, page, limit }) {
     } else if (s === 'CLOSED') {
       where.status = { in: ['CLOSED', 'COMPLETED'] };
     } else if (s === 'ALL') {
-      // Return all non-closed loans
-      where.status = { not: 'CLOSED' };
+      // All loans - no status restriction
     } else {
       where.status = status;
     }
-  } else {
-    // Default: all non-closed loans
-    where.status = { not: 'CLOSED' };
   }
   if (type) where.type = type;
 
@@ -652,5 +648,35 @@ async function getNextLoanNumber() {
   return `LN-${String(next).padStart(3, '0')}`;
 }
 
-module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, settleAndCloseLoans, repayPrincipal, getNextLoanNumber };
+async function deleteLoan(id) {
+  const loan = await prisma.loan.findUnique({
+    where: { id },
+    include: { dues: { select: { id: true } }, payments: { select: { id: true } } },
+  });
+  if (!loan) throw ApiError.notFound('Loan not found');
+
+  return prisma.$transaction(async (tx) => {
+    // 1. Delete closedLoan snapshot if any
+    await tx.closedLoan.deleteMany({ where: { loanId: id } });
+
+    // 2. Delete receipts linked to payments of this loan
+    const paymentIds = loan.payments.map((p) => p.id);
+    if (paymentIds.length > 0) {
+      await tx.receipt.deleteMany({ where: { paymentId: { in: paymentIds } } });
+    }
+
+    // 3. Delete payments linked to this loan
+    await tx.payment.deleteMany({ where: { loanId: id } });
+
+    // 4. Delete dues linked to this loan
+    await tx.due.deleteMany({ where: { loanId: id } });
+
+    // 5. Delete the loan record
+    await tx.loan.delete({ where: { id } });
+
+    return { success: true, message: 'Loan deleted successfully' };
+  });
+}
+
+module.exports = { createLoan, updateLoan, getLoanById, listLoans, closeLoan, settleAndCloseLoans, repayPrincipal, getNextLoanNumber, deleteLoan };
 

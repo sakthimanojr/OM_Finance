@@ -6,7 +6,9 @@ async function getAdminSummary() {
 
   const [
     totalCustomers,
+    totalLoans,
     activeLoans,
+    closedLoans,
     overdueLoans,
     totalDisbursedAgg,
     totalCollectedAgg,
@@ -16,8 +18,10 @@ async function getAdminSummary() {
     pendingDuesAgg,
     allLoans,
   ] = await Promise.all([
-    prisma.customer.count({ where: { status: 'ACTIVE' } }),
+    prisma.customer.count(),
+    prisma.loan.count(),
     prisma.loan.count({ where: { status: { in: ['ACTIVE', 'OVERDUE'] } } }),
+    prisma.loan.count({ where: { status: { in: ['CLOSED', 'COMPLETED'] } } }),
     prisma.loan.count({ where: { status: 'OVERDUE' } }),
     prisma.loan.aggregate({ _sum: { disbursedAmount: true } }),
     prisma.loan.aggregate({ _sum: { totalCollection: true } }),
@@ -67,7 +71,9 @@ async function getAdminSummary() {
 
   return {
     totalCustomers,
+    totalLoans,
     activeLoans,
+    closedLoans,
     overdueLoans,
     totalDisbursed,
     totalCollected,

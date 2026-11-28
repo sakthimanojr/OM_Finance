@@ -21,6 +21,7 @@ router.get('/next-number', controller.nextLoanNumber);
 router.get('/', validate(schemas.listLoans), controller.listLoans);
 router.get('/:id', validate(schemas.loanIdParam), controller.getLoan);
 router.patch('/:id', roleGuard('SUPER_ADMIN'), validate(schemas.updateLoan), controller.updateLoan);
+router.delete('/:id', roleGuard('SUPER_ADMIN'), validate(schemas.loanIdParam), controller.deleteLoan);
 router.patch('/:id/close', roleGuard('SUPER_ADMIN'), validate(schemas.closeLoan), controller.closeLoan);
 router.post(
   '/:id/repay-principal',

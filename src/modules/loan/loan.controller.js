@@ -107,5 +107,15 @@ async function nextLoanNumber(req, res, next) {
   }
 }
 
-module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, batchCloseLoans, repayPrincipal, nextLoanNumber };
+async function deleteLoan(req, res, next) {
+  try {
+    const result = await loanService.deleteLoan(req.params.id);
+    if (req.audit) await req.audit('DELETE_LOAN', 'Loan', req.params.id, {});
+    return ApiResponse.success(res, { message: 'Loan deleted successfully', data: result });
+  } catch (err) {
+    next(err);
+  }
+}
+
+module.exports = { createLoan, updateLoan, getLoan, listLoans, closeLoan, batchCloseLoans, repayPrincipal, nextLoanNumber, deleteLoan };
 
